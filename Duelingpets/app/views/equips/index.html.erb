@@ -1,0 +1,14 @@
+<% provide(:h1, "Equip List") %>
+<% if @equips.count > 9 %>
+   <div class="formlinks"><%= paginate @equips %></div>
+   <br>
+<% end %>
+<% @equips.each do |equip| %>
+   <div class="pageformat">
+      <p><%= equip.partner.name %></p>
+      <p>Capacity: <%= equip.capacity %></p>
+      <p>Equipment slots: <%= equip.equipslots.count %></p>
+   </div>
+   <br>
+<% end %>
+<p class="formlinks"><%= link_to 'Back', root_path %></p>

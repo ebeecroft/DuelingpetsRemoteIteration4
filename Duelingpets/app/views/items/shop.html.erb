@@ -1,0 +1,63 @@
+<% provide(:h1, "Shop") %>
+<% if @items.count >= 9 %>
+   <div class="formlinks"><%= paginate @items %></div>
+   <br>
+<% end %>
+<%= form_for(:inventoryslot, url: inventoryslots_purchase_path, method: :post) do |form| %>
+   <div class="pageformat">
+      <% if @slots.count > 0 %>
+         <p><%= form.collection_select(:inventoryslot_id, @slots, :id, :name) %></p>
+      <% else %>
+         <p>Inventoryslots are required to buy items!</p>
+      <% end %>
+   </div>
+   <br>
+   <% @items.each_with_index do |item, index| %>
+      <div class="pageformat">
+         <% if @slots.count > 0 %>
+            <% if index == 0 %>
+               <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %><%= form.radio_button :item_id, item.id, :checked => true %></p>
+            <% else %>
+               <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %><%= form.radio_button :item_id, item.id %></p>
+            <% end %>
+         <% else %>
+            <p class="formlinks"><%= link_to item.name, user_item_path(item.user, item) %></p>
+         <% end %>
+         <p>Created on: <%= distance_of_time_in_words_to_now item.created_on %> ago on (<%= item.created_on.strftime("%B-%d-%Y") %>)</p>
+         <% if !item.reviewed_on.nil? %>
+            <p>Reviewed on: <%= distance_of_time_in_words_to_now item.reviewed_on %> ago on (<%= item.reviewed_on.strftime("%B-%d-%Y") %>)</p>
+         <% end %>
+         <p>Updated on: <%= distance_of_time_in_words_to_now item.updated_on %> ago on (<%= item.updated_on.strftime("%B-%d-%Y") %>)</p>
+         <% if item.itemart.to_s != "" %>
+            <br>
+            <p><%= image_tag(item.itemart_url(:thumb)) %></p>
+         <% end %>
+         <br>
+         <p>Durability: <%= item.durability %></p>
+         <p>Rarity: <%= item.rarity %></p>
+         <p>Equipable: <%= item.equipable %></p>
+         <p>Type: <%= item.itemtype.name %></p>
+         <p>Cost: <%= item.cost %></p>
+         <p>Emeralds: <%= item.emeraldcost %></p>
+         <% if item.user.userinfo.miniavatar.to_s != "" %>
+            <br>
+            <p><%= image_tag(item.user.userinfo.miniavatar_url(:thumb)) %></p>
+         <% end %>
+         <p class="formlinks">Artist: <%= getUserPrivilege(item.user) %><%= link_to item.user.vname, user_path(item.user) %></p>
+         <p>Status: <%= getActivity(item.user) %>
+            <% if getActivity(item.user) != "Online" && getActivity(item.user) != "Inoperable" %>
+               for <%= distance_of_time_in_words_to_now getTime(item.user) %>
+            <% end %>
+         </p>
+         <br>
+         <p>Stats</p>
+         <%= getItemStats(item, item.itemtype.name) %>
+      </div>
+      <br>
+   <% end %>
+   <% if @slots.count > 0 %>
+      <div class="pageformat"><%= form.submit "Purchase", class: "button submitbutton" %></div>
+      <br>
+   <% end %>
+   <p class="formlinks"><%= link_to 'Back', root_path %></p>
+<% end %>
