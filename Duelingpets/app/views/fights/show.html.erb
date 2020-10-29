@@ -1,0 +1,12 @@
+<% provide(:h1, @fight.partner.name + "'s Fights") %>
+<p id="notice"><%= notice %></p>
+<div class="pageformat">
+   <p>Wins: <%= @fight.win %></p>
+   <p>Draws: <%= @fight.draw %></p>
+   <p>Losses: <%= @fight.loss %></p>
+   <p>Pet Battles</p>
+   <p>Monster Battles</p>
+   <p>Fanger Battles</p>
+</div>
+<br>
+<p class="formlinks"><%= link_to "Back", user_partner_path(@fight.partner.user, @fight.partner) %></p>

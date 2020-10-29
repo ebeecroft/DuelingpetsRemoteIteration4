@@ -66,6 +66,7 @@
    <% if(current_user && current_user.id == @partner.user_id) %>
       <br>
       <p><%= button_to 'Equipment', partner_equip_path(@partner, @partner.equip), method: :get, class: "button submitbutton" %></p>
+      <p><%= button_to 'Fight', partner_fight_path(@partner, @partner.fight), method: :get, class: "button submitbutton" %></p>
    <% end %>
 </div>
 <br>

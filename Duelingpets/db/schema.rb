@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_12_024203) do
+ActiveRecord::Schema.define(version: 2020_10_28_034246) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -425,6 +425,15 @@ ActiveRecord::Schema.define(version: 2020_08_12_024203) do
     t.datetime "updated_on"
     t.integer "baseinc_id"
     t.integer "dragonhoard_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fights", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "win", default: 0
+    t.integer "draw", default: 0
+    t.integer "loss", default: 0
+    t.integer "partner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -196,6 +196,12 @@ module PartnersHelper
                                  @equip = newEquip
                                  @equip.save
 
+                                 #Builds the partners fight
+                                 newFight = Fight.new(params[:fight])
+                                 newFight.partner_id = newPartner.id
+                                 @fight = newFight
+                                 @fight.save
+
                                  if(logged_in.partners.count > 0)
                                     #This may originally come from the warehouse
                                     logged_in.pouch.amount -= @partner.adoptcost
