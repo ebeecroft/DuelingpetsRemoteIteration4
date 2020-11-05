@@ -50,6 +50,7 @@ class User < ApplicationRecord
    has_many :partners, :foreign_key => "user_id", :dependent => :destroy
    has_one :inventory, :foreign_key => "user_id", :dependent => :destroy
    has_many :items, :foreign_key => "user_id", :dependent => :destroy
+   has_many :monsters, :foreign_key => "user_id", :dependent => :destroy
 
    #Regex code for managing the user section
    VALID_NAME_REGEX = /\A[a-z][a-z][a-z0-9]+\z/i

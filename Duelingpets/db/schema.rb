@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_034246) do
+ActiveRecord::Schema.define(version: 2020_11_02_032218) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -647,6 +647,46 @@ ActiveRecord::Schema.define(version: 2020_10_28_034246) do
     t.string "name"
     t.datetime "created_on"
     t.boolean "maintenance_on", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "monsters", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "image"
+    t.string "ogg"
+    t.string "mp3"
+    t.integer "level", default: 0
+    t.integer "hp", default: 0
+    t.integer "atk", default: 0
+    t.integer "def", default: 0
+    t.integer "agility", default: 0
+    t.integer "mp", default: 0
+    t.integer "matk", default: 0
+    t.integer "mdef", default: 0
+    t.integer "magi", default: 0
+    t.integer "exp", default: 0
+    t.integer "loot", default: 0
+    t.string "mischief"
+    t.integer "rarity", default: 1
+    t.boolean "retiredmonster", default: false
+    t.integer "cost", default: 0
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.datetime "reviewed_on"
+    t.integer "user_id"
+    t.integer "monstertype_id"
+    t.boolean "reviewed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "monstertypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_on"
+    t.integer "basecost"
+    t.integer "emeraldcost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

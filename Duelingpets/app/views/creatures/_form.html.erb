@@ -2,9 +2,9 @@
   <p class="centerpagecontent"><%= playMusicLoop("Creative", nil) %></p>
   <div class="pageformat">
      <% if current_user.userinfo.mute_on %>
-        <p><%= link_to 'Unmute music', muteAudio_path(:pageType => "Creature"), method: :post, class: "button submitbutton" %></p>
+        <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "Creature"), method: :post, class: "button submitbutton" %></p>
      <% else %>
-        <p><%= link_to 'Mute music', muteAudio_path(:pageType => "Creature"), method: :post, class: "button submitbutton" %></p>
+        <p><%= button_to 'Mute music', muteAudio_path(:pageType => "Creature"), method: :post, class: "button submitbutton" %></p>
      <% end %>
   </div>
   <% if @creature.errors.any? %>

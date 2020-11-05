@@ -348,6 +348,8 @@ module CusersHelper
             allContents = Oc.order("created_on desc")
          elsif(type == "Item")
             allContents = Item.order("created_on desc")
+         elsif(type == "Monster")
+            allContents = Monster.order("created_on desc")
          elsif(type == "Creature")
             allContents = Creature.order("created_on desc")
          elsif(type == "Chapter")
@@ -355,7 +357,7 @@ module CusersHelper
          else
             raise "Invalid content type detected!"
          end
-         if(type != "Item" && type != "Creature")
+         if(type != "Item" && type != "Creature" && type != "Monster")
             reviewedContents = allContents.select{|content| content.reviewed && checkBookgroupStatus(content)}
          else
             reviewedContents = allContents.select{|content| content.reviewed}

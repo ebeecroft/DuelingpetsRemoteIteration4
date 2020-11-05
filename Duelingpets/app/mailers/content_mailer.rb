@@ -36,6 +36,9 @@ class ContentMailer < ApplicationMailer
       elsif(type == "Creature")
          email = content.user.email
          message = "Your creature #{content.name} was approved:[Duelingpets]"
+      elsif(type == "Monster")
+         email = content.user.email
+         message = "Your monster #{content.name} was approved:[Duelingpets]"
       elsif(type == "Sound")
          email = content.user.email
          message = "Your sound #{content.title} was approved:[Duelingpets]"
@@ -71,6 +74,9 @@ class ContentMailer < ApplicationMailer
       elsif(type == "Creature")
          email = content.user.email
          message = "Your creature #{content.name} was denied:[Duelingpets]"
+      elsif(type == "Monster")
+         email = content.user.email
+         message = "Your monster #{content.name} was denied:[Duelingpets]"
       elsif(type == "Sound")
          email = content.user.email
          message = "Your sound #{content.title} was denied:[Duelingpets]"
@@ -97,6 +103,8 @@ class ContentMailer < ApplicationMailer
          message = "New oc #{content.name} is awaiting review:[Duelingpets]"
       elsif(type == "Item")
          message = "New item #{content.name} is awaiting review:[Duelingpets]"
+      elsif(type == "Monster")
+         message = "New monster #{content.name} is awaiting review:[Duelingpets]"
       elsif(type == "Creature")
          message = "New creature #{content.name} is awaiting review:[Duelingpets]"
       elsif(type == "Sound")

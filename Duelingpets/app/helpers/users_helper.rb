@@ -1,5 +1,22 @@
 module UsersHelper
+
    private
+      def getUserParams(type)
+         value = ""
+         if(type == "Id")
+            value = params[:id]
+         elsif(type == "User")
+            value = params.require(:user).permit(:firstname, :lastname, :email,
+            :country, :country_timezone, :military_time, :birthday, :login_id,
+            :vname, :password, :password_confirmation, :accounttype_id, :shared)
+         elsif(type == "Page")
+            value = params[:page]
+         else
+            raise "Invalid type detected!"
+         end
+         return value
+      end
+
       def getReferrals(user)
          allReferrals = Referral.order("created_on desc")
          value = allReferrals.select{|referral| referral.referred_by_id == user.id}
@@ -11,83 +28,56 @@ module UsersHelper
          user = allBanned.select{|banned| banned.user_id == user.id}
          return user
       end
-
-      def getUserContent(user, type)
-         value = 0
-         if(type == "Blog" || type == "Adblog")
-            allUserBlogs = user.blogs.all
-
-            #Retrieves all the normal blogs that have been reviewed
-            normalBlogs = allUserBlogs.select{|blog| blog.adbanner.to_s == "" && blog.largeimage1.to_s == "" && blog.largeimage2.to_s == "" && blog.largeimage3.to_s == "" && blog.smallimage1.to_s == "" && blog.smallimage2.to_s == "" && blog.smallimage3.to_s == "" && blog.smallimage4.to_s == "" && blog.smallimage5.to_s == ""}
-            if(type == "Adblog")
-               #Retrieves all the ad blogs that have been reviewed
-               normalBlogs = allUserBlogs.select{|blog| blog.adbanner.to_s != "" || blog.largeimage1.to_s != "" || blog.largeimage2.to_s != "" || blog.largeimage3.to_s != "" || blog.smallimage1.to_s != "" || blog.smallimage2.to_s != "" || blog.smallimage3.to_s != "" || blog.smallimage4.to_s != "" || blog.smallimage5.to_s != ""}
-            end
-            reviewedBlogs = normalBlogs.select{|blog| blog.reviewed}
-
-            #Displays all the blogs to the blog owner
-            if(current_user && current_user.id == user.id)
-               reviewedBlogs = normalBlogs
-            end
-            value = reviewedBlogs.count
-         elsif(type == "Activatedcolors" || type == "Inactivecolors")
-            allUserColors = user.colorschemes.all
-            activatedColors = allUserColors.select{|colorscheme| colorscheme.activated}
-            if(type == "Inactivecolors")
-               activatedColors = allUserColors.select{|colorscheme| !colorscheme.activated}
-            end
-            value = activatedColors.count
-         elsif(type == "Shout" || type == "Pageshouts")
-            allShouts = Shout.order("created_on desc")
-            reviewedShouts = allShouts.select{|shout| shout.shoutbox_id == user.shoutbox.id && shout.reviewed}
-            value = reviewedShouts.count
-            if(type == "Pageshouts")
-              #Shouts that get displayed on the user's show view
-              @shouts = Kaminari.paginate_array(reviewedShouts).page(params[:page]).per(10)
-              value = @shouts
-            end
-         elsif(type == "Creatures")
-            allCreatures = user.creatures.order("created_on desc")
-            reviewedCreatures = allCreatures.select{|creature| creature.reviewed}
-            value = reviewedCreatures.count
-         elsif(type == "Items")
-            allItems = user.items.order("created_on desc")
-            reviewedItems = allItems.select{|item| item.reviewed}
-            value = reviewedItems.count
-         elsif(type == "OCs")
-            allOCs = user.ocs.order("created_on desc")
-            reviewedOCs = allOCs.select{|oc| oc.reviewed}
-            value = reviewedOCs.count
-         elsif(type == "Donors")
-            value = user.donationbox.progress
-         elsif(type == "Galleries")
-            allGalleries = user.galleries.order("created_on desc")
-            value = allGalleries.count
-         elsif(type == "Channels")
-            allChannels = user.channels.order("created_on desc")
-            value = allChannels.count
-         elsif(type == "Jukeboxes")
-            allJukeboxes = user.jukeboxes.order("created_on desc")
-            value = allJukeboxes.count
-         elsif(type == "Books")
-            allBooks = user.books.order("created_on desc")
-            value = allBooks.count
-         elsif(type == "PMs")
-            allPMs = Pm.order("created_on desc")
-            pms = allPMs.select{|pm| pm.pmbox.user_id == user.id}
-            value = pms.count
+      
+      def getPagereturn(pagetype, content)
+         if(pagetype == "Home")
+            redirect_to root_path
+         elsif(pagetype == "Hoard")
+            redirect_to dragonhoards_path
+         elsif(pagetype == "User")
+            redirect_to user_path(content)
+         elsif(pagetype == "NewOC")
+            redirect_to new_user_oc_path(current_user)
+         elsif(pagetype == "NewItem")
+            redirect_to new_user_item_path(current_user)
+         elsif(pagetype == "NewCreature")
+            redirect_to new_user_creature_path(current_user)
+         elsif(pagetype == "NewMonster")
+            redirect_to new_user_monster_path(current_user)
+         elsif(pagetype == "Missingpage")
+            #Changes this name
+            redirect_to crazybat_path
+         elsif(pagetype == "Jukebox")
+            redirect_to user_jukebox_path(content)
+         elsif(pagetype == "Channel")
+            redirect_to user_channels_path(content)
+         elsif(pagetype == "Gallery")
+            redirect_to user_galleries_path(content)
+         elsif(pagetype == "Usermain")
+            redirect_to users_maintenance_path
+         elsif(pagetype == "Blogmain")
+            redirect_to blogs_maintenance_path
+         elsif(pagetype == "OCmain")
+            redirect_to ocs_maintenance_path
+         elsif(pagetype == "Itemmain")
+            redirect_to items_maintenance_path
+         elsif(pagetype == "Monstermain")
+            redirect_to monsters_maintenance_path
+         elsif(pagetype == "Creaturemain")
+            redirect_to creatures_maintenance_path
+         elsif(pagetype == "Bookworldmain")
+            redirect_to bookworlds_maintenance_path
+         elsif(pagetype == "Jukeboxmain")
+            redirect_to jukeboxes_maintenance_path
+         elsif(pagetype == "Channelmain")
+            redirect_to channels_maintenance_path
+         elsif(pagetype == "Gallerymain")
+            redirect_to galleries_maintenance_path
          end
-         return value
-      end
-
-      def user_params
-         params.require(:user).permit(:firstname, :lastname, :email, :country, 
-         :country_timezone, :military_time, :birthday, :login_id, :vname,
-         :password, :password_confirmation, :accounttype_id, :shared)
       end
 
       def musicCommons(type)
-         userFound = User.find_by_id(params[:id])
+         userFound = User.find_by_id(getUserParams("Id"))
          if(userFound)
             if(current_user && current_user.id == userFound.id)
                userInfo = Userinfo.find_by_user_id(userFound.id)
@@ -106,7 +96,7 @@ module UsersHelper
       end
 
       def showCommons(type)
-         userFound = User.find_by_vname(params[:id])
+         userFound = User.find_by_vname(getUserParams("Id"))
          if(userFound)
             setLastpageVisited
             #visitTimer(type, userFound)
@@ -153,7 +143,7 @@ module UsersHelper
       end
 
       def editCommons(type)
-         userFound = User.find_by_vname(params[:id])
+         userFound = User.find_by_vname(getUserParams("Id"))
          if(userFound)
             logged_in = current_user
             if(logged_in && ((logged_in.id == userFound.id) || logged_in.pouch.privilege == "Admin"))
@@ -161,7 +151,7 @@ module UsersHelper
                allAccounts = Accounttype.order("created_on desc")
                @groups = allAccounts
                if(type == "update")
-                  if(@user.update(user_params))
+                  if(@user.update(getUserParams("User")))
                      flash[:success] = "#{@user.vname} was successfully updated."
                      redirect_to user_path(@user)
                   else
@@ -177,16 +167,16 @@ module UsersHelper
       end
 
       def mode(type)
-         logoutExpiredUsers
          if(timeExpired)
             logout_user
+            logoutExpiredUsers
             redirect_to root_path
          else
             if(type == "index")
                logged_in = current_user
                if(logged_in && logged_in.pouch.privilege == "Admin")
                   removeTransactions
-                  allUsers = User.order("joined_on desc").page(params[:page]).per(10)
+                  allUsers = User.order("joined_on desc").page(getUserParams("Page")).per(10)
                   @users = allUsers
                else
                   redirect_to root_path
@@ -227,7 +217,7 @@ module UsersHelper
                   end
                end
             elsif(type == "disableshoutbox" || type == "disablepmbox")
-               userFound = User.find_by_id(params[:id])
+               userFound = User.find_by_id(getUserParams("Id"))
                if(current_user && userFound && current_user.id == userFound.id)
                   box = userFound.shoutbox
                   if(type == "disablepmbox")
@@ -266,7 +256,7 @@ module UsersHelper
                   end
                end
             elsif(type == "extractore")
-               userFound = User.find_by_id(params[:id])
+               userFound = User.find_by_id(getUserParams("Id"))
                if(current_user && userFound && userFound.id == current_user.id)
                   if(userFound.pouch.dreyterriumamount > 0)
                      hoard = Dragonhoard.find_by_id(1)
@@ -345,47 +335,9 @@ module UsersHelper
                   end
                   @userinfo = current_user.userinfo
                   @userinfo.save
-               end
-               if(params[:pageType] == "Home")
-                  redirect_to root_path
-               elsif(params[:pageType] == "Hoard")
-                  redirect_to dragonhoards_path
-               elsif(params[:pageType] == "User")
-                  redirect_to user_path(current_user)
-               elsif(params[:pageType] == "Missing")
-                  redirect_to crazybat_path
-               elsif(params[:pageType] == "CreativeOC")
-                  redirect_to new_user_oc_path(current_user)
-               elsif(params[:pageType] == "Creature")
-                  redirect_to new_user_creature_path(current_user)
-               elsif(params[:pageType] == "Item")
-                  redirect_to new_user_item_path(current_user)
-               elsif(params[:pageType] == "Usermain")
-                  redirect_to user_path(current_user)
-               elsif(params[:pageType] == "Colormain")
-                  redirect_to colorschemes_maintenance_path
-               elsif(params[:pageType] == "Blogmain")
-                  redirect_to blogs_path
-               elsif(params[:pageType] == "OCmain")
-                  redirect_to ocs_path
-               elsif(params[:pageType] == "Itemmain")
-                  redirect_to items_path
-               elsif(params[:pageType] == "Creaturemain")
-                  redirect_to creatures_path
-               elsif(params[:pageType] == "Bookworldmain")
-                  redirect_to bookworlds_path
-               elsif(params[:pageType] == "Jukeboxmain")
-                  redirect_to jukeboxes_path
-               elsif(params[:pageType] == "Channelmain")
-                  redirect_to channels_path
-               elsif(params[:pageType] == "Gallerymain")
-                  redirect_to galleries_path
-               elsif(params[:pageType] == "Jukebox")
-                  redirect_to user_jukeboxes_path(current_user)
-               elsif(params[:pageType] == "Channel")
-                  redirect_to user_channels_path(current_user)
-               elsif(params[:pageType] == "Gallery")
-                  redirect_to user_galleries_path(current_user)
+                  pagetype = params[:pageType]
+                  pagecontent = params[:pageContent]
+                  getPagereturn(pagetype, pagecontent)
                end
             end
          end

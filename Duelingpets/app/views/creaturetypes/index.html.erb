@@ -6,7 +6,7 @@
 <% @creaturetypes.each do |creaturetype| %>
    <div class="pageformat">
       <p>Created: <%= distance_of_time_in_words_to_now creaturetype.created_on %> ago on (<%= creaturetype.created_on.strftime("%B-%d-%Y") %>)</p>
-      <div class="container"><p class="formlinks">Name: <%= link_to creaturetype.name, creaturetypes_path %></p></div> <div class="container"><%= button_to 'Edit', edit_creaturetype_path(creaturetype), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', [creaturetype], method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div>
+      <div class="container"><p class="formlinks">Name: <%= link_to creaturetype.name, creaturetypes_path %></p></div> <div class="container"><%= button_to 'Edit', edit_creaturetype_path(creaturetype), method: :get, class: "button editbutton" %></div>
       <p>Basecost: <%= creaturetype.basecost %></p>
       <p>Dreyterriumcost: <%= creaturetype.dreyterriumcost %></p>
    </div>

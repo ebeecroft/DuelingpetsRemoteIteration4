@@ -17,6 +17,10 @@
          <p>You have <%= getNotifications("Item") %> items awaiting your review!</p>
          <br>
       <% end %>
+      <% if getNotifications("Monster") > 0 %>
+         <p>You have <%= getNotifications("Monster") %> monsters awaiting your review!</p>
+         <br>
+      <% end %>
       <% if getNotifications("Creature") > 0 %>
          <p>You have <%= getNotifications("Creature") %> creatures awaiting your review!</p>
          <br>

@@ -16,6 +16,31 @@
       on building some new features. So some of these new ones
       might be a bit buggy.
    </p>
+   <% if newestContent("Monster").count > 0 %>
+      <br>
+      <h2 class="subheader1">Newest Monsters</h2>
+      <% newestContent("Monster").each_with_index do |content, index| %>
+         <div class="container">
+            <p class="formlinks"><%= link_to content.name, user_creature_path(content.user, content) %></p>
+            <% if content.image.to_s != "" %>
+               <p><%= image_tag(content.image_url(:thumb)) %></p>
+            <% end %>
+            <p>Created: <%= distance_of_time_in_words_to_now content.created_on %> ago on (<%= content.created_on.strftime("%B-%d-%Y") %>)</p>
+            <% if !content.reviewed_on.nil? %>
+               <p>Reviewed: <%= distance_of_time_in_words_to_now content.reviewed_on %> ago on (<%= content.reviewed_on.strftime("%B-%d-%Y") %>)</p>
+            <% end %>
+            <p>Updated: <%= distance_of_time_in_words_to_now content.updated_on %> ago on (<%= content.updated_on.strftime("%B-%d-%Y") %>)</p>
+            <p class="formlinks">Artist: <%= getUserPrivilege(content.user) %><%= link_to content.user.vname, user_path(content.user) %></p>
+            <p>Monstertype: <%= content.monstertype.name %></p>
+            <p>Status: <%= getActivity(content.user) %>
+               <% if getActivity(content.user) != "Online" && getActivity(content.user) != "Inoperable" %>
+                  for <%= distance_of_time_in_words_to_now getTime(content.user) %>
+               <% end %>
+            </p>
+         </div>
+      <% end %>
+      <br>
+   <% end %>
    <% if newestContent("Art").count > 0 %>
       <br>
       <h2 class="subheader1">Newest Arts</h2>

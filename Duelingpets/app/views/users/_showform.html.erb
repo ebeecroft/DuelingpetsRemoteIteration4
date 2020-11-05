@@ -55,6 +55,23 @@
       <% end %>
    <% end %>
 <% end %>
+<!--Monster section--->
+<% if getUserContent(@user, "Monsters") != 0 %>
+   <br>
+   <h2 class="subheader1">Monster section</h2>
+   <div class="container"><%= button_to "My Monsters", user_monsters_path(@user), method: :get, class: "button submitbutton" %></div>
+   <% if current_user && current_user.id == @user.id %>
+      <div class="container"><%= button_to "New Monster", new_user_monster_path(@user), method: :get, class: "button submitbutton" %></div>
+   <% end %>
+   <br>
+<% else %>
+   <% if current_user && current_user.id == @user.id %>
+      <br>
+      <h2 class="subheader1">Monster section</h2>
+      <p><%= button_to "New Monster", new_user_monster_path(@user), method: :get, class: "button submitbutton" %></p>
+   <% end %>
+<% end %>
+<!--Monster section end--->
 <!--Partner section--->
 <% if getUserContent(@user, "Partners") != 0 %>
    <br>
