@@ -56,7 +56,7 @@ module ItemactionsHelper
                         redirect_to itemactions_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             else

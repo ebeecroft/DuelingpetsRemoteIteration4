@@ -29,7 +29,7 @@ module OcsHelper
                ocsReviewed = userOCs.select{|oc| (current_user && oc.user_id == current_user.id) || (oc.reviewed && checkBookgroupStatus(oc))}
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allOCs = Oc.order("reviewed_on desc, created_on desc")
@@ -68,7 +68,7 @@ module OcsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -99,7 +99,7 @@ module OcsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -108,7 +108,7 @@ module OcsHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)
                ocMode = Maintenancemode.find_by_id(8)
@@ -280,7 +280,7 @@ module OcsHelper
                         redirect_to root_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                else
                   redirect_to root_path

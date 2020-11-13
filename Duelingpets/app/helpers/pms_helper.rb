@@ -50,7 +50,7 @@ module PmsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -88,7 +88,7 @@ module PmsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 

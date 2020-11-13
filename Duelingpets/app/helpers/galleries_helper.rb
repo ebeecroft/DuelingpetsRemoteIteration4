@@ -44,7 +44,7 @@ module GalleriesHelper
                redirect_to user_gallery_path(@gallery.user, @gallery)
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -56,7 +56,7 @@ module GalleriesHelper
                galleriesReviewed = userGalleries.select{|gallery| (current_user && gallery.user_id == current_user.id) || (checkBookgroupStatus(gallery))}
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allGalleries = Gallery.order("updated_on desc, created_on desc")
@@ -94,7 +94,7 @@ module GalleriesHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -129,7 +129,7 @@ module GalleriesHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 

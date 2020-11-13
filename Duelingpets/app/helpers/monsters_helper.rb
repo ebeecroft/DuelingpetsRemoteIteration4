@@ -72,7 +72,6 @@ module MonstersHelper
          end
       end
 
-
       def indexCommons
          if(optional)
             userFound = User.find_by_vname(optional)
@@ -120,7 +119,7 @@ module MonstersHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -151,7 +150,7 @@ module MonstersHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -160,7 +159,7 @@ module MonstersHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)
                monsterMode = Maintenancemode.find_by_id(15)
@@ -291,13 +290,12 @@ module MonstersHelper
                            #Might revise this section later
                            monsterFound.reviewed = true
                            monsterFound.reviewed_on = currentTime
-                           #basecost = monsterFound.monstertype.basecost
-                           #monstercost = Fieldcost.find_by_name("Monster")
-                           #mcost = (monsterFound.cost * 0.10).round
-                           #price = (basecost + monstercost.amount + mcost)
-                           #pouch = Pouch.find_by_user_id(monsterFound.user_id)
+                           basecost = monsterFound.monstertype.basecost
+                           monstercost = Fieldcost.find_by_name("Monster")
+                           mcost = (monsterFound.cost * 0.10).round
+                           price = (basecost + monstercost.amount + mcost)
+                           pouch = Pouch.find_by_user_id(monsterFound.user_id)
                            #Add dreyterrium cost later
-                           price = 1 #temp
                            if(pouch.amount - price >= 0)
                               @monster = monsterFound
                               @monster.save
@@ -332,7 +330,7 @@ module MonstersHelper
                         redirect_to root_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                else
                   redirect_to root_path

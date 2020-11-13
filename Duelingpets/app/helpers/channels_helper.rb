@@ -44,7 +44,7 @@ module ChannelsHelper
                redirect_to user_channel_path(@channel.user, @channel)
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -56,7 +56,7 @@ module ChannelsHelper
                channelsReviewed = userChannels.select{|channel| (current_user && channel.user_id == current_user.id) || (checkBookgroupStatus(channel))}
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allChannels = Channel.order("updated_on desc, created_on desc")
@@ -94,7 +94,7 @@ module ChannelsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -129,7 +129,7 @@ module ChannelsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -138,7 +138,7 @@ module ChannelsHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)
                channelMode = Maintenancemode.find_by_id(13)
@@ -247,7 +247,6 @@ module ChannelsHelper
                   channelMode = Maintenancemode.find_by_id(13)
                   if(allMode.maintenance_on || channelMode.maintenance_on)
                      if(allMode.maintenance_on)
-                        #the render section
                         render "/start/maintenance"
                      else
                         render "/channels/maintenance"

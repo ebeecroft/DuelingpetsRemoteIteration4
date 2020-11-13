@@ -50,7 +50,7 @@ module MainsheetsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -85,7 +85,7 @@ module MainsheetsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -94,7 +94,7 @@ module MainsheetsHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                logged_in = current_user
                if(logged_in && logged_in.pouch.privilege == "Admin")
                   removeTransactions

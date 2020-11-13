@@ -8,8 +8,10 @@
    <%= form_for(:session, url: activatepost_path) do |f| %>
       <p><%= f.label :login_id, "Login Name" %></p>
       <p><%= f.password_field :login_id %></p>
+      <br>
       <p><%= f.label :token %></p>
       <p><%= f.password_field :token %></p>
+      <br>
       <p><%= f.submit "Activate", class: "button submitbutton" %></p>
    <% end %>
 </div>

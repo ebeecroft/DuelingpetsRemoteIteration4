@@ -44,7 +44,7 @@ module JukeboxesHelper
                redirect_to user_jukebox_path(@jukebox.user, @jukebox)
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -56,7 +56,7 @@ module JukeboxesHelper
                jukeboxesReviewed = userJukeboxes.select{|jukebox| (current_user && jukebox.user_id == current_user.id) || (checkBookgroupStatus(jukebox))}
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allJukeboxes = Jukebox.order("updated_on desc, created_on desc")
@@ -94,7 +94,7 @@ module JukeboxesHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -129,7 +129,7 @@ module JukeboxesHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -138,7 +138,7 @@ module JukeboxesHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)
                jukeboxMode = Maintenancemode.find_by_id(11)
@@ -247,7 +247,6 @@ module JukeboxesHelper
                   jukeboxMode = Maintenancemode.find_by_id(11)
                   if(allMode.maintenance_on || jukeboxMode.maintenance_on)
                      if(allMode.maintenance_on)
-                        #the render section
                         render "/start/maintenance"
                      else
                         render "/jukeboxes/maintenance"

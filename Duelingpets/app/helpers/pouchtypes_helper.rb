@@ -68,7 +68,7 @@ module PouchtypesHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                else
                   redirect_to root_path

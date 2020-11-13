@@ -53,7 +53,7 @@ module MaintenancemodesHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             else

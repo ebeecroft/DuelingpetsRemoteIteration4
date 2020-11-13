@@ -44,15 +44,12 @@ module UsersHelper
             redirect_to new_user_creature_path(current_user)
          elsif(pagetype == "NewMonster")
             redirect_to new_user_monster_path(current_user)
-         elsif(pagetype == "Missingpage")
-            #Changes this name
-            redirect_to crazybat_path
          elsif(pagetype == "Jukebox")
-            redirect_to user_jukebox_path(content)
+            redirect_to user_jukebox_path(content[0], content[1])
          elsif(pagetype == "Channel")
-            redirect_to user_channels_path(content)
+            redirect_to user_channels_path(content[0], content[1])
          elsif(pagetype == "Gallery")
-            redirect_to user_galleries_path(content)
+            redirect_to user_galleries_path(content[0], content[1])
          elsif(pagetype == "Usermain")
             redirect_to users_maintenance_path
          elsif(pagetype == "Blogmain")
@@ -91,7 +88,7 @@ module UsersHelper
                redirect_to user_path(@userinfo.user)
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -138,7 +135,7 @@ module UsersHelper
                end
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -162,7 +159,7 @@ module UsersHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -189,7 +186,6 @@ module UsersHelper
                   userMode = Maintenancemode.find_by_id(6)
                   if(allMode.maintenance_on || userMode.maintenance_on)
                      if(allMode.maintenance_on)
-                        #the render section
                         render "/start/maintenance"
                      else
                         render "/users/maintenance"

@@ -72,7 +72,7 @@ module RatecostsHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                elsif(type == "increase" || type == "decrease")
                   ratecostFound = Ratecost.find_by_id(getRatecostParams("RatecostId"))
@@ -107,7 +107,7 @@ module RatecostsHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             else

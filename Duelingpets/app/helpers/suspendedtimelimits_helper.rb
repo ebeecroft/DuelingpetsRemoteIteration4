@@ -77,7 +77,7 @@ module SuspendedtimelimitsHelper
                         redirect_to suspendedtimelimits_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             else

@@ -169,7 +169,7 @@ module UserupgradesHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             elsif(type == "upgrade")

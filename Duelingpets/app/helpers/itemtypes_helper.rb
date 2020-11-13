@@ -24,7 +24,7 @@ module ItemtypesHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                removeTransactions
                logged_in = current_user
                if(logged_in && logged_in.pouch.privilege == "Admin")
@@ -72,7 +72,7 @@ module ItemtypesHelper
                         redirect_to itemtypes_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                else
                   redirect_to root_path

@@ -18,9 +18,11 @@
    <% if current_user %>
       <div class="container">
          <% if current_user.userinfo.mute_on %>
-            <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "User"), method: :post, class: "button submitbutton" %></p>
+            <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "User", :pageContent => @user), method: :post, class: "button submitbutton" %></p>
+            <br>
          <% else %>
-            <p><%= button_to 'Mute music', muteAudio_path(:pageType => "User"), method: :post, class: "button submitbutton" %></p>
+            <p><%= button_to 'Mute music', muteAudio_path(:pageType => "User", :pageContent => @user), method: :post, class: "button submitbutton" %></p>
+            <br>
          <% end %>
       </div>
       <br>

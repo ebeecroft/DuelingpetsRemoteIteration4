@@ -13,7 +13,7 @@ class WebcontrolsController < ApplicationController
       mode "update"
    end
 
-   def crazybat
-      mode "crazybat"
+   def missingpage
+      mode "missingpage"
    end
 end

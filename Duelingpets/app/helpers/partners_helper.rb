@@ -10,7 +10,6 @@ module PartnersHelper
          elsif(type == "User")
             value = params[:user_id]
          elsif(type == "Partner")
-            #Add Knowledge here later
             value = params.require(:partner).permit(:name, :description, :creature_id)
          elsif(type == "Page")
             value = params[:page]
@@ -27,7 +26,7 @@ module PartnersHelper
             @user = userFound
             @partners = Kaminari.paginate_array(userPets).page(getPartnerParams("Page")).per(10)
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -51,7 +50,7 @@ module PartnersHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -84,7 +83,7 @@ module PartnersHelper
                end
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 

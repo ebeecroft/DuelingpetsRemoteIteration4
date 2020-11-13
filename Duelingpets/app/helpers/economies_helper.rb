@@ -20,7 +20,7 @@ module EconomiesHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Admin only
+            if(type == "index")
                logged_in = current_user
                if(logged_in && logged_in.pouch.privilege == "Admin")
                   allEconomies = Economy.order("created_on desc")

@@ -72,7 +72,7 @@ module FieldcostsHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                elsif(type == "increase" || type == "decrease")
                   fieldcostFound = Fieldcost.find_by_id(getFieldcostParams("FieldcostId"))
@@ -107,7 +107,7 @@ module FieldcostsHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             else

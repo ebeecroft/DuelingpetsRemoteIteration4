@@ -35,9 +35,8 @@ module FightsHelper
                      @user = logged_in
                      @fight = fightFound
                      @partner = Partner.find_by_id(fightFound.partner_id)
-                     #Don't have a fightslots as it will go up
-                     #slots = @equip.equipslots.all
-                     #@equipslots = Kaminari.paginate_array(slots).page(getEquipParams("Page")).per(1)
+                     battles = @fight.monsterbattles.all
+                     @monsterbattles = Kaminari.paginate_array(battles).page(getFightParams("Page")).per(10)
                   end
                else
                   redirect_to root_path

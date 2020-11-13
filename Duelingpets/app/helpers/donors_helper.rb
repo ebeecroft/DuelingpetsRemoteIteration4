@@ -60,7 +60,6 @@ module DonorsHelper
                               donationCheck = (logged_in.pouch.amount - @donor.amount >= 0)
                               boxCheck = (donationboxFound.progress + @donor.amount <= donationboxFound.capacity)
                               pointsAvailable = (logged_in.pouch.amount > 0)
-                              #May remove description later
                               if((capacityCheck && donationCheck) && (boxCheck && pointsAvailable))
                                  if(@donor.save)
                                     points = donationboxFound.progress + @donor.amount

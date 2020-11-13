@@ -52,7 +52,7 @@ module DreyoresHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                elsif(type == "addore")
                   dreyoreFound = Dreyore.find_by_id(getDreyoreParams("DreyoreId"))

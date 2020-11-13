@@ -1,12 +1,14 @@
+<div class="pageformat">
+   <% if current_user.userinfo.mute_on %>
+      <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "NewCreature"), method: :post, class: "button submitbutton" %></p>
+      <br>
+   <% else %>
+      <p><%= button_to 'Mute music', muteAudio_path(:pageType => "NewCreature"), method: :post, class: "button submitbutton" %></p>
+      <br>
+   <% end %>
+</div>
 <%= form_with(model: [@user, @creature], local: true) do |form| %>
   <p class="centerpagecontent"><%= playMusicLoop("Creative", nil) %></p>
-  <div class="pageformat">
-     <% if current_user.userinfo.mute_on %>
-        <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "Creature"), method: :post, class: "button submitbutton" %></p>
-     <% else %>
-        <p><%= button_to 'Mute music', muteAudio_path(:pageType => "Creature"), method: :post, class: "button submitbutton" %></p>
-     <% end %>
-  </div>
   <% if @creature.errors.any? %>
      <div class="alignboxes">
         <div id="errorexplan">
@@ -83,12 +85,12 @@
   <br>
   <p class="pageformat">Stamina Skills(gens 4 free points)</p>
   <div class="pageformat">
-    <%= form.label :hunger, "Hunger(min is 10)" %>
+    <%= form.label :hunger, "Hunger(min is 16)" %>
     <%= form.number_field :hunger %>
   </div>
   <br>
   <div class="pageformat">
-    <%= form.label :thirst, "Thirst(min is 10)" %>
+    <%= form.label :thirst, "Thirst(min is 16)" %>
     <%= form.number_field :thirst %>
   </div>
   <br>

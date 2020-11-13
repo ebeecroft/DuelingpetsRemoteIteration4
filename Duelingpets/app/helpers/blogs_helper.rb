@@ -158,7 +158,7 @@ module BlogsHelper
                blogsReviewed = userBlogs.select{|blog| blog.reviewed || (current_user && blog.user_id == current_user.id)}
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allBlogs = Blog.order("reviewed_on desc, created_on desc")
@@ -206,7 +206,7 @@ module BlogsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -241,7 +241,7 @@ module BlogsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -489,7 +489,7 @@ module BlogsHelper
                         redirect_to root_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                else
                   redirect_to root_path

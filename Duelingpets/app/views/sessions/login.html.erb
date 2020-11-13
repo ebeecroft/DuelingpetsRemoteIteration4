@@ -10,9 +10,11 @@
 <div class="pageformat">
    <%= form_for(:session, url: loginpost_path) do |f| %>
       <p><%= f.label :login_id, "Login Name" %></p>
-      <p><%= f.password_field :login_id %></p>
+      <p><%= f.text_field :login_id %></p>
+      <br>
       <p><%= f.label :password %></p>
       <p><%= f.password_field :password %></p>
+      <br>
       <p><%= f.submit "Login", class: "button submitbutton" %></p>
    <% end %>
 </div>

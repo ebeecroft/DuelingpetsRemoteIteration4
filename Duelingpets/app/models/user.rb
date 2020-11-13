@@ -60,7 +60,7 @@ class User < ApplicationRecord
    #Validates the user information upon submission
    validates :firstname, presence: true, format: {with: VALID_NAME_REGEX}
    validates :lastname, presence: true, format: {with: VALID_NAME_REGEX}
-   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}
+   validates :email, presence: true, format: {with: VALID_EMAIL_REGEX}, uniqueness: { case_sensitive: false}
    validates :country, presence: true, format: {with: VALID_NAME_REGEX}
    validates :country_timezone, presence: true
    validates :birthday, presence: true

@@ -57,7 +57,7 @@ module BlacklisteddomainsHelper
                         redirect_to blacklisteddomains_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             else

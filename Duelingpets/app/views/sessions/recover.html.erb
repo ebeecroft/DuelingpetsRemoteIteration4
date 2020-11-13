@@ -7,9 +7,11 @@
 <div class="pageformat">
    <%= form_for(:session, url: recoverpost_path) do |f| %>
       <p><%= f.label :login_id, "Login Name" %></p>
-      <p><%= f.password_field :login_id %></p>
+      <p><%= f.text_field :login_id %></p>
+      <br>
       <p><%= f.label :vname, "Virtual Name" %></p>
-      <p><%= f.password_field :vname %></p>
+      <p><%= f.text_field :vname %></p>
+      <br>
       <p><%= f.submit "Reset", class: "button submitbutton" %></p>
    <% end %>
 </div>

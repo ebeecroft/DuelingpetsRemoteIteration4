@@ -85,7 +85,7 @@ module ItemsHelper
                itemsReviewed = userItems.select{|item| (current_user && item.user_id == current_user.id) || item.reviewed}
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allItems = Item.order("reviewed_on desc, created_on desc")
@@ -123,7 +123,7 @@ module ItemsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -154,7 +154,7 @@ module ItemsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -195,7 +195,6 @@ module ItemsHelper
                   passedInValues = params[:format]
                   if(logged_in && userFound && !passedInValues.nil?)
                      itemtype = Itemtype.find_by_id(passedInValues)
-                     #raise "My itemtype is: #{itemtype.name}"
                      if(logged_in.id == userFound.id)
                         newItem = logged_in.items.new
                         if(type == "create")
@@ -203,9 +202,6 @@ module ItemsHelper
                            newItem.created_on = currentTime
                            newItem.updated_on = currentTime
                         end
-                        #Determines the type of bookgroup the user belongs to
-                        #allItemtypes = Itemtype.order("created_on desc")
-                        #@itemtypes = allItemtypes
 
                         @itemtype = itemtype
                         newItem.itemtype_id = itemtype.id
@@ -428,12 +424,10 @@ module ItemsHelper
             elsif(type == "choose" || type == "choosepost")
                logged_in = current_user
                if(logged_in)
-                  #Determines the type of bookgroup the user belongs to
                   allItemtypes = Itemtype.order("created_on desc")
                   @itemtypes = allItemtypes
                   if(type == "choosepost")
                      itemtype = Itemtype.find_by_id(params[:item][:itemtype_id])
-                     #raise "Hello #{itemtype}"
                      redirect_to new_user_item_path(logged_in, itemtype.id)
                   end
                else

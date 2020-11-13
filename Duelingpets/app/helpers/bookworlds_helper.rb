@@ -28,7 +28,7 @@ module BookworldsHelper
                bookworlds = userBookworlds
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allBookworlds = Bookworld.order("updated_on desc, created_on desc")
@@ -62,7 +62,7 @@ module BookworldsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -97,7 +97,7 @@ module BookworldsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -106,7 +106,7 @@ module BookworldsHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)
                bookworldMode = Maintenancemode.find_by_id(12)
@@ -245,7 +245,7 @@ module BookworldsHelper
                         #end
                   end
                else
-                  render "webcontrols/crazybat"
+                  render "webcontrols/missingpage"
                end
             end
          end

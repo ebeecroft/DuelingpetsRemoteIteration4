@@ -42,9 +42,9 @@ module WebcontrolsHelper
                         end
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
-               elsif(type == "crazybat")
+               elsif(type == "missingpage")
 
                end
             else

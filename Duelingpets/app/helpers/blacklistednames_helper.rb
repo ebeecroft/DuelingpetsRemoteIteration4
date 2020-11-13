@@ -57,7 +57,7 @@ module BlacklistednamesHelper
                         redirect_to blacklistednames_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                end
             else

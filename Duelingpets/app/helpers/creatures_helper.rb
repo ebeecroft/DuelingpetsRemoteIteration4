@@ -10,13 +10,7 @@ module CreaturesHelper
          elsif(type == "User")
             value = params[:user_id]
          elsif(type == "Creature")
-            #Add Knowledge here later
-            value = params.require(:creature).permit(:name, :description, :hp, :atk, :def, :agility, 
-            :strength, :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :lives, :rarity,
-            :starter, :emeraldcost, :unlimitedlives, :image, :remote_image_url,
-            :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :voiceogg,
-            :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id,
-            :activepet, :remote_activepet_url, :activepet_cache)
+            value = params.require(:creature).permit(:name, :description, :hp, :atk, :def, :agility, :strength, :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :lives, :rarity, :starter, :emeraldcost, :unlimitedlives, :image, :remote_image_url, :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :voiceogg, :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id, :activepet, :remote_activepet_url, :activepet_cache)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -92,7 +86,7 @@ module CreaturesHelper
                creaturesReviewed = userCreatures.select{|creature| (current_user && creature.user_id == current_user.id) || creature.reviewed}
                @user = userFound
             else
-               render "webcontrols/crazybat"
+               render "webcontrols/missingpage"
             end
          else
             allCreatures = Creature.order("reviewed_on desc, created_on desc")
@@ -131,7 +125,7 @@ module CreaturesHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -162,7 +156,7 @@ module CreaturesHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -171,7 +165,7 @@ module CreaturesHelper
             logout_user
             redirect_to root_path
          else
-            if(type == "index") #Guests
+            if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)
                creatureMode = Maintenancemode.find_by_id(10)
@@ -219,10 +213,7 @@ module CreaturesHelper
                            getPetCalc(@creature)
                            if(@creature.level > 0)
                               if(@creature.save)
-                                 url = "http://www.duelingpets.net/creatures/review" #"http://localhost:3000/blogs/review"
-                                 #if(type == "Production")
-                                 #   url = "http://www.duelingpets.net/blogs/review"
-                                 #end
+                                 url = "http://www.duelingpets.net/creatures/review"
                                  ContentMailer.content_review(@creature, "Creature", url).deliver_now
                                  flash[:success] = "#{@creature.name} was successfully created."
                                  redirect_to user_creature_path(@user, @creature)
@@ -346,7 +337,7 @@ module CreaturesHelper
                         redirect_to root_path
                      end
                   else
-                     render "webcontrols/crazybat"
+                     render "webcontrols/missingpage"
                   end
                else
                   redirect_to root_path

@@ -1,12 +1,14 @@
+<div class="pageformat">
+   <% if current_user.userinfo.mute_on %>
+      <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "NewOC"), method: :post, class: "button submitbutton" %></p>
+      <br>
+   <% else %>
+      <p><%= button_to 'Mute music', muteAudio_path(:pageType => "NewOC"), method: :post, class: "button submitbutton" %></p>
+      <br>
+   <% end %>
+</div>
 <%= form_with(model: [@user, @oc], local: true) do |form| %>
   <p class="centerpagecontent"><%= playMusicLoop("Creative", nil) %></p>
-  <div class="pageformat">
-     <% if current_user.userinfo.mute_on %>
-        <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "CreativeOC"), method: :post, class: "button submitbutton" %></p>
-     <% else %>
-        <p><%= button_to 'Mute music', muteAudio_path(:pageType => "CreativeOC"), method: :post, class: "button submitbutton" %></p>
-     <% end %>
-  </div>
   <% if @oc.errors.any? %>
      <div class="alignboxes">
         <div id="errorexplan">

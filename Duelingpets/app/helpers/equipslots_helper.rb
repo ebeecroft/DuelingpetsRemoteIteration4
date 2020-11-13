@@ -21,10 +21,6 @@ module EquipslotsHelper
          return value
       end
 
-      def is_num(num_given)
-         !!Integer(num_given) rescue false
-      end
-
       def getEquipItemName(slotindex, inventoryslot, type)
          item = -1
          if(slotindex == "1")
@@ -513,7 +509,7 @@ module EquipslotsHelper
                redirect_to root_path
             end
          else
-            render "webcontrols/crazybat"
+            render "webcontrols/missingpage"
          end
       end
 
@@ -681,7 +677,6 @@ module EquipslotsHelper
                            redirect_to root_path
                         end
                      end
-                     #General partner.save here
                   else
                      redirect_to root_path
                   end
