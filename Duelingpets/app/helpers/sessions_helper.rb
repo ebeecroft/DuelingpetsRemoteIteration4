@@ -1,6 +1,33 @@
 module SessionsHelper
 
    private
+      def findloginpage(type, pagemode)
+         if(type == "findloginpost")
+            emailFound = User.find_by_email(params[:session][:email].downcase)
+            if(emailFound && emailFound.pouch.activated)
+               if(pagemode == "Admin" && emailFound.pouch.privilege == "Admin")
+                  retrieveLogin(emailFound)
+               elsif(pagemode == "User")
+                  retrieveLogin(emailFound)
+               else
+                  flash.now[:error] = "Only the admin can findlogin at this time."
+                  render "recover"
+               end
+            else
+               flash.now[:error] = "Invalid email!"
+               render "findemail"
+            end
+         end
+      end
+      
+      def retrieveLogin(login)
+         #Sends the user an email with their login name
+         @user = login
+         UserMailer.user_info(@user, "Findlogin").deliver_now
+         flash[:success] = "Your login was emailed to you!"
+         redirect_to root_path
+      end
+   
       def extendTimelimit(pouch)
          #Extends the time limit for activation
          time_limit = 1.days.from_now.utc
@@ -218,6 +245,14 @@ module SessionsHelper
                render "extendtime"
             else
                extendtimepage(type)
+            end
+         elsif(type == "findlogin" || type == "findloginpost")
+            displayGreeter("Reset") #Change to findlogin
+            allMode = Maintenancemode.find_by_id(1)
+            if(allMode.maintenance_on)
+               findloginpage(type, "Admin")
+            else
+               findloginpage(type, "User")
             end
          end
       end

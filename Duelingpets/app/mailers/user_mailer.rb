@@ -10,6 +10,8 @@ class UserMailer < ApplicationMailer
          message = "Reset time:[Duelingpets]"
       elsif(type == "Resetpassword")
          message = "Reset password:[Duelingpets]"
+      elsif(type == "Findlogin")
+         message = "Find login:[Duelingpets]"
       elsif(type == "Info")
          message = "Account info:[Duelingpets]"
       end

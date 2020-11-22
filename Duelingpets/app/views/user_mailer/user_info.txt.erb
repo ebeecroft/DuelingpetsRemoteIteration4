@@ -1,15 +1,17 @@
-<% if type == "Welcome" %>
+<% if @type == "Welcome" %>
    Welcome <%= @user.vname %> to Duelingpets!
-<% elsif type == "Info" %>
+<% elsif @type == "Info" %>
    Greetings <%= @user.vname %> here is your account info!
-<% elsif type == "Resetpassword" %>
+<% elsif @type == "Findlogin" %>
+   Need help finding your login <%= @user.vname %>?
+<% elsif @type == "Resetpassword" %>
    Need help with your password <%= @user.vname %>?
-<% elsif type == "Resettime" %>
+<% elsif @type == "Resettime" %>
    Lets reset the time limit for you <%= @user.vname %>!
 <% end %>
 ===============================================
 
-<% if type == "Welcome" %>
+<% if @type == "Welcome" %>
    Hehehe hello there <%= @user.vname %> I am Glitchy the
    Dragon your helpful little tour guide. Not what you
    were expecting that's okay. Well one doesn't meet a
@@ -18,7 +20,7 @@
    in and well I have set up a bit of a shop here. I call
    it the dragonhoard and I take great care to see how
    well the economy of the game is managed.
-<% elsif type == "Info" %>
+<% elsif @type == "Info" %>
    Well hello there <%= @user.vname %> I am sure your
    curious about the contents of your account. I
    Bartholumu Bat will guide you. Avatars are images
@@ -28,7 +30,13 @@
    represent their privilege level. Privilege levels
    by default are normally users, but others may be
    reviewers, keymasters or others.
-<% elsif type == "Resetpassword" %>
+<% elsif @type == "Findlogin" %>
+   Sera the Shrew here, so it seems you misplaced
+   your login name once again little bat. You really
+   should consider investing in some glasses to see
+   better dear. No matter I am happy to help you
+   locate it.
+<% elsif @type == "Resetpassword" %>
    So you came to visit Steford the Stoat about that
    pesky password issue you were having. What did
    you say your name was again? I am a bit old and
@@ -36,7 +44,7 @@
    <%= @user.vname %> your the one that called upon
    me earlier. Let me fetch my tools and I will see
    what I can do.
-<% elsif type == "Resettime" %>
+<% elsif @type == "Resettime" %>
    Mortica Mouse here you must be the one requesting
    more time weren't you. I thought as much
    <%= @user.vname %>, I will see if I can roll back
@@ -46,7 +54,7 @@
    book and I will see what I can do.
 <% end  %>
 
-<% if type == "Welcome" %>
+<% if @type == "Welcome" %>
    Still being a glitch dragon does have some downsides
    playing games can be quite challenging when your
    programming has other plans. I can't remember how many
@@ -57,7 +65,7 @@
    of new features so that is kind of why I am a bit of a
    beta tester. Anyways I hope you have fun and enjoy
    playing around the site.
-<% elsif type == "Info" %>
+<% elsif @type == "Info" %>
    Now writing groups define what content as user you can
    create as such based on the age you selected during
    registration. As you grow older this writing  group
@@ -71,7 +79,16 @@
    wishes to be in that is equal to their writing group or
    less than it. Thats all I have time to tell you young
    one, best of luck to you.
-<% elsif type == "Resetpassword" %>
+<% elsif @type == "Findlogin" %>
+   Sera chuckles. Well looks like I found it. It was under
+   your little leaf bed. Its okay youngen sometimes these
+   things happen. Still your not as unlucky as little
+   Twinks is, that little bat has difficulty finding his
+   own shoes sometimes. He is quite a cutie though. Tell
+   him I say hi. Oh by the way your Login name is:
+   <%= @user.login_id %>. I hope to see you again little
+   bat. She then proceeds to give you a kiss before leaving.
+<% elsif @type == "Resetpassword" %>
    Well not bad I think this should work granted it is not
    the best, still its pretty good for Stoat knowledge on
    this thing. Heheee you humans are very silly creatures
@@ -81,7 +98,7 @@
    is <%= @user.password %>, please remember to change
    this one, once you are back into your account. See you
    later you one eyed seadog. Hahaha.
-<% elsif type == "Resettime" %>
+<% elsif @type == "Resettime" %>
    Whew that was quite exhausting I hope bought you enough
    time. I had to mutter quite a few words of power to
    reset and now I am quite winded. At least I was able to
@@ -91,12 +108,14 @@
 <% end %>
 
 
-<% if type == "Welcome" %>
+<% if @type == "Welcome" %>
    Your tourguide Glitchy The Dragon
-<% elsif type == "Info" %>
+<% elsif @type == "Info" %>
    Bartholumu Bat wishes you to have a very Myotis day
-<% elsif type == "Resetpassword" %>
+<% elsif @type == "Findlogin" %>
+   Sera the Shrew finder of small items
+<% elsif @type == "Resetpassword" %>
    Steford the Stoat your pirate captain
-<% elsif type == "Resettime" %>
+<% elsif @type == "Resettime" %>
    The great mystic Mortica Mouse
 <% end %>

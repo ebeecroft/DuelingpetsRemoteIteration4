@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_02_032218) do
+ActiveRecord::Schema.define(version: 2020_11_07_075156) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -647,6 +647,61 @@ ActiveRecord::Schema.define(version: 2020_11_02_032218) do
     t.string "name"
     t.datetime "created_on"
     t.boolean "maintenance_on", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "monsterbattles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "partner_name"
+    t.integer "partner_plevel"
+    t.integer "partner_pexp"
+    t.integer "partner_chp"
+    t.integer "partner_hp"
+    t.integer "partner_atk"
+    t.integer "partner_def"
+    t.integer "partner_agility"
+    t.integer "partner_strength"
+    t.integer "partner_mlevel"
+    t.integer "partner_mexp"
+    t.integer "partner_cmp"
+    t.integer "partner_mp"
+    t.integer "partner_matk"
+    t.integer "partner_mdef"
+    t.integer "partner_magi"
+    t.integer "partner_mstr"
+    t.integer "partner_lives"
+    t.integer "partner_damage", default: 0
+    t.boolean "partner_activepet", default: false
+    t.integer "creaturetype_id"
+    t.integer "partner_rarity"
+    t.string "monster_name"
+    t.string "monster_mischief"
+    t.integer "monster_plevel"
+    t.integer "monster_chp"
+    t.integer "monster_hp"
+    t.integer "monster_atk"
+    t.integer "monster_def"
+    t.integer "monster_agility"
+    t.integer "monster_mlevel"
+    t.integer "monster_cmp"
+    t.integer "monster_mp"
+    t.integer "monster_matk"
+    t.integer "monster_mdef"
+    t.integer "monster_magi"
+    t.integer "monster_loot"
+    t.integer "monster_damage"
+    t.integer "monstertype_id"
+    t.integer "monster_rarity"
+    t.integer "round", default: 1
+    t.integer "tokens_earned", default: 0
+    t.integer "exp_earned", default: 0
+    t.integer "dreyore_earned", default: 0
+    t.integer "items_earned", default: 0
+    t.boolean "battleover", default: false
+    t.datetime "started_on"
+    t.datetime "ended_on"
+    t.integer "fight_id"
+    t.integer "monster_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

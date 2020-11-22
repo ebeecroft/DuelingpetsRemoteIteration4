@@ -1,7 +1,8 @@
+<% provide(:title, "Duelingpets: Login") %>
+<% provide(:description, "Whether your a new or an old member, this portal allows you to enter into our small little dream world, so come join us on a new adventure!") %>
 <% provide(:h1, "Login") %>
 <% provide(:canonical, "http://www.duelingpets.net/login") %>
 <% provide(:alternate, "http://www.duelingpets.net/login/") %>
-<% provide(:description, "Duelingpets Login allows you to access the site.") %>
 <div class="pageformat">
    <p><%= image_tag(@artpage.art_url(:thumb)) %></p>
    <p class="textindent"><%= textFormater("Multi", @artpage.message, "All").html_safe %></p>
@@ -22,6 +23,7 @@
 <div class="pageformat">
    <p class="formlinks">New User? <%= link_to "Register now!", register_path  %></p>
    <p class="formlinks">New Account? <%= link_to "Activate now!", activate_path %></p>
+   <p class="formlinks">Forgot Login? <%= link_to "Find Login", findlogin_path %></p>
    <p class="formlinks">Forgot Password? <%= link_to "Forgot Password", recover_path %></p>
    <br>
    <p class="formlinks"><%= link_to 'Back', root_path %></p>

@@ -8,6 +8,8 @@
          <h1>Welcome <%= @user.vname %> to Duelingpets!</h1>
       <% elsif @type == "Info" %>
          <h1>Greetings <%= @user.vname %> here is your account info!</h1>
+      <% elsif @type == "Findlogin" %>
+         <h1>Need help finding your login <%= @user.vname %>?</h1>
       <% elsif @type == "Resetpassword" %>
          <h1>Need help with your password <%= @user.vname %>?</h1>
       <% elsif @type == "Resettime" %>
@@ -33,6 +35,12 @@
             represent their privilege level. Privilege levels
             by default are normally users, but others may be
             reviewers, keymasters or others.
+         <% elsif @type == "Findlogin" %>
+            Sera the Shrew here, so it seems you misplaced
+            your login name once again little bat. You really
+            should consider investing in some glasses to see
+            better dear. No matter I am happy to help you
+            locate it.
          <% elsif @type == "Resetpassword" %>
             So you came to visit Steford the Stoat about that
             pesky password issue you were having. What did
@@ -77,6 +85,15 @@
             wishes to be in that is equal to their writing group or
             less than it. Thats all I have time to tell you young
             one, best of luck to you.
+         <% elsif @type == "Findlogin" %>
+            Sera chuckles. Well looks like I found it. It was under
+            your little leaf bed. Its okay youngen sometimes these
+            things happen. Still your not as unlucky as little
+            Twinks is, that little bat has difficulty finding his
+            own shoes sometimes. He is quite a cutie though. Tell
+            him I say hi. Oh by the way your Login name is:
+            <%= @user.login_id %>. I hope to see you again little
+            bat. She then proceeds to give you a kiss before leaving.
          <% elsif @type == "Resetpassword" %>
             Well not bad I think this should work granted it is not
             the best, still its pretty good for Stoat knowledge on
@@ -102,6 +119,8 @@
             Your tourguide Glitchy The Dragon
          <% elsif @type == "Info" %>
             A very Myotis day to you from Bartholumu Bat
+         <% elsif @type == "Findlogin" %>
+            Sera the Shrew finder of small items
          <% elsif @type == "Resetpassword" %>
             Steford the Stoat your pirate captain
          <% elsif @type == "Resettime" %>

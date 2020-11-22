@@ -44,4 +44,12 @@ class SessionsController < ApplicationController
    def extendtimepost
       mode "extendtimepost"
    end
+
+   def findlogin
+      mode "findlogin"
+   end
+
+   def findloginpost
+      mode "findloginpost"
+   end
 end
