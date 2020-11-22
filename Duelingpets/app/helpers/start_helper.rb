@@ -377,9 +377,9 @@ module StartHelper
       def mode(type)
          if(timeExpired)
             logout_user
-            logoutExpiredUsers
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "home" || type == "aboutus" || type == "hubworld")
                removeTransactions
                if(type == "aboutus")

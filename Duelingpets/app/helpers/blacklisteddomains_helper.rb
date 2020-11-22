@@ -20,6 +20,7 @@ module BlacklisteddomainsHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(current_user && current_user.pouch.privilege == "Admin")
                if(type == "index")
                   removeTransactions

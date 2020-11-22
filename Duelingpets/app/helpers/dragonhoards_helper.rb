@@ -49,6 +49,7 @@ module DragonhoardsHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "index")
                removeTransactions
                if(current_user && current_user.pouch.privilege == "Admin")

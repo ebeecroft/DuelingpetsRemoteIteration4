@@ -108,6 +108,7 @@ module OcsHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)

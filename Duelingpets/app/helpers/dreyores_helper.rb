@@ -31,6 +31,7 @@ module DreyoresHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             logged_in = current_user
             if(logged_in && logged_in.pouch.privilege == "Glitchy")
                if(type == "index")

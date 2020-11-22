@@ -140,6 +140,7 @@ module PartnersHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "index")
                allMode = Maintenancemode.find_by_id(1)
                creatureMode = Maintenancemode.find_by_id(10)

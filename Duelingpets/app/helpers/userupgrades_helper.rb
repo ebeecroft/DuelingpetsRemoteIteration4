@@ -132,6 +132,7 @@ module UserupgradesHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "index")
                if(current_user && current_user.pouch.privilege == "Admin")
                   removeTransactions

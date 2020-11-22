@@ -20,6 +20,7 @@ module ItemactionsHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(current_user && current_user.pouch.privilege == "Admin")
                if(type == "index")
                   allActions = Itemaction.order("created_on desc")

@@ -174,9 +174,9 @@ module ColorschemesHelper
       def mode(type)
          if(timeExpired)
             logout_user
-            logoutExpiredUsers
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "index")
                removeTransactions
                allMode = Maintenancemode.find_by_id(1)

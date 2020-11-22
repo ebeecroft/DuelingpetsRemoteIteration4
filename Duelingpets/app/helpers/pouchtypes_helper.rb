@@ -24,6 +24,7 @@ module PouchtypesHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "index")
                removeTransactions
                logged_in = current_user

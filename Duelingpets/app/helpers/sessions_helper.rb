@@ -166,7 +166,6 @@ module SessionsHelper
       end
 
       def mode(type)
-         logoutExpiredUsers
          if(type == "destroy")
             logout_user
             redirect_to root_path

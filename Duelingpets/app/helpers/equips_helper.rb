@@ -18,6 +18,7 @@ module EquipsHelper
             logout_user
             redirect_to root_path
          else
+            logoutExpiredUsers
             if(type == "index")
                logged_in = current_user
                if(logged_in && logged_in.pouch.privilege == "Admin")
@@ -37,6 +38,8 @@ module EquipsHelper
                      @partner = Partner.find_by_id(equipFound.partner_id)
                      slots = @equip.equipslots.all
                      @equipslots = Kaminari.paginate_array(slots).page(getEquipParams("Page")).per(1)
+                  else
+                     redirect_to root_path
                   end
                else
                   redirect_to root_path
