@@ -1,8 +1,6 @@
 <% provide(:h1, "Subplaylist List") %>
-<% if @subplaylists.count >= 10 %>
-   <div class="formlinks"><%= paginate @subplaylists %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @subplaylists %></div>
+<br>
 <% @subplaylists.each do |subplaylist| %>
    <div class="pageformat">
       <p>Created: <%= distance_of_time_in_words_to_now subplaylist.created_on %> ago on (<%= subplaylist.created_on.strftime("%B-%d-%Y") %>)</p>

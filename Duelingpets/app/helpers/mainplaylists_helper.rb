@@ -75,7 +75,7 @@ module MainplaylistsHelper
                      if(logged_in.pouch.privilege == "Admin")
                         redirect_to mainplaylists_path
                      else
-                        redirect_to user_channel_path(mainplaylistFound.channel.user, mainplaylist.channel)
+                        redirect_to user_channel_path(mainplaylistFound.channel.user, mainplaylistFound.channel)
                      end
                   else
                      redirect_to root_path

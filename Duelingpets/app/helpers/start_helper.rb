@@ -205,6 +205,8 @@ module StartHelper
             allContents = Oc.all
          elsif(type == "Item")
             allContents = Item.all
+         elsif(type == "Monster")
+            allContents = Monster.all
          elsif(type == "Creature")
             allContents = Creature.all
          elsif(type == "Art")
@@ -225,11 +227,15 @@ module StartHelper
             allContents = Pm.all
          elsif(type == "Partner")
             allContents = Partner.all
+         else
+            raise "My invalid type is: #{type}"
          end
+         return allContents
       end   
 
       def getNotifications(type)
          allContents = ""
+         value = 0
          if(type != "All")
             allContents = notify(type)
          end
@@ -309,8 +315,10 @@ module StartHelper
             value = noteCount
          else
             #This is for notifying staff of new content
-            contents = allContents.select{|content| !content.reviewed}
-            value = contents.count
+            if(allContents.count > 0)
+               contents = allContents.select{|content| !content.reviewed}
+               value = contents.count
+            end
          end
          return value
       end
