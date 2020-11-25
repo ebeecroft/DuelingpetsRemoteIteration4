@@ -1,8 +1,6 @@
 <% provide(:h1, "Mainfolder List") %>
-<% if @mainfolders.count >= 10 %>
-   <div class="formlinks"><%= paginate @mainfolders %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @mainfolders %></div>
+<br>
 <% @mainfolders.each do |mainfolder| %>
    <div class="pageformat">
       <p>Created: <%= distance_of_time_in_words_to_now mainfolder.created_on %> ago on (<%= mainfolder.created_on.strftime("%B-%d-%Y") %>)</p>

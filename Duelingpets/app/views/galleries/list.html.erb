@@ -1,8 +1,6 @@
 <% provide(:h1, "Gallery List") %>
-<% if @galleries.count >= 10 %>
-   <div class="formlinks"><%= paginate @galleries %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @galleries %></div>
+<br>
 <% @galleries.each do |gallery| %>
    <div class="pageformat">
       <p>Created: <%= distance_of_time_in_words_to_now gallery.created_on %> ago on (<%= gallery.created_on.strftime("%B-%d-%Y") %>)</p>

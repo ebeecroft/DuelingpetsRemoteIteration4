@@ -1,8 +1,6 @@
 <% provide(:h1, "Subfolder List") %>
-<% if @subfolders.count >= 10 %>
-   <div class="formlinks"><%= paginate @subfolders %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @subfolders %></div>
+<br>
 <% @subfolders.each do |subfolder| %>
    <div class="pageformat">
       <p>Created: <%= distance_of_time_in_words_to_now subfolder.created_on %> ago on (<%= subfolder.created_on.strftime("%B-%d-%Y") %>)</p>
