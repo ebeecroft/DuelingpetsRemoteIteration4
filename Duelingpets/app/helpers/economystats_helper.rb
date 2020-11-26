@@ -57,7 +57,7 @@ module EconomystatsHelper
                #Retrieves all the ad blogs that have been reviewed
                normalBlogs = allUserBlogs.select{|blog| blog.adbanner.to_s != "" || blog.largeimage1.to_s != "" || blog.largeimage2.to_s != "" || blog.largeimage3.to_s != "" || blog.smallimage1.to_s != "" || blog.smallimage2.to_s != "" || blog.smallimage3.to_s != "" || blog.smallimage4.to_s != "" || blog.smallimage5.to_s != ""}
             end
-            reviewedBlogs = normalBlogs.select{|blog| blog.reviewed}
+            reviewedBlogs = normalBlogs.select{|blog| blog.reviewed || (current_user && current_user.id == blog.user_id)}
 
             #Displays all the blogs to the blog owner
             if(current_user && current_user.id == user.id)
@@ -82,19 +82,19 @@ module EconomystatsHelper
             end
          elsif(type == "Monsters")
             allMonsters = user.monsters.order("created_on desc")
-            reviewedMonsters = allMonsters.select{|monster| monster.reviewed}
+            reviewedMonsters = allMonsters.select{|monster| monster.reviewed || (current_user && current_user.id == monster.user_id)}
             value = reviewedMonsters.count
          elsif(type == "Creatures")
             allCreatures = user.creatures.order("created_on desc")
-            reviewedCreatures = allCreatures.select{|creature| creature.reviewed}
+            reviewedCreatures = allCreatures.select{|creature| creature.reviewed || (current_user && current_user.id == oc.user_id)}
             value = reviewedCreatures.count
          elsif(type == "Items")
             allItems = user.items.order("created_on desc")
-            reviewedItems = allItems.select{|item| item.reviewed}
+            reviewedItems = allItems.select{|item| item.reviewed || (current_user && current_user.id == item.user_id)}
             value = reviewedItems.count
          elsif(type == "OCs")
             allOCs = user.ocs.order("created_on desc")
-            reviewedOCs = allOCs.select{|oc| oc.reviewed}
+            reviewedOCs = allOCs.select{|oc| oc.reviewed || (current_user && current_user.id == oc.user_id)}
             value = reviewedOCs.count
          elsif(type == "Donors")
             value = user.donationbox.progress
