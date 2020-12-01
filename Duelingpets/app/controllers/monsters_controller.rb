@@ -44,4 +44,8 @@ class MonstersController < ApplicationController
    def list
       mode "list"
    end
+
+   def cave
+      mode "cave"
+   end
 end

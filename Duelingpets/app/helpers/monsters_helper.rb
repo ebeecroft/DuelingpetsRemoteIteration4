@@ -283,7 +283,7 @@ module MonstersHelper
             elsif(type == "approve" || type == "deny")
                logged_in = current_user
                if(logged_in)
-                  monsterFound = Monster.find_by_id(getMonsterParams("CreatureId"))
+                  monsterFound = Monster.find_by_id(getMonsterParams("MonsterId"))
                   if(monsterFound)
                      pouchFound = Pouch.find_by_user_id(logged_in.id)
                      if((logged_in.pouch.privilege == "Admin") || ((pouchFound.privilege == "Keymaster") || (pouchFound.privilege == "Reviewer")))
@@ -335,6 +335,33 @@ module MonstersHelper
                   end
                else
                   redirect_to root_path
+               end
+            elsif(type == "cave")
+               allMode = Maintenancemode.find_by_id(1)
+               monsterMode = Maintenancemode.find_by_id(15)
+               if(allMode.maintenance_on || monsterMode.maintenance_on)
+                  if(allMode.maintenance_on)
+                     render "/start/maintenance"
+                  else
+                     render "/monsters/maintenance"
+                  end
+               else
+                  logged_in = current_user
+                  if(logged_in)
+                     allPartners = Partner.all
+                     mypartners = allPartners.select{|partner| partner.user_id == logged_in.id && !partner.inbattle}
+                     if(mypartners.count > 0)
+                        @pets = mypartners
+                        allMonsters = Monster.order("reviewed_on desc, created_on desc")
+                        monstersReviewed = allMonsters.select{|monster| (monster.reviewed && logged_in.partners.count > 0)}
+                        @monsters = Kaminari.paginate_array(monstersReviewed).page(getMonsterParams("Page")).per(9)
+                     else
+                        flash[:error] = "You don't have any partners left!"
+                        redirect_to root_path
+                     end
+                  else
+                     redirect_to root_path
+                  end
                end
             end
          end
