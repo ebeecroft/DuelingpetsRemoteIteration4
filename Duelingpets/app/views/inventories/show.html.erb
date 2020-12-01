@@ -3,10 +3,8 @@
 <div class="pageformat">
    <p>Slot limit: <%= @inventory.inventoryslots.count %>/<%= @inventory.capacity %></p>
    <br>
-   <% if @inventoryslots.count >= 2 %>
-      <div class="formlinks"><%= paginate @inventoryslots %></div>
-      <br>
-   <% end %>
+   <div class="formlinks"><%= paginate @inventoryslots %></div>
+   <br>
    <% @inventoryslots.each do |inventoryslot| %>
       <p><div class="container"><%= button_to 'Edit', edit_inventory_inventoryslot_path(inventoryslot.inventory, inventoryslot), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', [inventoryslot.inventory, inventoryslot], method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div></p>
       <br>
@@ -19,56 +17,55 @@
                <%= render 'showform', slotindex: "1", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item2_id.nil? %>
-               <br>
                <%= render 'showform', slotindex: "2", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item3_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "3" %>
+               <%= render 'showform', slotindex: "3", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item4_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "4" %>
+               <%= render 'showform', slotindex: "4", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item5_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "5" %>
+               <% if(!inventoryslot.item1_id.nil? && !inventoryslot.item2_id.nil? && !inventoryslot.item3_id.nil? && !inventoryslot.item4_id.nil?)
+                  <br>
+                  <br>
+               <% end %>
+               <%= render 'showform', slotindex: "5", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item6_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "6" %>
+               <%= render 'showform', slotindex: "6", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item7_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "7" %>
+               <%= render 'showform', slotindex: "7", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item8_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "8" %>
+               <%= render 'showform', slotindex: "8", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item9_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "9" %>
+               <% if(!inventoryslot.item5_id.nil? && !inventoryslot.item6_id.nil? && !inventoryslot.item7_id.nil? && !inventoryslot.item8_id.nil?)
+                  <br>
+                  <br>
+               <% end %>
+               <%= render 'showform', slotindex: "9", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item10_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "10" %>
+               <%= render 'showform', slotindex: "10", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item11_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "11" %>
+               <%= render 'showform', slotindex: "11", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item12_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "12" %>
+               <%= render 'showform', slotindex: "12", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item13_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "13" %>
+               <% if(!inventoryslot.item9_id.nil? && !inventoryslot.item10_id.nil? && !inventoryslot.item11_id.nil? && !inventoryslot.item12_id.nil?)
+                  <br>
+                  <br>
+               <% end %>
+               <%= render 'showform', slotindex: "13", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item14_id.nil? %>
-               <br>
-               <%= render 'showform', slotindex: "14" %>
+               <%= render 'showform', slotindex: "14", slot: inventoryslot, form: form %>
             <% end %>
             <br>
             <div class="pageformat"><%= form.submit "Applyitem", class: "button submitbutton" %></div>

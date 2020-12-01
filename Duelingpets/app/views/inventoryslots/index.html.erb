@@ -1,8 +1,6 @@
 <% provide(:h1, "Inventoryslot List") %>
-<% if @inventoryslots.count >= 10 %>
-   <div class="formlinks"><%= paginate @inventoryslots %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @inventoryslots %></div>
+<br>
 <% @inventoryslots.each do |inventoryslot| %>
    <div class="pageformat">
       <p>Name: <%= inventoryslot.name %></p>
