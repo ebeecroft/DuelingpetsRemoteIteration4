@@ -173,7 +173,7 @@ module UsersHelper
                logged_in = current_user
                if(logged_in && logged_in.pouch.privilege == "Admin")
                   removeTransactions
-                  allUsers = User.order("joined_on desc").page(getUserParams("Page")).per(10)
+                  allUsers = User.order("joined_on desc").page(getUserParams("Page")).per(9)
                   @users = allUsers
                else
                   redirect_to root_path
