@@ -17,7 +17,7 @@ module BlogsHelper
             :largeimage3_cache, :smallimage1, :remote_smallimage1_url, :smallimage1_cache, :smallimage2,
             :remote_smallimage2_url, :smallimage2_cache, :smallimage3, :remote_smallimage3_url,
             :smallimage3_cache, :smallimage4, :remote_smallimage4_url, :smallimage4_cache, :smallimage5,
-            :remote_smallimage5_url, :smallimage5_cache, :bookgroup_id, :blogtype_id, :blogviewer_id)
+            :remote_smallimage5_url, :smallimage5_cache, :bookgroup_id, :blogtype_id, :gviewer_id)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -188,8 +188,8 @@ module BlogsHelper
                @blogtypes = blogtypes
 
                #Allows us to select the user who can view the blog
-               blogviewers = Blogviewer.order("created_on desc")
-               @blogviewers = blogviewers
+               gviewers = Gviewer.order("created_on desc")
+               @gviewers = gviewers
 
                blogFound.reviewed = false
                @blog = blogFound
@@ -297,8 +297,8 @@ module BlogsHelper
                         @blogtypes = blogtypes
 
                         #Allows us to select the user who can view the blog
-                        blogviewers = Blogviewer.order("created_on desc")
-                        @blogviewers = blogviewers
+                        gviewers = Gviewer.order("created_on desc")
+                        @gviewers = gviewers
 
                         @blog = newBlog
                         @user = userFound

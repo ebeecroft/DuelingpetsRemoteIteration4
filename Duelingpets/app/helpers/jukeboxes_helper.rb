@@ -11,7 +11,7 @@ module JukeboxesHelper
             value = params[:user_id]
          elsif(type == "Jukebox")
             value = params.require(:jukebox).permit(:name, :description, :bookgroup_id, :privatejukebox,
-            :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache)
+            :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :gviewer_id)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -80,6 +80,9 @@ module JukeboxesHelper
                allGroups = Bookgroup.order("created_on desc")
                allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                @group = allowedGroups
+               #Allows us to select the user who can view the jukebox
+               gviewers = Gviewer.order("created_on desc")
+               @gviewers = gviewers
                @jukebox = jukeboxFound
                @user = User.find_by_vname(jukeboxFound.user.vname)
                if(type == "update")
@@ -180,6 +183,10 @@ module JukeboxesHelper
                         allGroups = Bookgroup.order("created_on desc")
                         allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                         @group = allowedGroups
+
+                        #Allows us to select the user who can view the jukebox
+                        gviewers = Gviewer.order("created_on desc")
+                        @gviewers = gviewers
 
                         @jukebox = newJukebox
                         @user = userFound

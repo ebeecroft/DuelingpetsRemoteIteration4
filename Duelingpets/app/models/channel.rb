@@ -2,6 +2,7 @@ class Channel < ApplicationRecord
    #Channels related
    belongs_to :user, optional: true
    belongs_to :bookgroup, optional: true
+   belongs_to :gviewer, optional: true
    has_many :mainplaylists, :foreign_key => "channel_id", :dependent => :destroy
 
    #Uploader section

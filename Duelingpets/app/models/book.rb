@@ -3,6 +3,7 @@ class Book < ApplicationRecord
    belongs_to :user, optional: true
    belongs_to :bookgroup, optional: true
    belongs_to :bookworld, optional: true
+   belongs_to :gviewer, optional: true
    has_many :chapters, :foreign_key => "book_id", :dependent => :destroy
 
    #Regex for title

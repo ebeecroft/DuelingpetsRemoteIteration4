@@ -2,6 +2,7 @@ class Oc < ApplicationRecord
    #Ocs related
    belongs_to :user, optional: true
    belongs_to :bookgroup, optional: true
+   belongs_to :gviewer, optional: true
 
    #Uploader section
    mount_uploader :ogg, OggUploader

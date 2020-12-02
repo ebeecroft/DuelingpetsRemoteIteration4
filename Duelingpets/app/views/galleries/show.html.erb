@@ -39,6 +39,7 @@
    <% end %>
    <p class="formlinks">Artist: <%= getUserPrivilege(@gallery.user) %><%= link_to @gallery.user.vname, user_path(@gallery.user) %></p>
    <p>Group: <%= @gallery.bookgroup.name %></p>
+   <p>Viewer: <%= @gallery.gviewer.name %></p>
    <p>Total mainfolders: <%= @gallery.mainfolders.count %></p>
    <p>Status: <%= getActivity(@gallery.user) %>
       <% if getActivity(@gallery.user) != "Online" && getActivity(@gallery.user) != "Inoperable" %>

@@ -1,8 +1,6 @@
 <% provide(:h1, "Book List") %>
-<% if @books.count >= 10 %>
-   <div class="formlinks"><%= paginate @books %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @books %></div>
+<br>
 <% @books.each do |book| %>
    <div class="pageformat">
       <p>Created: <%= distance_of_time_in_words_to_now book.created_on %> ago on (<%= book.created_on.strftime("%B-%d-%Y") %>)</p>
@@ -15,6 +13,7 @@
       <p class="formlinks">Writer: <%= getUserPrivilege(book.user) %><%= link_to book.user.vname, user_path(book.user) %></p>
       <p class="formlinks">Bookworld: <%= link_to book.bookworld.name, user_bookworld_path(book.bookworld.user, book.bookworld) %></p>
       <p>Group: <%= book.bookgroup.name %></p>
+      <p>Viewer: <%= book.gviewer.name %></p>
       <p>Collab mode: <%= book.collab_mode %></p>
       <p>Status: <%= getActivity(book.user) %>
          <% if getActivity(book.user) != "Online" && getActivity(book.user) != "Inoperable" %>

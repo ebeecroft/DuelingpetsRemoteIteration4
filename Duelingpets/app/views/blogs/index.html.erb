@@ -3,10 +3,8 @@
 <% else %>
    <% provide(:h1, "Blog List") %>
 <% end %>
-<% if @blogs.count > 10 %>
-   <div class="formlinks"><%= paginate @blogs %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @blogs %></div>
+<br>
 <% @blogs.each do |blog| %>
    <div class="pageformat">
       <p class="formlinks"><%= link_to blog.title, user_blog_path(blog.user, blog) %></p>
@@ -23,7 +21,7 @@
          <p class="formlinks">Blogger: <%= getUserPrivilege(blog.user) %><%= link_to blog.user.vname, user_path(blog.user) %></p>
          <p>Group: <%= blog.bookgroup.name %></p>
          <p>Type: <%= blog.blogtype.name %></p>
-         <p>Viewer: <%= blog.blogviewer.name %></p>
+         <p>Viewer: <%= blog.gviewer.name %></p>
          <p>Status: <%= getActivity(blog.user) %>
             <% if getActivity(blog.user) != "Online" && getActivity(blog.user) != "Inoperable" %>
                for <%= distance_of_time_in_words_to_now getTime(blog.user) %>

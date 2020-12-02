@@ -12,7 +12,7 @@ module OcsHelper
          elsif(type == "Oc")
             value = params.require(:oc).permit(:name, :description, :nickname, :species, :age, :personality, :likesanddislikes, :backgroundandhistory, :relatives, :family, :friends, :world, :alignment, :alliance, :elements, :appearance, :clothing, :accessories, :image, :remote_image_url, :image_cache, :ogg, :remote_ogg_url, :ogg_cache,
             :mp3, :remote_mp3_url, :mp3_cache, :voiceogg, :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache,
-            :bookgroup_id)
+            :bookgroup_id, :gviewer_id)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -53,6 +53,9 @@ module OcsHelper
                allGroups = Bookgroup.order("created_on desc")
                allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                @group = allowedGroups
+               #Allows us to select the user who can view the oc
+               gviewers = Gviewer.order("created_on desc")
+               @gviewers = gviewers
                ocFound.reviewed = false
                @oc = ocFound
                @user = User.find_by_vname(ocFound.user.vname)
@@ -150,6 +153,10 @@ module OcsHelper
                         allGroups = Bookgroup.order("created_on desc")
                         allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                         @group = allowedGroups
+
+                        #Allows us to select the user who can view the oc
+                        gviewers = Gviewer.order("created_on desc")
+                        @gviewers = gviewers
 
                         @oc = newOc
                         @user = userFound

@@ -9,6 +9,7 @@ class CreateGalleries < ActiveRecord::Migration[5.2]
       t.datetime :updated_on
       t.integer :user_id
       t.integer :bookgroup_id
+      t.integer :gviewer_id
       t.boolean :music_on, default: false
       t.boolean :privategallery, default: false
 

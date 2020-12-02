@@ -20,7 +20,7 @@ class CreateBlogs < ActiveRecord::Migration[5.2]
       t.datetime :updated_on
       t.integer :blogtype_id
       t.integer :bookgroup_id
-      t.integer :blogviewer_id
+      t.integer :gviewer_id
       t.integer :user_id
       t.boolean :largeimage1purchased, default: false
       t.boolean :largeimage2purchased, default: false

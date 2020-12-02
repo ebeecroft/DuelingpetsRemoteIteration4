@@ -1,8 +1,6 @@
 <% provide(:h1, "Blog Review") %>
-<% if @blogs.count > 4 %>
-   <div class="formlinks"><%= paginate @blogs %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @blogs %></div>
+<br>
 <% @blogs.each do |blog| %>
    <div class="pageformat">
       <% if blog.blogtype.name == "Adblog" && blog.adbanner.to_s != "" %>
@@ -21,7 +19,7 @@
       <p class="formlinks">Blogger: <%= getUserPrivilege(blog.user) %><%= link_to blog.user.vname, user_path(blog.user) %></p>
       <p>Group: <%= blog.bookgroup.name %></p>
       <p>Type: <%= blog.blogtype.name %></p>
-      <p>Viewer: <%= blog.blogviewer.name %></p>
+      <p>Viewer: <%= blog.gviewer.name %></p>
       <% if blog.blogtype.name == "Blog" %>
          <p>Points gained: <%= blog.pointsreceived %></p>
       <% end %>

@@ -17,6 +17,7 @@
          <% end %>
          <p class="formlinks">Artist: <%= getUserPrivilege(gallery.user) %><%= link_to gallery.user.vname, user_path(gallery.user) %></p>
          <p>Group: <%= gallery.bookgroup.name %></p>
+         <p>Viewer: <%= gallery.gviewer.name %></p>
          <p>Status: <%= getActivity(gallery.user) %>
             <% if getActivity(gallery.user) != "Online" && getActivity(gallery.user) != "Inoperable" %>
                for <%= distance_of_time_in_words_to_now getTime(gallery.user) %>
@@ -26,6 +27,7 @@
       <% else %>
          <br>
          <p>Group: <%= gallery.bookgroup.name %></p>
+         <p>Viewer: <%= gallery.gviewer.name %></p>
          <br>
       <% end %>
       <p class="textindent"><%= textFormater("Multi", gallery.description, "All").html_safe %></p>

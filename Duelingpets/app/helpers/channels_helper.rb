@@ -11,7 +11,7 @@ module ChannelsHelper
             value = params[:user_id]
          elsif(type == "Channel")
             value = params.require(:channel).permit(:name, :description, :bookgroup_id, :privatechannel,
-            :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache)
+            :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :gviewer_id)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -80,6 +80,9 @@ module ChannelsHelper
                allGroups = Bookgroup.order("created_on desc")
                allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                @group = allowedGroups
+               #Allows us to select the user who can view the channel
+               gviewers = Gviewer.order("created_on desc")
+               @gviewers = gviewers
                @channel = channelFound
                @user = User.find_by_vname(channelFound.user.vname)
                if(type == "update")
@@ -180,6 +183,10 @@ module ChannelsHelper
                         allGroups = Bookgroup.order("created_on desc")
                         allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                         @group = allowedGroups
+
+                        #Allows us to select the user who can view the channel
+                        gviewers = Gviewer.order("created_on desc")
+                        @gviewers = gviewers
 
                         @channel = newChannel
                         @user = userFound

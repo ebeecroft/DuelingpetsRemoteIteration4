@@ -2,6 +2,7 @@ class Gallery < ApplicationRecord
    #Galleries related
    belongs_to :user, optional: true
    belongs_to :bookgroup, optional: true
+   belongs_to :gviewer, optional: true
    has_many :mainfolders, :foreign_key => "gallery_id", :dependent => :destroy
 
    #Uploader section

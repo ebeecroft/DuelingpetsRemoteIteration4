@@ -1,8 +1,6 @@
 <% provide(:h1, "Jukebox List") %>
-<% if @jukeboxes.count >= 10 %>
-   <div class="formlinks"><%= paginate @jukeboxes %></div>
-   <br>
-<% end %>
+<div class="formlinks"><%= paginate @jukeboxes %></div>
+<br>
 <% @jukeboxes.each do |jukebox| %>
    <div class="pageformat">
       <p>Created: <%= distance_of_time_in_words_to_now jukebox.created_on %> ago on (<%= jukebox.created_on.strftime("%B-%d-%Y") %>)</p>
@@ -20,6 +18,7 @@
       <% end %>
       <p class="formlinks">Composer: <%= getUserPrivilege(jukebox.user) %><%= link_to jukebox.user.vname, user_path(jukebox.user) %></p>
       <p>Group: <%= jukebox.bookgroup.name %></p>
+      <p>Viewer: <%= jukebox.gviewer.name %></p>
       <p>Status: <%= getActivity(jukebox.user) %>
          <% if getActivity(jukebox.user) != "Online" && getActivity(jukebox.user) != "Inoperable" %>
             for <%= distance_of_time_in_words_to_now getTime(jukebox.user) %>

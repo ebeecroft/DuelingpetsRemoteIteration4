@@ -27,7 +27,7 @@
    <% end %>
    <p>Group: <%= @blog.bookgroup.name %></p>
    <p>Type: <%= @blog.blogtype.name %></p>
-   <p>Viewer: <%= @blog.blogviewer.name %></p>
+   <p>Viewer: <%= @blog.gviewer.name %></p>
    <p>Status: <%= getActivity(@blog.user) %>
       <% if getActivity(@blog.user) != "Online" && getActivity(@blog.user) != "Inoperable" %>
          for <%= distance_of_time_in_words_to_now getTime(@blog.user) %>

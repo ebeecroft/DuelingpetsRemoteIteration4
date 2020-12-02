@@ -39,6 +39,7 @@
    <% end %>
    <p class="formlinks">Director: <%= getUserPrivilege(@channel.user) %><%= link_to @channel.user.vname, user_path(@channel.user) %></p>
    <p>Group: <%= @channel.bookgroup.name %></p>
+   <p>Viewer: <%= @channel.gviewer.name %></p>
    <p>Total mainplaylists: <%= @channel.mainplaylists.count %></p>
    <p>Status: <%= getActivity(@channel.user) %>
       <% if getActivity(@channel.user) != "Online" && getActivity(@channel.user) != "Inoperable" %>

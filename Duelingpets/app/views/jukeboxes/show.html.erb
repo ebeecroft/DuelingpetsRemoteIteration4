@@ -39,6 +39,7 @@
    <% end %>
    <p class="formlinks">Composer: <%= getUserPrivilege(@jukebox.user) %><%= link_to @jukebox.user.vname, user_path(@jukebox.user) %></p>
    <p>Group: <%= @jukebox.bookgroup.name %></p>
+   <p>Viewer: <%= @jukebox.gviewer.name %></p>
    <p>Total mainsheets: <%= @jukebox.mainsheets.count %></p>
    <p>Status: <%= getActivity(@jukebox.user) %>
       <% if getActivity(@jukebox.user) != "Online" && getActivity(@jukebox.user) != "Inoperable" %>

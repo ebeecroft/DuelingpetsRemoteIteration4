@@ -31,6 +31,7 @@ class CreateOcs < ActiveRecord::Migration[5.2]
       t.boolean :pointsreceived, default: false
       t.integer :user_id
       t.integer :bookgroup_id
+      t.integer :gviewer_id
 
       t.timestamps
     end

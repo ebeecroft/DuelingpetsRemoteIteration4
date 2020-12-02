@@ -2,6 +2,7 @@ class Jukebox < ApplicationRecord
    #Jukeboxes related
    belongs_to :user, optional: true
    belongs_to :bookgroup, optional: true
+   belongs_to :gviewer, optional: true
    has_many :mainsheets, :foreign_key => "jukebox_id", :dependent => :destroy
 
    #Uploader section

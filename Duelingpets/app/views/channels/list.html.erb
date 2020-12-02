@@ -18,6 +18,7 @@
       <% end %>
       <p class="formlinks">Director: <%= getUserPrivilege(channel.user) %><%= link_to channel.user.vname, user_path(channel.user) %></p>
       <p>Group: <%= channel.bookgroup.name %></p>
+      <p>Viewer: <%= channel.gviewer.name %></p>
       <p>Status: <%= getActivity(channel.user) %>
          <% if getActivity(channel.user) != "Online" && getActivity(channel.user) != "Inoperable" %>
             for <%= distance_of_time_in_words_to_now getTime(channel.user) %>

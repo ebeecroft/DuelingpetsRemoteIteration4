@@ -8,6 +8,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.integer :user_id
       t.integer :bookgroup_id
       t.integer :bookworld_id
+      t.integer :gviewer_id
       t.boolean :collab_mode, default: false
 
       t.timestamps

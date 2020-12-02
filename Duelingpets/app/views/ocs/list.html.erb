@@ -71,6 +71,7 @@
          <% end %>
          <p class="formlinks">Owner: <%= getUserPrivilege(oc.user) %><%= link_to oc.user.vname, user_path(oc.user) %></p>
          <p>Group: <%= oc.bookgroup.name %></p>
+         <p>Viewer: <%= oc.gviewer.name %></p>
          <p>Status: <%= getActivity(oc.user) %>
             <% if getActivity(oc.user) != "Online" && getActivity(oc.user) != "Inoperable" %>
                for <%= distance_of_time_in_words_to_now getTime(oc.user) %>

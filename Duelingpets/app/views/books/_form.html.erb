@@ -27,6 +27,11 @@
   </div>
   <br>
   <div class="pageformat">
+    <%= form.label :gviewer_id, "Select Gviewer" %>
+    <%= form.collection_select(:gviewer_id, @gviewers, :id, :name) %>
+  </div>
+  <br>
+  <div class="pageformat">
     <%= form.label :collab_mode %>
     <%= form.check_box :collab_mode %>
   </div>

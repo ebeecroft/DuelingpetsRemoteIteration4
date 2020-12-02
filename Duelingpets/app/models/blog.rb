@@ -6,7 +6,7 @@ class Blog < ApplicationRecord
    belongs_to :user, optional: true
    belongs_to :bookgroup, optional: true
    belongs_to :blogtype, optional: true
-   belongs_to :blogviewer, optional: true
+   belongs_to :gviewer, optional: true
 
    #Uploader section
    mount_uploader :ogg, OggUploader

@@ -8,7 +8,7 @@ module BooksHelper
          elsif(type == "Bookworld")
             value = params[:bookworld_id]
          elsif(type == "Book")
-            value = params.require(:book).permit(:title, :description, :bookgroup_id, :collab_mode)
+            value = params.require(:book).permit(:title, :description, :bookgroup_id, :collab_mode, :gviewer_id)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -32,6 +32,9 @@ module BooksHelper
                allGroups = Bookgroup.order("created_on desc")
                allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                @group = allowedGroups
+               #Allows us to select the user who can view the book
+               gviewers = Gviewer.order("created_on desc")
+               @gviewers = gviewers
                @book = bookFound
                @bookworld = Bookworld.find_by_name(bookFound.bookworld.name)
                if(type == "update")
@@ -124,6 +127,11 @@ module BooksHelper
                      allGroups = Bookgroup.order("created_on desc")
                      allowedGroups = allGroups.select{|bookgroup| bookgroup.id <= getWritingGroup(logged_in, "Id")}
                      @group = allowedGroups
+
+                     #Allows us to select the user who can view the book
+                     gviewers = Gviewer.order("created_on desc")
+                     @gviewers = gviewers
+
                      @book = newBook
                      @bookworld = bookworldFound
 

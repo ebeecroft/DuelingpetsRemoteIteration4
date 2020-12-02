@@ -14,6 +14,7 @@
    <p>Bookgroup: <%= @book.bookgroup.name %></p>
    <p class="formlinks">Bookworld: <%= link_to @book.bookworld.name, user_bookworld_path(@book.bookworld.user, @book.bookworld) %></p>
    <p>Collab mode: <%= @book.collab_mode %></p>
+   <p>Viewer: <%= @book.gviewer.name %></p>
    <p>Total chapters: <%= @book.chapters.count %></p>
    <p>Status: <%= getActivity(@book.user) %>
       <% if getActivity(@book.user) != "Online" && getActivity(@book.user) != "Inoperable" %>

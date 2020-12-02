@@ -34,8 +34,8 @@
      <br>
   <% end %>
   <div class="pageformat">
-    <%= form.label :blogviewer_id, "Select Blogviewer" %>
-    <%= form.collection_select(:blogviewer_id, @blogviewers, :id, :name) %>
+    <%= form.label :gviewer_id, "Select Gviewer" %>
+    <%= form.collection_select(:gviewer_id, @gviewers, :id, :name) %>
   </div>
   <br>
   <% if object == "New" || @blog.blogtype.name == "Blog" %>
