@@ -6,7 +6,7 @@
 <% @fieldcosts.each do |fieldcost| %>
    <div class="pageformat">
       <div class="container"><p>Name: <%= fieldcost.name %></p></div> <div class="container"><%= button_to 'Edit', edit_dragonhoard_fieldcost_path(fieldcost.dragonhoard, fieldcost), method: :get, class: "button editbutton" %></div>
-      <div class="container">Amount: <%= fieldcost.amount %></div> <div class="container"><%= button_to "Increase", fieldcosts_increase_path(fieldcost), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to "Decrease", fieldcosts_decrease_path(fieldcost), method: :post, class: "button destroybutton" %></div>
+      <div class="container">Amount: <%= fieldcost.amount %></div> <div class="container"><%= button_to "Increase", fieldcosts_inc_path(fieldcost), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to "Decrease", fieldcosts_dec_path(fieldcost), method: :post, class: "button destroybutton" %></div>
       <br>
       <p>Econtype: <%= fieldcost.econtype %></p>
       <p>Baseinc: <%= fieldcost.baseinc.name %></p>

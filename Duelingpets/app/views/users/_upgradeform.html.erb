@@ -1,4 +1,4 @@
-<% if current_user && current_user.id == @user.id %>
+<% if current_user && current_user.id == @user.id && @user.pouch.amount > 0 %>
    <br>
    <h2 class="subheader1">Upgrade levels</h2>
    <div class="container">Free pouch level: <%= @user.pouch.pouchslot.free1 %>/<%= getUpgrades("Pouch", "Max", @user.pouch, 1) %></div> <div class="container"><%= button_to 'Buy Upgrade for ' + getUpgrades("Pouch", "Cost", @user.pouch, 1).to_s, userupgrades_buy_path(:pouch_id=>@user.pouch.id, :buyname=>"Pouch", :upnumber=>1), method: :post, class: "button submitbutton" %></div>

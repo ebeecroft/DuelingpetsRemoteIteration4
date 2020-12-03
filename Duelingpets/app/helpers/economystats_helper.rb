@@ -80,6 +80,9 @@ module EconomystatsHelper
               @shouts = Kaminari.paginate_array(reviewedShouts).page(getUserParams("Page")).per(10)
               value = @shouts
             end
+         elsif(type == "Tags")
+            allTags = user.tags.order("created_on desc")
+            value = allTags.count
          elsif(type == "Monsters")
             allMonsters = user.monsters.order("created_on desc")
             reviewedMonsters = allMonsters.select{|monster| monster.reviewed || (current_user && current_user.id == monster.user_id)}

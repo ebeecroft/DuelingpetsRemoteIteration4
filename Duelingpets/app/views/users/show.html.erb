@@ -149,7 +149,7 @@
             <p>Message</p>
             <p class="textindent"><%= textFormater("Multi", shout.message, "All").html_safe %></p>
          <% end %>
-         <% if current_user.id != @user.id %>
+         <% if current_user.id != @user.id && @user.pouch.amount > 0 %>
             <%= form_for [@user.shoutbox, Shout.new] do |form| %>
                <p><%= form.label :message %></p>
                <p><%= form.text_area :message, :placeholder => "Enter message" %></p>

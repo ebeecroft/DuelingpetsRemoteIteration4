@@ -55,6 +55,23 @@
       <% end %>
    <% end %>
 <% end %>
+<!--Tag section--->
+<% if getUserContent(@user, "Tags") != 0 %>
+   <br>
+   <h2 class="subheader1">Tag section</h2>
+   <div class="container"><%= button_to "My Tags", user_tags_path(@user), method: :get, class: "button submitbutton" %></div>
+   <% if current_user && current_user.id == @user.id %>
+      <div class="container"><%= button_to "New Tag", new_user_tag_path(@user), method: :get, class: "button submitbutton" %></div>
+   <% end %>
+   <br>
+<% else %>
+   <% if current_user && current_user.id == @user.id && @user.pouch.amount > 0 %>
+      <br>
+      <h2 class="subheader1">Tag section</h2>
+      <p><%= button_to "New Tag", new_user_tag_path(@user), method: :get, class: "button submitbutton" %></p>
+   <% end %>
+<% end %>
+<!--Tag section end--->
 <!--Monster section--->
 <% if getUserContent(@user, "Monsters") != 0 %>
    <br>
@@ -65,7 +82,7 @@
    <% end %>
    <br>
 <% else %>
-   <% if current_user && current_user.id == @user.id %>
+   <% if current_user && current_user.id == @user.id && @user.pouch.amount > 0 %>
       <br>
       <h2 class="subheader1">Monster section</h2>
       <p><%= button_to "New Monster", new_user_monster_path(@user), method: :get, class: "button submitbutton" %></p>
@@ -168,6 +185,7 @@
       <br>
       <h2 class="subheader1">OC section</h2>
       <p><%= button_to "New OC", new_user_oc_path(@user), method: :get, class: "button submitbutton" %></p>
+      <p>Earn points by creating ocs!</p>
    <% end %>
 <% end %>
 <!--OC section end--->
@@ -181,7 +199,7 @@
    <% end %>
    <br>
 <% else %>
-   <% if current_user && current_user.id == @user.id %>
+   <% if current_user && current_user.id == @user.id && @user.pouch.amount > 0 %>
       <br>
       <h2 class="subheader1">Item section</h2>
       <p><%= button_to "New Item", items_choose_path(@user), method: :get, class: "button submitbutton" %></p>
@@ -198,7 +216,7 @@
    <% end %>
    <br>
 <% else %>
-   <% if current_user && current_user.id == @user.id %>
+   <% if current_user && current_user.id == @user.id && @user.pouch.amount > 0 %>
       <br>
       <h2 class="subheader1">Creature section</h2>
       <p><%= button_to "New Creature", new_user_creature_path(@user), method: :get, class: "button submitbutton" %></p>
@@ -241,6 +259,7 @@
       <br>
       <h2 class="subheader1">Colorscheme section</h2>
       <p><%= button_to "New Colorscheme", new_user_colorscheme_path(@user), method: :get, class: "button submitbutton" %></p>
+      <p>Earn points by creating colorschemes!</p>
    <% end %>
 <% end %>
 <!--Colorscheme section end-->
