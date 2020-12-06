@@ -163,6 +163,11 @@ module OcsHelper
 
                         if(type == "create")
                            if(@oc.save)
+                              octag = Octag.new(params[:octag])
+                              octag.oc_id = @oc.id
+                              octag.tag1_id = 1
+                              @octag = octag
+                              @octag.save
                               url = "http://www.duelingpets.net/ocs/review" #"http://localhost:3000/blogs/review"
                               #if(type == "Production")
                               #   url = "http://www.duelingpets.net/blogs/review"

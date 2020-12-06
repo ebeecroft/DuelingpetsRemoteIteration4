@@ -1,0 +1,40 @@
+<% provide(:h1, "OCTag List") %>
+<div class="formlinks"><%= paginate @octags %></div>
+<br>
+<% @octags.each do |octag| %>
+   <div class="pageformat">
+      <p class="formlinks"><%= link_to octag.oc.name, user_oc_path(octag.oc.user, octag.oc) %></p>
+      <p>Tag1: <%= octag.tag1 %></p>
+      <p>Tag2: <%= octag.tag2 %></p>
+      <p>Tag3: <%= octag.tag3 %></p>
+      <p>Tag4: <%= octag.tag4 %></p>
+      <p>Tag5: <%= octag.tag5 %></p>
+      <p>Tag6: <%= octag.tag6 %></p>
+      <p>Tag7: <%= octag.tag7 %></p>
+      <p>Tag8: <%= octag.tag8 %></p>
+      <p>Tag9: <%= octag.tag9 %></p>
+      <p>Tag10: <%= octag.tag10 %></p>
+      <p>Tag11: <%= octag.tag11 %></p>
+      <p>Tag12: <%= octag.tag12 %></p>
+      <p>Tag13: <%= octag.tag13 %></p>
+      <p>Tag14: <%= octag.tag14 %></p>
+      <p>Tag15: <%= octag.tag15 %></p>
+      <p>Tag16: <%= octag.tag16 %></p>
+      <p>Tag17: <%= octag.tag17 %></p>
+      <p>Tag18: <%= octag.tag18 %></p>
+      <p>Tag19: <%= octag.tag19 %></p>
+      <p>Tag20: <%= octag.tag20 %></p>
+      <br>
+      <% if octag.oc.user.userinfo.miniavatar.to_s != "" %>
+         <p><%= image_tag(octag.oc.user.userinfo.miniavatar_url(:thumb)) %></p>
+      <% end %>
+      <p class="formlinks">Owner: <%= getUserPrivilege(octag.oc.user) %><%= link_to octag.oc.user.vname, user_path(octag.oc.user) %></p>
+      <p>Status: <%= getActivity(octag.oc.user) %>
+         <% if getActivity(octag.oc.user) != "Online" && getActivity(octag.oc.user) != "Inoperable" %>
+            for <%= distance_of_time_in_words_to_now getTime(octag.oc.user) %>
+         <% end %>
+      </p>
+   </div>
+   <br>
+<% end %>
+<p class="formlinks"><%= link_to 'Back', root_path %></p>
