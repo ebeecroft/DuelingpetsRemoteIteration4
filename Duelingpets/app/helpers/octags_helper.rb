@@ -152,7 +152,11 @@ module OctagsHelper
                         @octag = octagFound
                         @octag.save
                         flash[:success] = "Tag #{getTagname(tag)} was successfully removed!"
-                        redirect_to user_oc_path(@octag.oc.user, @octag.oc)
+                        if(logged_in.pouch.privilege == "Admin")
+                           redirect_to octags_path
+                        else
+                           redirect_to user_oc_path(@octag.oc.user, @octag.oc)
+                        end
                      else
                         flash[:error] = "This tag does not exist!"
                         redirect_to root_path
