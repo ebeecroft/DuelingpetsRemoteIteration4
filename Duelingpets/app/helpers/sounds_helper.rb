@@ -144,6 +144,11 @@ module SoundsHelper
 
                            if(type == "create")
                               if(@sound.save)
+                                 soundtag = Soundtag.new(params[:soundtag])
+                                 soundtag.sound_id = @sound.id
+                                 soundtag.tag1_id = 1
+                                 @soundtag = soundtag
+                                 @soundtag.save
                                  updateJukebox(@sound.subsheet)
                                  url = "http://www.duelingpets.net/sounds/review"
                                  ContentMailer.content_review(@sound, "Sound", url).deliver_now

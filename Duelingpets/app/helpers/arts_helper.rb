@@ -144,6 +144,11 @@ module ArtsHelper
 
                            if(type == "create")
                               if(@art.save)
+                                 arttag = Arttag.new(params[:arttag])
+                                 arttag.art_id = @art.id
+                                 arttag.tag1_id = 1
+                                 @arttag = arttag
+                                 @arttag.save
                                  updateGallery(@art.subfolder)
                                  url = "http://www.duelingpets.net/arts/review"
                                  ContentMailer.content_review(@art, "Art", url).deliver_now

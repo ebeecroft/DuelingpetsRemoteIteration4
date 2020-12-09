@@ -32,5 +32,143 @@
    <br>
    <p class="textindent"><%= textFormater("Multi", @art.description, "All").html_safe %></p>
    <br>
+   <p>Tag list</p>
+   <% if(!@art.arttag.tag1_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag1_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag1_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag2_id.nil?) %>
+      <div class="container"><%= " " + getTagname(@art.arttag.tag2_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag2_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag3_id.nil?) %>
+      <div class="container"><%= " " + getTagname(@art.arttag.tag3_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag3_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag4_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag4_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag4_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag5_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag5_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag5_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag6_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag6_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag6_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag7_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag7_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag7_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag8_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag8_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag8_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag9_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag9_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag9_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag10_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag10_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag10_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag11_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag11_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag11_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag12_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag12_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag12_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag13_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag13_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag13_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag14_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag14_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag14_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag15_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag15_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag15_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag16_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag16_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag16_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag17_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag17_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag17_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag18_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag18_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag18_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag19_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag19_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag19_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@art.arttag.tag20_id.nil?) %>
+      <div class="container"><%= getTagname(@art.arttag.tag20_id) %></div>
+      <% if(current_user && current_user.id == @art.user_id) %>
+         <div class="container"><%= button_to 'X', arttags_removetag_path(:arttag_id=>@art.arttag.id, :tagid=>@art.arttag.tag20_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <br>
+   <% if current_user && current_user.id == @art.user_id %>
+      <br>
+      <%= form_for(:arttag, url: arttags_addtag_path(:arttag_id=>@art.arttag.id), method: :post) do |form| %>
+         <p>
+            <%= form.label :name, "Tagname" %>
+            <%= form.text_field :name %>
+         </p>
+         <br>
+         <p>
+            <%= form.label :tagslot, "Pick a slot from 1 - 20" %>
+            <%= form.number_field :tagslot %>
+         </p>
+         <br>
+         <div class="pageformat"><%= form.submit "Add Tag", class: "button submitbutton" %></div>
+      <% end %>
+   <% end %>
 </div>
 <p class="formlinks"><%= link_to "Back", mainfolder_subfolder_path(@art.subfolder.mainfolder, @art.subfolder) %></p>

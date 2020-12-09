@@ -3,6 +3,7 @@ class Art < ApplicationRecord
    belongs_to :user, optional: true
    belongs_to :subfolder, optional: true
    belongs_to :bookgroup, optional: true
+   has_one :arttag, :foreign_key => "art_id", :dependent => :destroy
 
    #Uploader section
    mount_uploader :ogg, OggUploader
