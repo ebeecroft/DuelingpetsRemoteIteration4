@@ -3,6 +3,7 @@ class Movie < ApplicationRecord
    belongs_to :user, optional: true
    belongs_to :subplaylist, optional: true
    belongs_to :bookgroup, optional: true
+   has_one :movietag, :foreign_key => "movie_id", :dependent => :destroy
 
    #Uploader section
    mount_uploader :ogv, OgvUploader

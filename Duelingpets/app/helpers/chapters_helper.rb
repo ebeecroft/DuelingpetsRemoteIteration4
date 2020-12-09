@@ -174,6 +174,11 @@ module ChaptersHelper
 
                         if(type == "create")
                            if(@chapter.save)
+                              chaptertag = Chaptertag.new(params[:chaptertag])
+                              chaptertag.chapter_id = @chapter.id
+                              chaptertag.tag1_id = 1
+                              @chaptertag = chaptertag
+                              @chaptertag.save
                               updateBookworld(@chapter.book)
                               url = "http://www.duelingpets.net/chapters/review"
                               ContentMailer.content_review(@chapter, "Chapter", url).deliver_now

@@ -47,5 +47,143 @@
    <br>
    <p class="textindent"><%= textFormater("Multi", @chapter.story, "All").html_safe %></p>
    <br>
+   <p>Tag list</p>
+   <% if(!@chapter.chaptertag.tag1_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag1_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag1_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag2_id.nil?) %>
+      <div class="container"><%= " " + getTagname(@chapter.chaptertag.tag2_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag2_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag3_id.nil?) %>
+      <div class="container"><%= " " + getTagname(@chapter.chaptertag.tag3_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag3_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag4_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag4_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag4_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag5_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag5_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag5_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag6_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag6_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag6_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag7_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag7_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag7_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag8_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag8_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag8_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag9_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag9_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag9_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag10_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag10_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag10_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag11_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag11_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag11_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag12_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag12_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag12_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag13_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag13_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag13_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag14_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag14_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag14_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag15_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag15_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag15_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag16_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag16_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag16_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag17_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag17_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag17_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag18_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag18_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag18_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag19_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag19_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag19_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <% if(!@chapter.chaptertag.tag20_id.nil?) %>
+      <div class="container"><%= getTagname(@chapter.chaptertag.tag20_id) %></div>
+      <% if(current_user && current_user.id == @chapter.user_id) %>
+         <div class="container"><%= button_to 'X', chaptertags_removetag_path(:chaptertag_id=>@chapter.chaptertag.id, :tagid=>@chapter.chaptertag.tag20_id), method: :post, class: "button destroybutton" %></div>
+      <% end %>
+   <% end %>
+   <br>
+   <% if current_user && current_user.id == @chapter.user_id %>
+      <br>
+      <%= form_for(:chaptertag, url: chaptertags_addtag_path(:chaptertag_id=>@chapter.chaptertag.id), method: :post) do |form| %>
+         <p>
+            <%= form.label :name, "Tagname" %>
+            <%= form.text_field :name %>
+         </p>
+         <br>
+         <p>
+            <%= form.label :tagslot, "Pick a slot from 1 - 20" %>
+            <%= form.number_field :tagslot %>
+         </p>
+         <br>
+         <div class="pageformat"><%= form.submit "Add Tag", class: "button submitbutton" %></div>
+      <% end %>
+   <% end %>
 </div>
 <p class="formlinks"><%= link_to "Back", bookworld_book_path(@chapter.book.bookworld, @chapter.book) %></p>

@@ -4,6 +4,7 @@ class Chapter < ApplicationRecord
    belongs_to :book, optional: true
    belongs_to :bookgroup, optional: true
    belongs_to :gchapter, optional: true
+   has_one :chaptertag, :foreign_key => "chapter_id", :dependent => :destroy
 
    #Uploader section
    mount_uploader :voice1ogg, Voice1oggUploader

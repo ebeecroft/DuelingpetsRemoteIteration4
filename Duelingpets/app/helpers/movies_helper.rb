@@ -144,6 +144,11 @@ module MoviesHelper
 
                            if(type == "create")
                               if(@movie.save)
+                                 movietag = Movietag.new(params[:movietag])
+                                 movietag.movie_id = @movie.id
+                                 movietag.tag1_id = 1
+                                 @movietag = movietag
+                                 @movietag.save
                                  updateChannel(@movie.subplaylist)
                                  url = "http://www.duelingpets.net/movies/review"
                                  ContentMailer.content_review(@movie, "Movie", url).deliver_now

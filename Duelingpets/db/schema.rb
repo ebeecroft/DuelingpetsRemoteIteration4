@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_04_014037) do
+ActiveRecord::Schema.define(version: 2020_12_09_020113) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -42,6 +42,32 @@ ActiveRecord::Schema.define(version: 2020_12_04_014037) do
     t.integer "subfolder_id"
     t.boolean "reviewed", default: false
     t.boolean "pointsreceived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "arttags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "art_id"
+    t.integer "tag1_id"
+    t.integer "tag2_id"
+    t.integer "tag3_id"
+    t.integer "tag4_id"
+    t.integer "tag5_id"
+    t.integer "tag6_id"
+    t.integer "tag7_id"
+    t.integer "tag8_id"
+    t.integer "tag9_id"
+    t.integer "tag10_id"
+    t.integer "tag11_id"
+    t.integer "tag12_id"
+    t.integer "tag13_id"
+    t.integer "tag14_id"
+    t.integer "tag15_id"
+    t.integer "tag16_id"
+    t.integer "tag17_id"
+    t.integer "tag18_id"
+    t.integer "tag19_id"
+    t.integer "tag20_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -192,6 +218,32 @@ ActiveRecord::Schema.define(version: 2020_12_04_014037) do
     t.integer "gchapter_id", default: 1
     t.boolean "reviewed", default: false
     t.boolean "pointsreceived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chaptertags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "chapter_id"
+    t.integer "tag1_id"
+    t.integer "tag2_id"
+    t.integer "tag3_id"
+    t.integer "tag4_id"
+    t.integer "tag5_id"
+    t.integer "tag6_id"
+    t.integer "tag7_id"
+    t.integer "tag8_id"
+    t.integer "tag9_id"
+    t.integer "tag10_id"
+    t.integer "tag11_id"
+    t.integer "tag12_id"
+    t.integer "tag13_id"
+    t.integer "tag14_id"
+    t.integer "tag15_id"
+    t.integer "tag16_id"
+    t.integer "tag17_id"
+    t.integer "tag18_id"
+    t.integer "tag19_id"
+    t.integer "tag20_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -767,6 +819,32 @@ ActiveRecord::Schema.define(version: 2020_12_04_014037) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "movietags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "movie_id"
+    t.integer "tag1_id"
+    t.integer "tag2_id"
+    t.integer "tag3_id"
+    t.integer "tag4_id"
+    t.integer "tag5_id"
+    t.integer "tag6_id"
+    t.integer "tag7_id"
+    t.integer "tag8_id"
+    t.integer "tag9_id"
+    t.integer "tag10_id"
+    t.integer "tag11_id"
+    t.integer "tag12_id"
+    t.integer "tag13_id"
+    t.integer "tag14_id"
+    t.integer "tag15_id"
+    t.integer "tag16_id"
+    t.integer "tag17_id"
+    t.integer "tag18_id"
+    t.integer "tag19_id"
+    t.integer "tag20_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "ocs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -1141,6 +1219,32 @@ ActiveRecord::Schema.define(version: 2020_12_04_014037) do
     t.integer "subsheet_id"
     t.boolean "reviewed", default: false
     t.boolean "pointsreceived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "soundtags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "sound_id"
+    t.integer "tag1_id"
+    t.integer "tag2_id"
+    t.integer "tag3_id"
+    t.integer "tag4_id"
+    t.integer "tag5_id"
+    t.integer "tag6_id"
+    t.integer "tag7_id"
+    t.integer "tag8_id"
+    t.integer "tag9_id"
+    t.integer "tag10_id"
+    t.integer "tag11_id"
+    t.integer "tag12_id"
+    t.integer "tag13_id"
+    t.integer "tag14_id"
+    t.integer "tag15_id"
+    t.integer "tag16_id"
+    t.integer "tag17_id"
+    t.integer "tag18_id"
+    t.integer "tag19_id"
+    t.integer "tag20_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
