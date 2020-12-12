@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_020113) do
+ActiveRecord::Schema.define(version: 2020_12_09_054022) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -1362,6 +1362,20 @@ ActiveRecord::Schema.define(version: 2020_12_09_020113) do
     t.integer "price"
     t.integer "freecap"
     t.integer "membercap"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "warehouses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "message"
+    t.string "ogg"
+    t.string "mp3"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.integer "treasury", default: 0
+    t.integer "profit", default: 0
+    t.boolean "store_open", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

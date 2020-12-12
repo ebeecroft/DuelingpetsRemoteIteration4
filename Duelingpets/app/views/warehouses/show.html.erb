@@ -1,0 +1,37 @@
+<% provide(:h1, @warehouse.name) %>
+<p id="notice"><%= notice %></p>
+<% if current_user %>
+   <p class="centerpagecontent"><%= playMusicLoop("Warehouse", @warehouse) %></p>
+   <div class="pageformat">
+      <div class="container">
+         <% if current_user.userinfo.mute_on %>
+            <p><%= button_to 'Unmute music', muteAudio_path(:pageType => "Warehouse", :pageContent => @warehouse), method: :post, class: "button submitbutton" %></p>
+            <br>
+         <% else %>
+            <p><%= button_to 'Mute music', muteAudio_path(:pageType => "Warehouse", :pageContent => @warehouse), method: :post, class: "button submitbutton" %></p>
+            <br>
+         <% end %>
+      </div>
+      <br>
+   </div>
+<% end %>
+<div class="pageformat">
+   <% if current_user && current_user.pouch.privilege == "Glitchy" %>
+      <div class="container"><%= button_to 'Edit', edit_warehouse_path(@warehouse), method: :get, class: "button editbutton" %></div>
+   <% end %>
+   <p>Created: <%= distance_of_time_in_words_to_now @warehouse.created_on %> ago on (<%= @warehouse.created_on.strftime("%B-%d-%Y") %>)</p>
+   <p>Updated: <%= distance_of_time_in_words_to_now @warehouse.updated_on %> ago on (<%= @warehouse.updated_on.strftime("%B-%d-%Y") %>)</p>
+   <br>
+   <p class="textindent"><%= textFormater("Multi", @warehouse.message, "All").html_safe %></p>
+   <br>
+   <p>Treasury: <%= @warehouse.treasury %></p>
+   <% if current_user && current_user.pouch.privilege == "Glitchy" %>
+      <p>Profit: <%= @warehouse.profit %></p>
+   <% end %>
+   <% if @warehouse.store_open %>
+      <p>Store is open!</p>
+   <% else %>
+      <p>Store is closed!</p>
+   <% end %>
+</div>
+<p class="formlinks"><%= link_to "Back", root_path %></p>
