@@ -26,7 +26,7 @@
                <%= render 'showform', slotindex: "4", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item5_id.nil? %>
-               <% if(!inventoryslot.item1_id.nil? && !inventoryslot.item2_id.nil? && !inventoryslot.item3_id.nil? && !inventoryslot.item4_id.nil?)
+               <% if(!inventoryslot.item1_id.nil? && !inventoryslot.item2_id.nil? && !inventoryslot.item3_id.nil? && !inventoryslot.item4_id.nil?) %>
                   <br>
                   <br>
                <% end %>
@@ -42,7 +42,7 @@
                <%= render 'showform', slotindex: "8", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item9_id.nil? %>
-               <% if(!inventoryslot.item5_id.nil? && !inventoryslot.item6_id.nil? && !inventoryslot.item7_id.nil? && !inventoryslot.item8_id.nil?)
+               <% if(!inventoryslot.item5_id.nil? && !inventoryslot.item6_id.nil? && !inventoryslot.item7_id.nil? && !inventoryslot.item8_id.nil?) %>
                   <br>
                   <br>
                <% end %>
@@ -58,7 +58,7 @@
                <%= render 'showform', slotindex: "12", slot: inventoryslot, form: form %>
             <% end %>
             <% if !inventoryslot.item13_id.nil? %>
-               <% if(!inventoryslot.item9_id.nil? && !inventoryslot.item10_id.nil? && !inventoryslot.item11_id.nil? && !inventoryslot.item12_id.nil?)
+               <% if(!inventoryslot.item9_id.nil? && !inventoryslot.item10_id.nil? && !inventoryslot.item11_id.nil? && !inventoryslot.item12_id.nil?) %>
                   <br>
                   <br>
                <% end %>
@@ -75,7 +75,7 @@
       <% end %>
       <br>
    <% end %>
-   <% if(@inventory.inventoryslot.count < @inventory.capacity) %>
+   <% if(@inventory.inventoryslots.count < @inventory.capacity) %>
       <p><%= button_to "New Itempouch", new_inventory_inventoryslot_path(@inventory), method: :get, class: "button submitbutton" %></p>
    <% end %>
 </div>

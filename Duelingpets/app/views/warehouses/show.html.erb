@@ -29,7 +29,123 @@
       <p>Profit: <%= @warehouse.profit %></p>
    <% end %>
    <% if @warehouse.store_open %>
-      <p>Store is open!</p>
+      <p>Please take a look at our really cool items!</p>
+      <br>
+      <%= form_for(:inventoryslot, url: warehouses_purchase_path(:warehouse_id => @warehouse.id), method: :post) do |form| %>
+         <% if @slots.count > 0 %>
+           <%= form.collection_select(:inventoryslot_id, @slots, :id, :name) %>
+
+            <p><%#= form.collection_select(:beep, @slots, :id, :name) %></p>
+         <% else %>
+            <p>Inventoryslots are required to buy items!</p>
+         <% end %>
+         <br>
+         <div class="formlinks"><%= paginate @witemshelves %></div>
+         <br>
+         <% @witemshelves.each do |witemshelf| %>
+            <% if(!checkShelf(witemshelf)) %>
+               <p><%= witemshelf.name %><%= form.radio_button :witemshelf_id, witemshelf.id, :checked => true %></p>
+               <br>
+               <% if !witemshelf.item1_id.nil? %>
+                  <%= render 'showform', slotindex: 1, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item2_id.nil? %>
+                  <%= render 'showform', slotindex: 2, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item3_id.nil? %>
+                  <%= render 'showform', slotindex: 3, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item4_id.nil? %>
+                  <%= render 'showform', slotindex: 4, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item5_id.nil? %>
+                  <%= render 'showform', slotindex: 5, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item6_id.nil? %>
+                  <%= render 'showform', slotindex: 6, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item7_id.nil? %>
+                  <%= render 'showform', slotindex: 7, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item8_id.nil? %>
+                  <%= render 'showform', slotindex: 8, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item9_id.nil? %>
+                  <%= render 'showform', slotindex: 9, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item10_id.nil? %>
+                  <%= render 'showform', slotindex: 10, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item11_id.nil? %>
+                  <%= render 'showform', slotindex: 11, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item12_id.nil? %>
+                  <%= render 'showform', slotindex: 12, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item13_id.nil? %>
+                  <%= render 'showform', slotindex: 13, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item14_id.nil? %>
+                  <%= render 'showform', slotindex: 14, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item15_id.nil? %>
+                  <%= render 'showform', slotindex: 15, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item16_id.nil? %>
+                  <%= render 'showform', slotindex: 16, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item17_id.nil? %>
+                  <%= render 'showform', slotindex: 17, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item18_id.nil? %>
+                  <%= render 'showform', slotindex: 18, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item19_id.nil? %>
+                  <%= render 'showform', slotindex: 19, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item20_id.nil? %>
+                  <%= render 'showform', slotindex: 20, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item21_id.nil? %>
+                  <%= render 'showform', slotindex: 21, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item22_id.nil? %>
+                  <%= render 'showform', slotindex: 22, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item23_id.nil? %>
+                  <%= render 'showform', slotindex: 23, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item24_id.nil? %>
+                  <%= render 'showform', slotindex: 24, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item25_id.nil? %>
+                  <%= render 'showform', slotindex: 25, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item26_id.nil? %>
+                  <%= render 'showform', slotindex: 26, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item27_id.nil? %>
+                  <%= render 'showform', slotindex: 27, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item28_id.nil? %>
+                  <%= render 'showform', slotindex: 28, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item29_id.nil? %>
+                  <%= render 'showform', slotindex: 29, slot: witemshelf, form: form %>
+               <% end %>
+               <% if !witemshelf.item30_id.nil? %>
+                  <%= render 'showform', slotindex: 30, slot: witemshelf, form: form %>
+               <% end %>
+               <% if @slots.count > 0 %>
+                  <p><%= form.submit "Purchase", class: "button submitbutton" %></p>
+                  <br>
+               <% end %>
+            <% else %>
+               <p><%= witemshelf.name %></p>
+               <p>Sorry this shelf is currently out of items! Please check back later!</p>
+            <% end %>
+         <% end %>
+      <% end %>
    <% else %>
       <p>Store is closed!</p>
    <% end %>

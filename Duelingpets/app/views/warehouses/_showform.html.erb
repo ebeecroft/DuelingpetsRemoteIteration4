@@ -1,0 +1,16 @@
+<div class="container">
+   <div class="container"><p class="formlinks"><%= link_to getItemStats(getItem(slotindex, slot), "Name"), user_item_path(getItemStats(getItem(slotindex, slot), "Creator"), getItemStats(getItem(slotindex, slot), "Name")) %></p></div> <div class="container"><%= form.radio_button :slotindex_id, slotindex %></div>
+   <% if getItemStats(getItem(slotindex, slot), "Imagecheck") %>
+      <p><%= image_tag(getItemStats(getItem(slotindex, slot), "Image")) %></p>
+   <% end %>
+   <p>Type: <%= getItemStats(getItem(slotindex, slot), "Itemtype") %></p>
+   <p>Durability: <%= getItemStats(getItem(slotindex, slot), "Durability") %></p>
+   <p>Rarity: <%= getItemStats(getItem(slotindex, slot), "Rarity") %></p>
+   <p class="formlinks">Artist: <%= getUserPrivilege(getItemStats(getItem(slotindex, slot), "User")) %><%= link_to getItemStats(getItem(slotindex, slot), "Creator"), user_path(getItemStats(getItem(slotindex, slot), "Creator")) %></p>
+   <p>Quantity: <%= getItemcost(getItem(slotindex, slot), slotindex, slot, "Quantity") %></p>
+   <p>Emeralds: <%= getItemcost(getItem(slotindex, slot), slotindex, slot, "Emerald") %></p>
+   <p>Points: <%= getItemcost(getItem(slotindex, slot), slotindex, slot, "Point") %></p>
+   <br>
+   <p>Stats</p>
+   <%= getItemtypeStats(getItem(slotindex, slot)) %>
+</div>

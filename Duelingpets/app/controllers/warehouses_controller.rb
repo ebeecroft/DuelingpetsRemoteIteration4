@@ -16,4 +16,8 @@ class WarehousesController < ApplicationController
    def update
       mode "update"
    end
+
+   def purchase
+      mode "purchase"
+   end
 end
