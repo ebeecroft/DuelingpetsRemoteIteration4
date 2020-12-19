@@ -9,9 +9,6 @@ module WarehousesHelper
             value = params[:warehouse_id]
          elsif(type == "Warehouse")
             value = params.require(:warehouse).permit(:name, :message, :store_open)
-         elsif(type == "ItemId")
-            #This one may get removed!
-            value = params[:inventoryslot][:item_id]
          elsif(type == "SlotId")
             value = params[:inventoryslot][:inventoryslot_id]
          elsif(type == "WshelfId")
@@ -489,6 +486,7 @@ module WarehousesHelper
          return value
       end
 
+      #has been replaced by getItemCost
       def findItemcost(slotIndex, witemshelf, type)
          value = 0
          slotIndex = slotIndex.to_i
@@ -1513,7 +1511,7 @@ module WarehousesHelper
                      logged_in.pouch.emeraldamount -= emeralds
                      @pouch = logged_in.pouch
                      @pouch.save
-                     warehouseFound.treasury += (cost + tax)
+                     warehouseFound.profit += (cost + tax)
                      @warehouse = warehouseFound
                      @warehouse.save
                      

@@ -9,12 +9,43 @@ module DragonhoardsHelper
             value = params.require(:dragonhoard).permit(:name, :message, :dragonimage, :remote_dragonimage_url,
             :dragonimage_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache,
             :basecost, :baserate)
+         elsif(type == "ShelfId")
+            value = params[:witemshelf][:witemshelf_id]
+         elsif(type == "ItemId")
+            value = params[:witemshelf][:item_id]
          elsif(type == "Page")
             value = params[:page]
          else
             raise "Invalid type detected!"
          end
          return value
+      end
+
+      def getMarketStats(item, type)
+         stats = ""
+         if(type == "Food")
+            msg1 = content_tag(:p, "HP: #{item.hp}")
+            msg2 = content_tag(:p, "Hunger: #{item.hunger}")
+            msg3 = content_tag(:p, "Fun: #{item.fun}")
+            stats = (msg1 + msg2 + msg3)
+         elsif(type == "Drink")
+            msg1 = content_tag(:p, "HP: #{item.hp}")
+            msg2 = content_tag(:p, "Thirst: #{item.thirst}")
+            msg3 = content_tag(:p, "Fun: #{item.fun}")
+            stats = (msg1 + msg2 + msg3)
+         elsif(type == "Weapon")
+            msg1 = content_tag(:p, "Atk: #{item.atk}")
+            msg2 = content_tag(:p, "Def: #{item.def}")
+            msg3 = content_tag(:p, "Agi: #{item.agility}")
+            msg4 = content_tag(:p, "Str: #{item.strength}")
+            stats = (msg1 + msg2 + msg3 + msg4)
+         elsif(type == "Toy")
+            msg1 = content_tag(:p, "Fun: #{item.fun}")
+            msg2 = content_tag(:p, "Hunger: #{item.hunger}")
+            msg3 = content_tag(:p, "Thirst: #{item.thirst}")
+            stats = (msg1 + msg2 + msg3)
+         end
+         return stats
       end
 
       def getEmeraldPrice(type)
@@ -31,6 +62,279 @@ module DragonhoardsHelper
             redirect_to root_path
          end
          return price
+      end
+      
+      def storeitem(item, shelf)
+         #Sets up the variables
+         spacefound = false
+         emptyspace = false
+      
+         #Determines which slot to put the item in
+         if(shelf.item1_id && shelf.item1_id == item.id)
+            spacefound = true
+            shelf.qty1 += 1
+         elsif(shelf.item2_id && shelf.item2_id == item.id)
+            spacefound = true
+            shelf.qty2 += 1
+         elsif(shelf.item3_id && shelf.item3_id == item.id)
+            spacefound = true
+            shelf.qty3 += 1
+         elsif(shelf.item4_id && shelf.item4_id == item.id)
+            spacefound = true
+            shelf.qty4 += 1
+         elsif(shelf.item5_id && shelf.item5_id == item.id)
+            spacefound = true
+            shelf.qty5 += 1
+         else
+            if(shelf.item1_id.nil?)
+               emptyspace = true
+               shelf.item1_id = item.id
+               shelf.qty1 = 1
+            elsif(shelf.item2_id.nil?)
+               emptyspace = true
+               shelf.item2_id = item.id
+               shelf.qty2 = 1
+            elsif(shelf.item3_id.nil?)
+               emptyspace = true
+               shelf.item3_id = item.id
+               shelf.qty3 = 1
+            elsif(shelf.item4_id.nil?)
+               emptyspace = true
+               shelf.item4_id = item.id
+               shelf.qty4 = 1
+            elsif(shelf.item5_id.nil?)
+               emptyspace = true
+               shelf.item5_id = item.id
+               shelf.qty5 = 1
+            end
+         end
+
+         #Checks the additional itemslots
+         if(!spacefound)
+            if(shelf.item6_id && shelf.item6_id == item.id)
+            spacefound = true
+            shelf.qty6 += 1
+            elsif(shelf.item7_id && shelf.item7_id == item.id)
+               spacefound = true
+               shelf.qty7 += 1
+            elsif(shelf.item8_id && shelf.item8_id == item.id)
+               spacefound = true
+               shelf.qty8 += 1
+            elsif(shelf.item9_id && shelf.item9_id == item.id)
+               spacefound = true
+               shelf.qty9 += 1
+            elsif(shelf.item10_id && shelf.item10_id == item.id)
+               spacefound = true
+               shelf.qty10 += 1
+            else
+               if(!emptyspace)
+                  if(shelf.item6_id.nil?)
+                     emptyspace = true
+                     shelf.item6_id = item.id
+                     shelf.qty6 = 1
+                  elsif(shelf.item7_id.nil?)
+                     emptyspace = true
+                     shelf.item7_id = item.id
+                     shelf.qty7 = 1
+                  elsif(shelf.item8_id.nil?)
+                     emptyspace = true
+                     shelf.item8_id = item.id
+                     shelf.qty8 = 1
+                  elsif(shelf.item9_id.nil?)
+                     emptyspace = true
+                     shelf.item9_id = item.id
+                     shelf.qty9 = 1
+                  elsif(shelf.item10_id.nil?)
+                     emptyspace = true
+                     shelf.item10_id = item.id
+                     shelf.qty10 = 1
+                  end
+               end
+            end
+         end
+
+         #Checks the additional itemslots
+         if(!spacefound)
+            if(shelf.item11_id && shelf.item11_id == item.id)
+            spacefound = true
+            shelf.qty11 += 1
+            elsif(shelf.item12_id && shelf.item12_id == item.id)
+               spacefound = true
+               shelf.qty12 += 1
+            elsif(shelf.item13_id && shelf.item13_id == item.id)
+               spacefound = true
+               shelf.qty13 += 1
+            elsif(shelf.item14_id && shelf.item14_id == item.id)
+               spacefound = true
+               shelf.qty14 += 1
+            elsif(shelf.item15_id && shelf.item15_id == item.id)
+               spacefound = true
+               shelf.qty15 += 1
+            else
+               if(!emptyspace)
+                  if(shelf.item11_id.nil?)
+                     emptyspace = true
+                     shelf.item11_id = item.id
+                     shelf.qty11 = 1
+                  elsif(shelf.item12_id.nil?)
+                     emptyspace = true
+                     shelf.item12_id = item.id
+                     shelf.qty12 = 1
+                  elsif(shelf.item13_id.nil?)
+                     emptyspace = true
+                     shelf.item13_id = item.id
+                     shelf.qty13 = 1
+                  elsif(shelf.item14_id.nil?)
+                     emptyspace = true
+                     shelf.item14_id = item.id
+                     shelf.qty14 = 1
+                  elsif(shelf.item15_id.nil?)
+                     emptyspace = true
+                     shelf.item15_id = item.id
+                     shelf.qty15 = 1
+                  end
+               end
+            end
+         end
+
+         #Checks the additional itemslots
+         if(!spacefound)
+            if(shelf.item16_id && shelf.item16_id == item.id)
+            spacefound = true
+            shelf.qty16 += 1
+            elsif(shelf.item17_id && shelf.item17_id == item.id)
+               spacefound = true
+               shelf.qty17 += 1
+            elsif(shelf.item18_id && shelf.item18_id == item.id)
+               spacefound = true
+               shelf.qty18 += 1
+            elsif(shelf.item19_id && shelf.item19_id == item.id)
+               spacefound = true
+               shelf.qty19 += 1
+            elsif(shelf.item20_id && shelf.item20_id == item.id)
+               spacefound = true
+               shelf.qty20 += 1
+            else
+               if(!emptyspace)
+                  if(shelf.item16_id.nil?)
+                     emptyspace = true
+                     shelf.item16_id = item.id
+                     shelf.qty16 = 1
+                  elsif(shelf.item17_id.nil?)
+                     emptyspace = true
+                     shelf.item17_id = item.id
+                     shelf.qty17 = 1
+                  elsif(shelf.item18_id.nil?)
+                     emptyspace = true
+                     shelf.item18_id = item.id
+                     shelf.qty18 = 1
+                  elsif(shelf.item19_id.nil?)
+                     emptyspace = true
+                     shelf.item19_id = item.id
+                     shelf.qty19 = 1
+                  elsif(shelf.item20_id.nil?)
+                     emptyspace = true
+                     shelf.item20_id = item.id
+                     shelf.qty20 = 1
+                  end
+               end
+            end
+         end
+
+         #Checks the additional itemslots
+         if(!spacefound)
+            if(shelf.item21_id && shelf.item21_id == item.id)
+            spacefound = true
+            shelf.qty21 += 1
+            elsif(shelf.item22_id && shelf.item22_id == item.id)
+               spacefound = true
+               shelf.qty22 += 1
+            elsif(shelf.item23_id && shelf.item23_id == item.id)
+               spacefound = true
+               shelf.qty23 += 1
+            elsif(shelf.item24_id && shelf.item24_id == item.id)
+               spacefound = true
+               shelf.qty24 += 1
+            elsif(shelf.item25_id && shelf.item25_id == item.id)
+               spacefound = true
+               shelf.qty25 += 1
+            else
+               if(!emptyspace)
+                  if(shelf.item21_id.nil?)
+                     emptyspace = true
+                     shelf.item21_id = item.id
+                     shelf.qty21 = 1
+                  elsif(shelf.item22_id.nil?)
+                     emptyspace = true
+                     shelf.item22_id = item.id
+                     shelf.qty22 = 1
+                  elsif(shelf.item23_id.nil?)
+                     emptyspace = true
+                     shelf.item23_id = item.id
+                     shelf.qty23 = 1
+                  elsif(shelf.item24_id.nil?)
+                     emptyspace = true
+                     shelf.item24_id = item.id
+                     shelf.qty24 = 1
+                  elsif(shelf.item25_id.nil?)
+                     emptyspace = true
+                     shelf.item25_id = item.id
+                     shelf.qty25 = 1
+                  end
+               end
+            end
+         end
+
+         #Checks the additional itemslots
+         if(!spacefound)
+            if(shelf.item26_id && shelf.item26_id == item.id)
+            spacefound = true
+            shelf.qty26 += 1
+            elsif(shelf.item27_id && shelf.item27_id == item.id)
+               spacefound = true
+               shelf.qty27 += 1
+            elsif(shelf.item28_id && shelf.item28_id == item.id)
+               spacefound = true
+               shelf.qty28 += 1
+            elsif(shelf.item29_id && shelf.item29_id == item.id)
+               spacefound = true
+               shelf.qty29 += 1
+            elsif(shelf.item30_id && shelf.item30_id == item.id)
+               spacefound = true
+               shelf.qty30 += 1
+            else
+               if(!emptyspace)
+                  if(shelf.item26_id.nil?)
+                     emptyspace = true
+                     shelf.item26_id = item.id
+                     shelf.qty26 = 1
+                  elsif(shelf.item27_id.nil?)
+                     emptyspace = true
+                     shelf.item27_id = item.id
+                     shelf.qty27 = 1
+                  elsif(shelf.item28_id.nil?)
+                     emptyspace = true
+                     shelf.item28_id = item.id
+                     shelf.qty28 = 1
+                  elsif(shelf.item29_id.nil?)
+                     emptyspace = true
+                     shelf.item29_id = item.id
+                     shelf.qty29 = 1
+                  elsif(shelf.item30_id.nil?)
+                     emptyspace = true
+                     shelf.item30_id = item.id
+                     shelf.qty30 = 1
+                  end
+               end
+            end
+         end
+         
+         #Checks to see if there is room for the item
+         roomspace = false
+         if(spacefound || emptyspace)
+            roomspace = true
+         end
+         return roomspace
       end
 
       def indexCommons
@@ -171,76 +475,71 @@ module DragonhoardsHelper
                else
                   redirect_to root_path
                end
-            elsif(type == "donate" || type == "donatepost")
-               hoard = Dragonhoard.find_by_id(1)
-               logged_in = current_user
-               if(hoard && logged_in)
-                  if(type == "donatepost")
-                     amount = (params[:session][:amount]).to_i
-                     if(!amount.nil? && amount > 0)
-                        if(logged_in.pouch.amount - amount >= 0)
-                           logged_in.pouch.amount -= amount
-                           hoard.vacationpoints += amount
-                           @pouch = logged_in.pouch
-                           @pouch.save
-                           @hoard = hoard
-                           @hoard.save
-                           flash[:success] = "You donated #{amount} points to the central bank!"
-                           redirect_to dragonhoards_path
-                        else
-                           flash[:error]  = "You don't have that many points!"
-                           redirect_to root_path
-                        end
-                     else
-                        flash[:error] = "Invalid data detected!"
-                        redirect_to root_path
-                     end
-                  end
-               else
-                  redirect_to root_path
-               end
-            elsif(type == "vacationmode" || type == "getvacationpoints" || type == "transfer")
+            elsif(type == "transfer") #Eventually may need to have a method to pull warehouse points here
                hoard = Dragonhoard.find_by_id(1)
                logged_in = current_user
                if(hoard && (logged_in && logged_in.pouch.privilege == "Glitchy"))
-                  if(type == "vacationmode")
-                     if(hoard.denholiday)
-                        #Will be removed in iteration 3
-                        hoard.denholiday = false
-                        flash[:success] = "Glitchy has now returned from his vacation!"
-                     else
-                        hoard.denholiday = true
-                        flash[:success] = "Glitchy is now on vacation!"
-                     end
+                  if(hoard.contestpoints > 0)
+                     points = hoard.contestpoints
+                     logged_in.pouch.amount += points
+                     hoard.contestpoints = 0
+                     flash[:success] = "#{points} contestpoints were transfered to Glitchy!"
+                     @pouch = logged_in.pouch
+                     @pouch.save
                   else
-                     if(!hoard.denholiday)
-                        if(type == "getvacationpoints")
-                           if(hoard.vacationpoints > 0)
-                              tax = (hoard.vacationpoints * 0.20).round
-                              points = hoard.vacationpoints - tax
-                              hoard.treasury += points
-                              hoard.vacationpoints = 0
-                              flash[:success] = "#{points} vacationpoints were added to the treasury!"
-                           else
-                              flash[:error] = "There are no vacationpoints to add!"
-                           end
-                        else
-                           if(hoard.contestpoints > 0)
-                              points = hoard.contestpoints
-                              logged_in.pouch.amount += points
-                              hoard.contestpoints = 0
-                              flash[:success] = "#{points} contestpoints were transfered to Glitchy!"
-                              @pouch = logged_in.pouch
-                              @pouch.save
-                           else
-                              flash[:error] = "There are no contestpoints to transfer!"
-                           end
-                        end
-                     end
+                     flash[:error] = "There are no contestpoints to transfer!"
                   end
                   @dragonhoard = hoard
                   @dragonhoard.save
                   redirect_to dragonhoards_path
+               else
+                  redirect_to root_path
+               end
+            elsif(type == "itemmarket")
+               logged_in = current_user
+               if(logged_in && logged_in.pouch.privilege == "Glitchy")
+                  allItems = Item.order("reviewed_on desc, created_on desc")
+                  itemsReviewed = allItems.select{|item| item.reviewed}
+                  allShelves = Witemshelf.all
+                  @slots = allShelves
+                  @items = Kaminari.paginate_array(itemsReviewed).page(getHoardParams("Page")).per(30)
+               else
+                  redirect_to root_path
+               end
+            elsif(type == "buyitem")
+               logged_in = current_user
+               hoard = Dragonhoard.find_by_id(1)
+               shelfFound = Witemshelf.find_by_id(getHoardParams("ShelfId"))
+               itemFound = Item.find_by_id(getHoardParams("ItemId"))
+               validPurchase = (shelfFound && itemFound)
+               if(logged_in && validPurchase && logged_in.pouch.privilege == "Glitchy")
+                  buyable = ((hoard.treasury - itemFound.cost >= 0) && (hoard.emeralds - itemFound.emeraldcost >= 0))
+                  room = storeitem(itemFound, shelfFound)
+                  if(room && buyable)
+                     #Buys item
+                     hoard.treasury -= itemFound.cost
+                     hoard.emeralds -= itemFound.emeraldcost
+                     @dragonhoard = hoard
+                     @dragonhoard.save
+                     @witemshelf = shelfFound
+                     @witemshelf.save
+                     
+                     #Pays the owner of the item
+                     owner = Pouch.find_by_user_id(itemFound.user_id)
+                     points = (itemFound.cost * 0.40).round
+                     owner.amount += points
+                     @owner = owner
+                     @owner.save
+                     flash[:success] = "Item #{itemFound.name} was added to the warehouse!"
+                     redirect_to warehouse_path(@witemshelf.warehouse.name)
+                  else
+                     if(!room)
+                        flash[:error] = "No room to store the item #{itemFound.name}!"
+                     else
+                        flash[:error] = "Insufficient funds to purchase the item #{itemFound.name}!"
+                     end
+                     redirect_to dragonhoards_path
+                  end
                else
                   redirect_to root_path
                end

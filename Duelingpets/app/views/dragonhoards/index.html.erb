@@ -115,4 +115,10 @@
          <br>
       </div>
    <% end %>
-<p class="formlinks"><%= link_to 'Back', root_path %></p>
+<div class="pageformat">
+   <% if current_user && current_user.pouch.privilege == "Glitchy" %>
+      <p class="formlinks"><%= link_to 'Back', root_path %>|<%= link_to 'Item market', dragonhoards_itemmarket_path %>|<%= link_to 'Fieldcost', fieldcosts_path %>|<%= link_to 'Ratecosts', ratecosts_path %>|<%= link_to 'Dreyores', dreyores_path %></p>
+   <% else %>
+      <p class="formlinks"><%= link_to 'Back', root_path %></p>
+   <% end %>
+</div>

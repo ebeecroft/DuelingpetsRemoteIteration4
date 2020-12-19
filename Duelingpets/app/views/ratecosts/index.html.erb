@@ -5,11 +5,11 @@
 <% end %>
 <% @ratecosts.each do |ratecost| %>
    <div class="pageformat">
-      <div class="container"><p>Name: <%= ratecost.name %></p></div> <div class="container"><%= button_to 'Edit', edit_dragonhoard_ratecost_path(ratecost.dragonhoard, ratecost), method: :get, class: "button editbutton" %></div>
-      <div class="container">Amount: <%= ratecost.amount %></div> <div class="container"><%= button_to "Increase", ratecosts_increase_path(ratecost), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to "Decrease", ratecosts_decrease_path(ratecost), method: :post, class: "button destroybutton" %></div>
+      <p><div class="container"><%= ratecost.name %></div> <div class="container"><%= button_to 'Edit', edit_dragonhoard_ratecost_path(ratecost.dragonhoard, ratecost), method: :get, class: "button editbutton" %></div></p>
+      <div class="container">Amount: <%= ratecost.amount %></div> <div class="container"><%= button_to "Increase", ratecosts_inc_path(ratecost), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to "Decrease", ratecosts_dec_path(ratecost), method: :post, class: "button destroybutton" %></div>
       <br>
       <p>Econtype: <%= ratecost.econtype %></p>
-      <p>Baserate: <%= ratecost.baseinc.name %></p>
+      <p>Baserate: <%= ratecost.baserate.name %></p>
       <p>Dragonhoard: <%= ratecost.dragonhoard_id %></p>
       <br>
       <p>Created: <%= distance_of_time_in_words_to_now ratecost.created_on %> ago on (<%= ratecost.created_on.strftime("%B-%d-%Y") %>)</p>

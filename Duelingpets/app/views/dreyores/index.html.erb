@@ -5,7 +5,7 @@
 <% end %>
 <% @dreyores.each do |dreyore| %>
    <div class="pageformat">
-      <div class="container"><p>Name: <%= dreyore.name %></p></div> <div class="container"><%= button_to 'Edit', edit_dragonhoard_dreyore_path(dreyore.dragonhoard, dreyore), method: :get, class: "button editbutton" %></div>
+      <p><div class="container"><%= dreyore.name %></div> <div class="container"><%= button_to 'Edit', edit_dragonhoard_dreyore_path(dreyore.dragonhoard, dreyore), method: :get, class: "button editbutton" %></div></p>
       <div class="container"><p>Dreyterrium: <%= dreyore.cur %>/<%= dreyore.cap %></p></div> <div class="container"><%= button_to 'Add Ore', dreyores_addore_path(:dreyore_id => dreyore.id), method: :get, class: "button submitbutton" %></div>
       <p>Change: <%= dreyore.change %></p>
       <p>Extracted: <%= dreyore.extracted %></p>
