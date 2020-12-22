@@ -1,6 +1,7 @@
 class Warehouse < ApplicationRecord
    #Pages that require warehouses
    has_many :witemshelves, :foreign_key => "warehouse_id", :dependent => :destroy
+   has_many :wpetdens, :foreign_key => "warehouse_id", :dependent => :destroy
 
    #Uploader section
    mount_uploader :ogg, OggUploader

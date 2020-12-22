@@ -1,0 +1,26 @@
+<div class="container">
+   <div class="container"><p class="formlinks"><%= link_to getPetStats(getPet(petindex, slot), "Name"), user_creature_path(getPetStats(getPet(petindex, slot), "Creator"), getPetStats(getPet(petindex, slot), "Name")) %></p></div> <div class="container"><%= form.radio_button :petindex_id, petindex %></div>
+   <% if getPetStats(getPet(petindex, slot), "Imagecheck") %>
+      <p><%= image_tag(getPetStats(getPet(petindex, slot), "Image")) %></p>
+   <% end %>
+   <p>Type: <%= getPetStats(getPet(petindex, slot), "Creaturetype") %></p>
+   <p>Lives: <%= getPetStats(getPet(petindex, slot), "Lives") %></p>
+   <p>Rarity: <%= getPetStats(getPet(petindex, slot), "Rarity") %></p>
+   <p class="formlinks">Artist: <%= getUserPrivilege(getPetStats(getPet(petindex, slot), "User")) %><%= link_to getPetStats(getPet(petindex, slot), "Creator"), user_path(getPetStats(getPet(petindex, slot), "Creator")) %></p>
+   <p>Quantity: <%= getPetcost(getPet(petindex, slot), petindex, slot, "Quantity") %></p>
+   <p>Emeralds: <%= getPetcost(getPet(petindex, slot), petindex, slot, "Emerald") %></p>
+   <p>Points: <%= getPetcost(getPet(petindex, slot), petindex, slot, "Point") %></p>
+   <br>
+   <p>Stats</p>
+   <div class="container">
+      <%= getPettypeStats(getPet(petindex, slot), "Physical") %>
+   </div>
+   <br>
+   <br>
+   <div class="container">
+      <%= getPettypeStats(getPet(petindex, slot), "Magical") %>
+   </div>
+   <div class="container">
+      <%= getPettypeStats(getPet(petindex, slot), "Stamina") %>
+   </div>
+</div>

@@ -1,7 +1,7 @@
 <% provide(:h1, "Witemshelf List") %>
 <div class="formlinks"><%= paginate @witemshelves %></div>
 <br>
-<% @witemshelves.each do |witemshelves| %>
+<% @witemshelves.each do |witemshelf| %>
    <div class="pageformat">
       <p>Name: <%= witemshelf.name %></p>
       <p>Warehouse: <%= witemshelf.warehouse.name %></p>

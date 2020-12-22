@@ -15,12 +15,525 @@ module WarehousesHelper
             value = params[:inventoryslot][:witemshelf_id]
          elsif(type == "Slotindex")
             value = params[:inventoryslot][:slotindex_id]
+         elsif(type == "Petindex")            
+            value = params[:partner][:petindex_id]
+         elsif(type == "WdenId")
+            value = params[:partner][:wpetden_id]
+         elsif(type == "Partnername")
+            value = params[:partner][:name]
+         elsif(type == "Partnerdescription")
+            value = params[:partner][:description]
+         elsif(type == "Partner")
+            value = params.require(:partner).permit(:name, :description, :creature_id)
          elsif(type == "Page")
             value = params[:page]
          else
             raise "Invalid type detected!"
          end
          return value
+      end
+
+      def checkDen(den)
+         #Checks the warehouse den to see if there any creatures available
+         noCreatures = false
+         slota = ((den.creature1_id.nil? && den.creature2_id.nil?) && (den.creature3_id.nil? && den.creature4_id.nil?))
+         slotb = ((den.creature5_id.nil? && den.creature6_id.nil?) && (den.creature7_id.nil? && den.creature8_id.nil?))
+         slotc = ((den.creature9_id.nil? && den.creature10_id.nil?) && (den.creature11_id.nil? && den.creature12_id.nil?))
+         slotd = ((den.creature13_id.nil? && den.creature14_id.nil?) && (den.creature15_id.nil? && den.creature16_id.nil?))
+         if(slota && slotb && slotc && slotd)
+            noCreatures = true
+         end
+         return noCreatures
+      end
+
+      def getPet(petIndex, wpetden)
+         creatureFound = false
+         creature = nil
+
+         #Locates the creature in the warehouse
+         petIndex = petIndex.to_i
+         if(petIndex == 1)
+            creature = Creature.find_by_id(wpetden.creature1_id)
+            creatureFound = true
+         elsif(petIndex == 2)
+            creature = Creature.find_by_id(wpetden.creature2_id)
+            creatureFound = true
+         elsif(petIndex == 3)
+            creature = Creature.find_by_id(wpetden.creature3_id)
+            creatureFound = true
+         elsif(petIndex == 4)
+            creature = Creature.find_by_id(wpetden.creature4_id)
+            creatureFound = true
+         end
+
+         #Checks additional slots if not found
+         if(!creatureFound)
+            if(petIndex == 5)
+               creature = Creature.find_by_id(wpetden.creature5_id)
+               creatureFound = true
+            elsif(petIndex == 6)
+               creature = Creature.find_by_id(wpetden.creature6_id)
+               creatureFound = true
+            elsif(petIndex == 7)
+               creature = Creature.find_by_id(wpetden.creature7_id)
+               creatureFound = true
+            elsif(petIndex == 8)
+               creature = Creature.find_by_id(wpetden.creature8_id)
+               creatureFound = true
+            end
+         end
+
+         #Checks additional slots if not found
+         if(!creatureFound)
+            if(petIndex == 9)
+               creature = Creature.find_by_id(wpetden.creature9_id)
+               creatureFound = true
+            elsif(petIndex == 10)
+               creature = Creature.find_by_id(wpetden.creature10_id)
+               creatureFound = true
+            elsif(petIndex == 11)
+               creature = Creature.find_by_id(wpetden.creature11_id)
+               creatureFound = true
+            elsif(petIndex == 12)
+               creature = Creature.find_by_id(wpetden.creature12_id)
+               creatureFound = true
+            end
+         end
+
+         #Checks additional slots if not found
+         if(!creatureFound)
+            if(petIndex == 13)
+               creature = Creature.find_by_id(wpetden.creature13_id)
+               creatureFound = true
+            elsif(petIndex == 14)
+               creature = Creature.find_by_id(wpetden.creature14_id)
+               creatureFound = true
+            elsif(petIndex == 15)
+               creature = Creature.find_by_id(wpetden.creature15_id)
+               creatureFound = true
+            elsif(petIndex == 16)
+               creature = Creature.find_by_id(wpetden.creature16_id)
+               creatureFound = true
+            end
+         end
+
+         #Returns the id if the creature exists
+         value = -1
+         if(creatureFound)
+            value = creature.id
+         else
+            value = creature
+         end
+         return value
+      end
+
+      def getPetStats(petid, type)
+         creature = Creature.find_by_id(petid)
+         value = ""
+         if(type == "Name")
+            value = creature.name
+            if(creature.retiredpet)
+               value = value + " [Retired]"
+            end
+         elsif(type == "Creator" || type == "User")
+            value = creature.user
+            if(type == "Creator")
+               value = creature.user.vname
+            end
+         elsif(type == "Image" || type == "Imagecheck")
+            value = (creature.image.to_s != "")
+            if(type == "Image")
+               value = creature.image_url(:thumb)
+            end
+         elsif(type == "Lives")
+            value = creature.lives
+            if(creature.unlimitedlives)
+               value = value + " [Unl]"
+            end
+         elsif(type == "Rarity")
+            value = creature.rarity
+         elsif(type == "Creaturetype")
+            value = creature.creaturetype.name
+            if(creature.starter)
+               value = value + " [Starter]"
+            end
+         end
+         return value
+      end
+
+      def getPetcost(petid, petIndex, wpetden, type)
+         creature = Creature.find_by_id(petid)
+         creatureFound = false
+         
+         #Determines what to return
+         if(type == "Emerald")
+            value = creature.emeraldcost
+         elsif(type == "Point")
+            #Add tax here
+            value = creature.cost
+         end
+         
+         #If is not an emerald check the slots
+         if(type != "Emerald")
+            if(petIndex == 1)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax1
+               elsif(type == "Quantity")
+                  value = wpetden.qty1
+               end
+            elsif(petIndex == 2)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax2
+               elsif(type == "Quantity")
+                  value = wpetden.qty2
+               end
+            elsif(petIndex == 3)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax3
+               elsif(type == "Quantity")
+                  value = wpetden.qty3
+               end
+            elsif(petIndex == 4)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax4
+               elsif(type == "Quantity")
+                  value = wpetden.qty4
+               end
+            end
+         end
+         
+         #Checks additional slots if not found
+         if(type != "Emerald" && !creatureFound)
+            if(petIndex == 5)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax5
+               elsif(type == "Quantity")
+                  value = wpetden.qty5
+               end
+            elsif(petIndex == 6)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax6
+               elsif(type == "Quantity")
+                  value = wpetden.qty6
+               end
+            elsif(petIndex == 7)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax7
+               elsif(type == "Quantity")
+                  value = wpetden.qty7
+               end
+            elsif(petIndex == 8)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax8
+               elsif(type == "Quantity")
+                  value = wpetden.qty8
+               end
+            end
+         end
+         
+         #Checks additional slots if not found
+         if(type != "Emerald" && !creatureFound)
+            if(petIndex == 9)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax9
+               elsif(type == "Quantity")
+                  value = wpetden.qty9
+               end
+            elsif(petIndex == 10)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax10
+               elsif(type == "Quantity")
+                  value = wpetden.qty10
+               end
+            elsif(petIndex == 11)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax11
+               elsif(type == "Quantity")
+                  value = wpetden.qty11
+               end
+            elsif(petIndex == 12)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax12
+               elsif(type == "Quantity")
+                  value = wpetden.qty12
+               end
+            end
+         end
+         
+         #Checks additional slots if not found
+         if(type != "Emerald" && !creatureFound)
+            if(petIndex == 13)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax13
+               elsif(type == "Quantity")
+                  value = wpetden.qty13
+               end
+            elsif(petIndex == 14)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax14
+               elsif(type == "Quantity")
+                  value = wpetden.qty14
+               end
+            elsif(petIndex == 15)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax15
+               elsif(type == "Quantity")
+                  value = wpetden.qty15
+               end
+            elsif(petIndex == 16)
+               creatureFound = true
+               if(type == "Point")
+                  value += wpetden.tax16
+               elsif(type == "Quantity")
+                  value = wpetden.qty16
+               end
+            end
+         end
+         return value
+      end
+
+      def getPettypeStats(petid, type)
+         creature = Creature.find_by_id(petid)
+         value = ""
+         if(type == "Physical")
+            msg1 = content_tag(:p, "Physical Stats")
+            msg2 = content_tag(:p, "Level: #{creature.level}")
+            msg3 = content_tag(:p, "HP: #{creature.hp}")
+            msg4 = content_tag(:p, "Atk: #{creature.atk} | Def: #{creature.def}")
+            msg5 = content_tag(:p, "Agi: #{creature.agility} | Strength: #{creature.strength}")
+            value = (msg1 + msg2 + msg3 + msg4 + msg5)
+         elsif(type == "Magical")
+            msg1 = content_tag(:p, "Magical Stats")
+            msg2 = content_tag(:p, "MP: #{creature.mp}")
+            msg3 = content_tag(:p, "Matk: #{creature.matk} | Mdef: #{creature.mdef}")
+            msg4 = content_tag(:p, "Magi: #{creature.magi} | Mstr: #{creature.mstr}")
+            value = (msg1 + msg2 + msg3 + msg4)
+         elsif(type == "Stamina")
+            msg1 = content_tag(:p, "Stamina Stats")
+            msg2 = content_tag(:p, "Fun: #{creature.fun}")
+            msg3 = content_tag(:p, "Hunger: #{creature.hunger}")
+            msg4 = content_tag(:p, "Thirst: #{creature.thirst}")
+            value = (msg1 + msg2 + msg3 + msg4)
+         end
+         return value
+      end
+      
+      def storePartner(logged_in, creature)
+         #Creating the partner entry
+         newPartner = logged_in.partners.new(getWarehouseParams("Partner"))
+         newPartner.adopted_on = currentTime
+         newPartner.updated_on = currentTime
+         newPartner.plevel = creature.level
+         newPartner.chp = creature.hp
+         newPartner.hp = creature.hp
+         newPartner.atk = creature.atk
+         newPartner.def = creature.def
+         newPartner.agility = creature.agility
+         newPartner.strength = creature.strength
+         newPartner.mlevel = creature.level
+         newPartner.cmp = creature.mp
+         newPartner.mp = creature.mp
+         newPartner.matk = creature.matk
+         newPartner.mdef = creature.mdef
+         newPartner.magi = creature.magi
+         newPartner.mstr = creature.mstr
+         newPartner.chunger = creature.hunger
+         newPartner.hunger = creature.hunger
+         newPartner.cthirst = creature.thirst
+         newPartner.thirst = creature.thirst
+         newPartner.cfun = creature.fun
+         newPartner.fun = creature.fun
+         newPartner.lives = creature.lives
+         newPartner.creature_id = creature.id
+         if(logged_in.partners.count == 0)
+            newPartner.activepet = true
+         end
+
+         #Adoptcost should be based off the shopcost value
+         newPartner.adoptcost = creature.cost
+         newPartner.cost = creature.cost
+         return newPartner
+      end
+
+      def updateDen(petIndex, wpetden)
+         petIndex = petIndex.to_i
+         creatureFound = false
+         
+         if(petIndex == 1)
+            creatureFound = true
+            if(wpetden.qty1 > 1)
+               wpetden.qty1 -= 1
+            else
+               wpetden.qty1 = 0
+               wpetden.tax1 = 0
+               wpetden.creature1_id = nil
+            end
+         elsif(petIndex == 2)
+            creatureFound = true
+            if(wpetden.qty2 > 1)
+               wpetden.qty2 -= 1
+            else
+               wpetden.qty2 = 0
+               wpetden.tax2 = 0
+               wpetden.creature2_id = nil
+            end
+         elsif(petIndex == 3)
+            creatureFound = true
+            if(wpetden.qty3 > 1)
+               wpetden.qty3 -= 1
+            else
+               wpetden.qty3 = 0
+               wpetden.tax3 = 0
+               wpetden.creature3_id = nil
+            end
+         elsif(petIndex == 4)
+            creatureFound = true
+            if(wpetden.qty4 > 1)
+               wpetden.qty4 -= 1
+            else
+               wpetden.qty4 = 0
+               wpetden.tax4 = 0
+               wpetden.creature4_id = nil
+            end
+         end
+         
+         #Check additional dens if not found
+         if(!creatureFound)
+            if(petIndex == 5)
+               creatureFound = true
+               if(wpetden.qty5 > 1)
+                  wpetden.qty5 -= 1
+               else
+                  wpetden.qty5 = 0
+                  wpetden.tax5 = 0
+                  wpetden.creature5_id = nil
+               end
+            elsif(petIndex == 6)
+               creatureFound = true
+               if(wpetden.qty6 > 1)
+                  wpetden.qty6 -= 1
+               else
+                  wpetden.qty6 = 0
+                  wpetden.tax6 = 0
+                  wpetden.creature6_id = nil
+               end
+            elsif(petIndex == 7)
+               creatureFound = true
+               if(wpetden.qty7 > 1)
+                  wpetden.qty7 -= 1
+               else
+                  wpetden.qty7 = 0
+                  wpetden.tax7 = 0
+                  wpetden.creature7_id = nil
+               end
+            elsif(petIndex == 8)
+               creatureFound = true
+               if(wpetden.qty8 > 1)
+                  wpetden.qty8 -= 1
+               else
+                  wpetden.qty8 = 0
+                  wpetden.tax8 = 0
+                  wpetden.creature8_id = nil
+               end
+            end
+         end
+         
+         #Check additional dens if not found
+         if(!creatureFound)
+            if(petIndex == 9)
+               creatureFound = true
+               if(wpetden.qty9 > 1)
+                  wpetden.qty9 -= 1
+               else
+                  wpetden.qty9 = 0
+                  wpetden.tax9 = 0
+                  wpetden.creature9_id = nil
+               end
+            elsif(petIndex == 10)
+               creatureFound = true
+               if(wpetden.qty10 > 1)
+                  wpetden.qty10 -= 1
+               else
+                  wpetden.qty10 = 0
+                  wpetden.tax10 = 0
+                  wpetden.creature10_id = nil
+               end
+            elsif(petIndex == 11)
+               creatureFound = true
+               if(wpetden.qty11 > 1)
+                  wpetden.qty11 -= 1
+               else
+                  wpetden.qty11 = 0
+                  wpetden.tax11 = 0
+                  wpetden.creature11_id = nil
+               end
+            elsif(petIndex == 12)
+               creatureFound = true
+               if(wpetden.qty12 > 1)
+                  wpetden.qty12 -= 1
+               else
+                  wpetden.qty12 = 0
+                  wpetden.tax12 = 0
+                  wpetden.creature12_id = nil
+               end
+            end
+         end
+         
+         #Check additional dens if not found
+         if(!creatureFound)
+            if(petIndex == 13)
+               creatureFound = true
+               if(wpetden.qty13 > 1)
+                  wpetden.qty13 -= 1
+               else
+                  wpetden.qty13 = 0
+                  wpetden.tax13 = 0
+                  wpetden.creature13_id = nil
+               end
+            elsif(petIndex == 14)
+               creatureFound = true
+               if(wpetden.qty14 > 1)
+                  wpetden.qty14 -= 1
+               else
+                  wpetden.qty14 = 0
+                  wpetden.tax14 = 0
+                  wpetden.creature14_id = nil
+               end
+            elsif(petIndex == 15)
+               creatureFound = true
+               if(wpetden.qty15 > 1)
+                  wpetden.qty15 -= 1
+               else
+                  wpetden.qty15 = 0
+                  wpetden.tax15 = 0
+                  wpetden.creature15_id = nil
+               end
+            elsif(petIndex == 16)
+               creatureFound = true
+               if(wpetden.qty16 > 1)
+                  wpetden.qty16 -= 1
+               else
+                  wpetden.qty16 = 0
+                  wpetden.tax16 = 0
+                  wpetden.creature16_id = nil
+               end
+            end
+         end
       end
 
       def checkShelf(shelf)
@@ -1426,14 +1939,12 @@ module WarehousesHelper
          warehouseFound = Warehouse.find_by_name(getWarehouseParams("Id"))
          logged_in = current_user
          if(warehouseFound && logged_in)
-            #Eventually add pets here too
             removeTransactions
             @warehouse = warehouseFound
-            #allSlots = Inventoryslot.all
-            #myslots = allSlots.select{|slot| slot.inventory_id == logged_in.inventory.id}
+            pets = warehouseFound.wpetdens.all
+            @wpetdens = Kaminari.paginate_array(pets).page(getWarehouseParams("Page")).per(1)
             myslots = logged_in.inventory.inventoryslots.all
             @slots = myslots
-            Inventoryslot.find_by_id(params[:inventorymeep])
             shelves = warehouseFound.witemshelves.all
             @witemshelves = Kaminari.paginate_array(shelves).page(getWarehouseParams("Page")).per(1)
          else
@@ -1542,6 +2053,70 @@ module WarehousesHelper
                      else
                         flash[:error] = "Insufficient funds to purchase the item #{item.name}!"
                      end
+                     redirect_to user_path(logged_in.id)
+                  end
+               else
+                  redirect_to root_path
+               end
+            elsif(type == "buypet")
+               logged_in = current_user
+               warehouseFound = Warehouse.find_by_id(getWarehouseParams("WarehouseId"))
+               denFound = Wpetden.find_by_id(getWarehouseParams("WdenId"))
+               petIndex = getWarehouseParams("Petindex")
+               petname = getWarehouseParams("Partnername")
+               description = getWarehouseParams("Partnerdescription")
+               validPurchase = (warehouseFound && denFound)
+               if(logged_in && validPurchase && !petIndex.nil?)
+                  cost = getPetcost(getPet(petIndex, denFound), petIndex, denFound, "Point")
+                  emeralds = getPetcost(getPet(petIndex, denFound), petIndex, denFound, "Emerald")
+                  buyable = ((logged_in.pouch.amount - cost) >= 0 && (logged_in.pouch.emeraldamount - emeralds) >= 0)
+                  if(buyable)
+                     pet = Creature.find_by_id(getPet(petIndex, denFound))
+                     partner = storePartner(logged_in, pet)
+                     @partner = partner
+                     if(@partner.save)
+                        if(logged_in.partners.count > 0)
+                           logged_in.pouch.amount -= cost
+                           logged_in.pouch.emeraldamount -= emeralds
+                           @pouch = logged_in.pouch
+                           @pouch.save
+                           warehouseFound.profit += cost
+                           @warehouse = warehouseFound
+                           @warehouse.save
+                           #Eventually need to keep track of transactions
+                           if(pet.user_id != logged_in.id)
+                              owner = Pouch.find_by_user_id(pet.user_id)
+                              points = (cost  * 0.10).round
+                              owner.amount += points
+                              @owner = owner
+                              @owner.save
+                           end
+                        end
+                        #Builds the partners equipbag
+                        newEquip = Equip.new(params[:equip])
+                        newEquip.partner_id = partner.id
+                        @equip = newEquip
+                        @equip.save
+
+                        #Builds the partners fight
+                        newFight = Fight.new(params[:fight])
+                        newFight.partner_id = partner.id
+                        @fight = newFight
+                        @fight.save
+
+                        #Saves the updated warehouse inventory
+                        updateDen(petIndex, denFound)
+                        @wpetden = denFound
+                        @wpetden.save
+                        flash[:success] = "Pet #{@partner.name} was added to the party!"
+                        redirect_to user_partner_path(partner.user, partner)
+                     else
+                        flash[:error] = "Partner name or description was empty or spaces were used instead of - as part of the name!"
+                        redirect_to warehouse_path(warehouseFound.name)
+                     end
+                  else
+                     pet = Creature.find_by_id(getPet(slotIndex, denFound))
+                     flash[:error] = "Insufficient funds to adopt the creature #{pet.name}!"
                      redirect_to user_path(logged_in.id)
                   end
                else

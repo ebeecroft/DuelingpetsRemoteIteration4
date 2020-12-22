@@ -20,4 +20,8 @@ class WarehousesController < ApplicationController
    def purchase
       mode "purchase"
    end
+
+   def buypet
+      mode "buypet"
+   end
 end
