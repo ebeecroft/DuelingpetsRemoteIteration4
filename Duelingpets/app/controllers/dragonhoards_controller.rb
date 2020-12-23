@@ -37,7 +37,15 @@ class DragonhoardsController < ApplicationController
       mode "itemmarket"
    end
 
+   def petmarket
+      mode "petmarket"
+   end
+
    def buyitem
       mode "buyitem"
+   end
+
+   def buypet
+      mode "buypet"
    end
 end

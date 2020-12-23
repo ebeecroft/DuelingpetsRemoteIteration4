@@ -13,12 +13,41 @@ module DragonhoardsHelper
             value = params[:witemshelf][:witemshelf_id]
          elsif(type == "ItemId")
             value = params[:witemshelf][:item_id]
+         elsif(type == "DenId")
+            value = params[:wpetden][:wpetden_id]
+         elsif(type == "CreatureId")
+            value = params[:wpetden][:creature_id]
          elsif(type == "Page")
             value = params[:page]
          else
             raise "Invalid type detected!"
          end
          return value
+      end
+
+      def getPetmarketStats(creature, type)
+         stats = ""
+         if(type == "Physical")
+            msg1 = content_tag(:p, "Physical Stats")
+            msg2 = content_tag(:p, "Level: #{creature.level}")
+            msg3 = content_tag(:p, "HP: #{creature.hp}")
+            msg4 = content_tag(:p, "Atk: #{creature.atk} | Def: #{creature.def}")
+            msg5 = content_tag(:p, "Agi: #{creature.agility} | Strength: #{creature.strength}")
+            stats = (msg1 + msg2 + msg3 + msg4 + msg5)
+         elsif(type == "Magical")
+            msg1 = content_tag(:p, "Magical Stats")
+            msg2 = content_tag(:p, "MP: #{creature.mp}")
+            msg3 = content_tag(:p, "Matk: #{creature.matk} | Mdef: #{creature.mdef}")
+            msg4 = content_tag(:p, "Magi: #{creature.magi} | Mstr: #{creature.mstr}")
+            stats = (msg1 + msg2 + msg3 + msg4)
+         elsif(type == "Stamina")
+            msg1 = content_tag(:p, "Stamina Stats")
+            msg2 = content_tag(:p, "Fun: #{creature.fun}")
+            msg3 = content_tag(:p, "Hunger: #{creature.hunger}")
+            msg4 = content_tag(:p, "Thirst: #{creature.thirst}")
+            stats = (msg1 + msg2 + msg3 + msg4)
+         end
+         return stats
       end
 
       def getMarketStats(item, type)
@@ -62,6 +91,163 @@ module DragonhoardsHelper
             redirect_to root_path
          end
          return price
+      end
+
+      def storepet(creature, den)
+         #Sets up the variables
+         spacefound = false
+         emptyspace = false
+      
+         #Determines which slot to put the creature in
+         if(den.creature1_id && den.creature1_id == creature.id)
+            spacefound = true
+            den.qty1 += 1
+         elsif(den.creature2_id && den.creature2_id == creature.id)
+            spacefound = true
+            den.qty2 += 1
+         elsif(den.creature3_id && den.creature3_id == creature.id)
+            spacefound = true
+            den.qty3 += 1
+         elsif(den.creature4_id && den.creature4_id == creature.id)
+            spacefound = true
+            den.qty4 += 1
+         else
+            if(den.creature1_id.nil?)
+               emptyspace = true
+               den.creature1_id = creature.id
+               den.qty1 = 1
+            elsif(den.creature2_id.nil?)
+               emptyspace = true
+               den.creature2_id = creature.id
+               den.qty2 = 1
+            elsif(den.creature3_id.nil?)
+               emptyspace = true
+               den.creature3_id = creature.id
+               den.qty3 = 1
+            elsif(den.creature4_id.nil?)
+               emptyspace = true
+               den.creature4_id = creature.id
+               den.qty4 = 1
+            end
+         end
+
+         #Checks the additional creatureslots
+         if(!spacefound)
+            if(den.creature5_id && den.creature5_id == creature.id)
+               spacefound = true
+               den.qty5 += 1
+            elsif(den.creature6_id && den.creature6_id == creature.id)
+               spacefound = true
+               den.qty6 += 1
+            elsif(den.creature7_id && den.creature7_id == creature.id)
+               spacefound = true
+               den.qty7 += 1
+            elsif(den.creature8_id && den.creature8_id == creature.id)
+               spacefound = true
+               den.qty8 += 1
+            else
+               if(!emptyspace)
+                  if(den.creature5_id.nil?)
+                     emptyspace = true
+                     den.creature5_id = creature.id
+                     den.qty5 = 1
+                  elsif(den.creature6_id.nil?)
+                     emptyspace = true
+                     den.creature6_id = creature.id
+                     den.qty6 = 1
+                  elsif(den.creature7_id.nil?)
+                     emptyspace = true
+                     den.creature7_id = creature.id
+                     den.qty7 = 1
+                  elsif(den.creature8_id.nil?)
+                     emptyspace = true
+                     den.creature8_id = creature.id
+                     den.qty8 = 1
+                  end
+               end
+            end
+         end
+
+         #Checks the additional creatureslots
+         if(!spacefound)
+            if(den.creature9_id && den.creature9_id == creature.id)
+               spacefound = true
+               den.qty9 += 1
+            elsif(den.creature10_id && den.creature10_id == creature.id)
+               spacefound = true
+               den.qty10 += 1
+            elsif(den.creature11_id && den.creature11_id == creature.id)
+               spacefound = true
+               den.qty11 += 1
+            elsif(den.creature12_id && den.creature12_id == creature.id)
+               spacefound = true
+               den.qty12 += 1
+            else
+               if(!emptyspace)
+                  if(den.creature9_id.nil?)
+                     emptyspace = true
+                     den.creature9_id = creature.id
+                     den.qty9 = 1
+                  elsif(den.creature10_id.nil?)
+                     emptyspace = true
+                     den.creature10_id = creature.id
+                     den.qty10 = 1
+                  elsif(den.creature11_id.nil?)
+                     emptyspace = true
+                     den.creature11_id = creature.id
+                     den.qty11 = 1
+                  elsif(den.creature12_id.nil?)
+                     emptyspace = true
+                     den.creature12_id = creature.id
+                     den.qty12 = 1
+                  end
+               end
+            end
+         end
+
+         #Checks the additional creatureslots
+         if(!spacefound)
+            if(den.creature13_id && den.creature13_id == creature.id)
+               spacefound = true
+               den.qty13 += 1
+            elsif(den.creature14_id && den.creature14_id == creature.id)
+               spacefound = true
+               den.qty14 += 1
+            elsif(den.creature15_id && den.creature15_id == creature.id)
+               spacefound = true
+               den.qty15 += 1
+            elsif(den.creature16_id && den.creature16_id == creature.id)
+               spacefound = true
+               den.qty16 += 1
+            else
+               if(!emptyspace)
+                  if(den.creature13_id.nil?)
+                     emptyspace = true
+                     den.creature13_id = creature.id
+                     den.qty13 = 1
+                  elsif(den.creature14_id.nil?)
+                     emptyspace = true
+                     den.creature14_id = creature.id
+                     den.qty14 = 1
+                  elsif(den.creature15_id.nil?)
+                     emptyspace = true
+                     den.creature15_id = creature.id
+                     den.qty15 = 1
+                  elsif(shelf.creature16_id.nil?)
+                     emptyspace = true
+                     shelf.creature16_id = creature.id
+                     shelf.qty16 = 1
+                  end
+               end
+            end
+         end
+         
+         #Checks to see if there is room for the creature
+         roomspace = false
+         if(spacefound || emptyspace)
+            roomspace = true
+         end
+         return roomspace
       end
       
       def storeitem(item, shelf)
@@ -506,6 +692,17 @@ module DragonhoardsHelper
                else
                   redirect_to root_path
                end
+            elsif(type == "petmarket")
+               logged_in = current_user
+               if(logged_in && logged_in.pouch.privilege == "Glitchy")
+                  allCreatures = Creature.order("reviewed_on desc, created_on desc")
+                  creaturesReviewed = allCreatures.select{|creature| creature.reviewed}
+                  allDens = Wpetden.all
+                  @slots = allDens
+                  @creatures = Kaminari.paginate_array(creaturesReviewed).page(getHoardParams("Page")).per(16)
+               else
+                  redirect_to root_path
+               end
             elsif(type == "buyitem")
                logged_in = current_user
                hoard = Dragonhoard.find_by_id(1)
@@ -537,6 +734,43 @@ module DragonhoardsHelper
                         flash[:error] = "No room to store the item #{itemFound.name}!"
                      else
                         flash[:error] = "Insufficient funds to purchase the item #{itemFound.name}!"
+                     end
+                     redirect_to dragonhoards_path
+                  end
+               else
+                  redirect_to root_path
+               end
+            elsif(type == "buypet")
+               logged_in = current_user
+               hoard = Dragonhoard.find_by_id(1)
+               denFound = Wpetden.find_by_id(getHoardParams("DenId"))
+               creatureFound = Creature.find_by_id(getHoardParams("CreatureId"))
+               validPurchase = (denFound && creatureFound)
+               if(logged_in && validPurchase && logged_in.pouch.privilege == "Glitchy")
+                  buyable = ((hoard.treasury - creatureFound.cost >= 0) && (hoard.emeralds - creatureFound.emeraldcost >= 0))
+                  room = storepet(creatureFound, denFound)
+                  if(room && buyable)
+                     #Buys creature
+                     hoard.treasury -= creatureFound.cost
+                     hoard.emeralds -= creatureFound.emeraldcost
+                     @dragonhoard = hoard
+                     @dragonhoard.save
+                     @wpetden = denFound
+                     @wpetden.save
+                     
+                     #Pays the owner of the creature
+                     owner = Pouch.find_by_user_id(creatureFound.user_id)
+                     points = (creatureFound.cost * 0.40).round
+                     owner.amount += points
+                     @owner = owner
+                     @owner.save
+                     flash[:success] = "Creature #{creatureFound.name} was added to the warehouse!"
+                     redirect_to warehouse_path(@wpetden.warehouse.name)
+                  else
+                     if(!room)
+                        flash[:error] = "No room to store the creature #{creatureFound.name}!"
+                     else
+                        flash[:error] = "Insufficient funds to purchase the creature #{creatureFound.name}!"
                      end
                      redirect_to dragonhoards_path
                   end
