@@ -9,6 +9,8 @@ class CreateWarehouses < ActiveRecord::Migration[5.2]
       t.datetime :updated_on
       t.integer :treasury, default: 0
       t.integer :profit, default: 0
+      t.integer :hoardpoints, default: 0
+      t.integer :emeralds, default: 0
       t.boolean :store_open, default: false
 
       t.timestamps

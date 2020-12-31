@@ -16,21 +16,25 @@
    </div>
 <% end %>
 <div class="pageformat">
+   <div class="container">Treasury: <%= @warehouse.treasury %></div> 
    <% if current_user && current_user.pouch.privilege == "Glitchy" %>
-      <div class="container"><%= button_to 'Edit', edit_warehouse_path(@warehouse), method: :get, class: "button editbutton" %></div>
+      <div class="container"><%= button_to 'Transfer', warehouses_tsetup_path(:warehouse_id=>@warehouse.id), method: :post, class: "button submitbutton" %></div>
+      <div class="container"><%= button_to 'Edit Warehouse', edit_warehouse_path(@warehouse.name), method: :get, class: "button editbutton" %></div>
+      <br>
    <% end %>
+   <p>Emeralds: <%= @warehouse.emeralds %></p>
+   <% if current_user && current_user.pouch.privilege == "Glitchy" %>
+      <div class="container">Profit: <%= @warehouse.profit %></div> <div class="container"><%= button_to 'Withdraw', warehouses_withdraw_path(:warehouse_id=>@warehouse.id),method: :post, class: "button submitbutton" %></div>
+      <p>Hoard points: <%= @warehouse.hoardpoints %></p>
+   <% end %>
+   <br>
    <p>Created: <%= distance_of_time_in_words_to_now @warehouse.created_on %> ago on (<%= @warehouse.created_on.strftime("%B-%d-%Y") %>)</p>
    <p>Updated: <%= distance_of_time_in_words_to_now @warehouse.updated_on %> ago on (<%= @warehouse.updated_on.strftime("%B-%d-%Y") %>)</p>
    <br>
-   <p class="textindent"><%= textFormater("Multi", @warehouse.message, "All").html_safe %></p>
+   <p>Warehouse avatar goes here</p>
+   <p><%= textFormater("Multi", @warehouse.message, "All").html_safe %></p>
    <br>
-   <p>Treasury: <%= @warehouse.treasury %></p>
-   <% if current_user && current_user.pouch.privilege == "Glitchy" %>
-      <p>Profit: <%= @warehouse.profit %></p>
-   <% end %>
    <% if @warehouse.store_open %>
-      <p>Please take a look at our amazing creatures!</p>
-      <br>
       <%= form_for(:partner, url: warehouses_buypet_path(:warehouse_id => @warehouse.id), method: :post) do |form| %>
          <p>Partner Name</p>
          <p><%= form.text_field :name %></p>
@@ -38,8 +42,10 @@
          <p>Description</p>
          <p><%= form.text_area :description %></p>
          <br>
+         <div class="formlinks"><%= paginate @wpetdens %></div>
+         <br>
          <% @wpetdens.each do |wpetden| %>
-            <% if(!checkDen(wpetden)) %>
+            <% if(!checkWarehouse(wpetden, "Den")) %>
                <p><%= wpetden.name %><%= form.radio_button :wpetden_id, wpetden.id, :checked => true %></p>
                <br>
                <% if !wpetden.creature1_id.nil? %>
@@ -99,10 +105,9 @@
             <% end %>
          <% end %>
       <% end %>
-      <p>Please take a look at our really cool items!</p>
-      <br>
-      <%= form_for(:inventoryslot, url: warehouses_purchase_path(:warehouse_id => @warehouse.id), method: :post) do |form| %>
+      <%= form_for(:inventoryslot, url: warehouses_buyitem_path(:warehouse_id => @warehouse.id), method: :post) do |form| %>
          <% if @slots.count > 0 %>
+            <p>Inventory slot</p>
             <p><%= form.collection_select(:inventoryslot_id, @slots, :id, :name) %></p>
          <% else %>
             <p>Inventoryslots are required to buy items!</p>
@@ -111,7 +116,7 @@
          <div class="formlinks"><%= paginate @witemshelves %></div>
          <br>
          <% @witemshelves.each do |witemshelf| %>
-            <% if(!checkShelf(witemshelf)) %>
+            <% if(!checkWarehouse(witemshelf, "Shelf")) %>
                <p><%= witemshelf.name %><%= form.radio_button :witemshelf_id, witemshelf.id, :checked => true %></p>
                <br>
                <% if !witemshelf.item1_id.nil? %>
@@ -216,8 +221,7 @@
          <% end %>
       <% end %>
    <% else %>
-      <p>Store is closed!</p>
-      <br>
+      <p>We are currently out of items/pets and need to restock our inventory.</p>
    <% end %>
 </div>
 <p class="formlinks"><%= link_to "Back", root_path %></p>

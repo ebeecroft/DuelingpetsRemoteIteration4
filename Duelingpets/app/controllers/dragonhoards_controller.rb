@@ -33,6 +33,14 @@ class DragonhoardsController < ApplicationController
       mode "transfer"
    end
 
+   def waretransfer
+      mode "waretransfer"
+   end
+
+   def warepost
+      mode "warepost"
+   end
+
    def itemmarket
       mode "itemmarket"
    end

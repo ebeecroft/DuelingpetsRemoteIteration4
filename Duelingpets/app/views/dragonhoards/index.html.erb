@@ -31,8 +31,10 @@
       <% if current_user && current_user.pouch.privilege == "Glitchy" %>
          <div class="container">Profit: <%= @dragonhoard.profit %></div>
          <div class="container"><%= button_to 'Withdraw points', dragonhoards_withdraw_path(:dragonhoard_id=>@dragonhoard.id), method: :post, class: "button submitbutton" %></div>
+         <p>Ware points: <%= @dragonhoard.warepoints %></p>
+         <p>Helper points: <%= @dragonhoard.helperpoints %></p>
          <br>
-         <div class="container"><p>Treasury: <%= @dragonhoard.treasury %></p></div> <div class="container"><%= button_to 'Convert points', dragonhoards_convertpoints_path, method: :post, class: "button submitbutton" %></div>
+         <div class="container"><p>Treasury: <%= @dragonhoard.treasury %></p></div> <div class="container"><%= button_to 'Convert points', dragonhoards_convertpoints_path, method: :post, class: "button submitbutton" %></div> <div class="container"><%= button_to 'Waretransfer', dragonhoards_waretransfer_path, method: :get, class: "button submitbutton" %></div>
          <br>
       <% else %>
          <p>Treasury: <%= @dragonhoard.treasury %></p>

@@ -388,11 +388,13 @@ ActiveRecord::Schema.define(version: 2020_12_19_225552) do
     t.datetime "updated_on"
     t.string "ogg"
     t.string "mp3"
-    t.integer "basecost"
+    t.integer "basecost", default: 0
     t.float "baserate", limit: 53
     t.integer "treasury", default: 0
     t.integer "contestpoints", default: 0
     t.integer "profit", default: 0
+    t.integer "warepoints", default: 0
+    t.integer "helperpoints", default: 0
     t.integer "emeralds", default: 0
     t.string "dragonimage"
     t.datetime "created_at", null: false
@@ -1375,6 +1377,8 @@ ActiveRecord::Schema.define(version: 2020_12_19_225552) do
     t.datetime "updated_on"
     t.integer "treasury", default: 0
     t.integer "profit", default: 0
+    t.integer "hoardpoints", default: 0
+    t.integer "emeralds", default: 0
     t.boolean "store_open", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

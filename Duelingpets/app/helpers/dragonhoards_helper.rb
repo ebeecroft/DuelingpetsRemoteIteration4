@@ -17,6 +17,8 @@ module DragonhoardsHelper
             value = params[:wpetden][:wpetden_id]
          elsif(type == "CreatureId")
             value = params[:wpetden][:creature_id]
+         elsif(type == "WarehouseId")
+            value = params[:warehouse][:warehouse_id]
          elsif(type == "Page")
             value = params[:page]
          else
@@ -581,15 +583,30 @@ module DragonhoardsHelper
                   logged_in = current_user
                   if(logged_in && logged_in.pouch.privilege == "Glitchy")
                      if(type == "withdraw")
-                        if(hoard.profit > 0)
+                        if(hoard.profit > 0 || hoard.warepoints > 0 || hoard.helperpoints > 0)
                            #Add points to the treasury
-                           hoard.treasury += hoard.profit
-                           flash[:success] = "#{hoard.profit} points have been added to the treasury!"
-                           hoard.profit = 0
+                           points = 0
+                           if(hoard.profit > 0)
+                              #Points from selling emeralds and taxes
+                              hoard.treasury += hoard.profit
+                              points = hoard.profit
+                              hoard.profit = 0
+                           elsif(hoard.warepoints > 0)
+                              #Points from selling items and creatures
+                              hoard.treasury += hoard.warepoints
+                              points = hoard.warepoints
+                              hoard.warepoints = 0
+                           else
+                              #Points from bots donating to the hoard
+                              hoard.treasury += hoard.helperpoints
+                              points = hoard.helperpoints
+                              hoard.helperpoints = 0
+                           end
+                           flash[:success] = "#{points} points have been added to the treasury!"
                            @dragonhoard = hoard
                            @dragonhoard.save
                         else
-                           flash[:error] = "No points are stored in profit!"
+                           flash[:error] = "No points are available for retrieval!"
                         end
                      else
                         price = hoard.treasury - hoard.basecost
@@ -661,117 +678,125 @@ module DragonhoardsHelper
                else
                   redirect_to root_path
                end
-            elsif(type == "transfer") #Eventually may need to have a method to pull warehouse points here
+            elsif(type == "transfer" || type == "waretransfer" || type == "warepost")
                hoard = Dragonhoard.find_by_id(1)
                logged_in = current_user
                if(hoard && (logged_in && logged_in.pouch.privilege == "Glitchy"))
-                  if(hoard.contestpoints > 0)
-                     points = hoard.contestpoints
-                     logged_in.pouch.amount += points
-                     hoard.contestpoints = 0
-                     flash[:success] = "#{points} contestpoints were transfered to Glitchy!"
-                     @pouch = logged_in.pouch
-                     @pouch.save
+                  if(type == "waretransfer" || type == "warepost")
+                     @slots = Warehouse.all
+                     if(type == "warepost")
+                        dpoints = params[:warehouse][:amount]
+                        demeralds = params[:warehouse][:emeralds]
+                        ware = Warehouse.find_by_id(getHoardParams("WarehouseId"))
+                        dpoints = dpoints.to_i
+                        demeralds = demeralds.to_i
+                        if(hoard.treasury - dpoints >= 0 && hoard.emeralds - demeralds >= 0)
+                           hoard.treasury -= dpoints
+                           hoard.emeralds -= demeralds
+                           #ware = Warehouse.find_by_id(1)
+                           ware.hoardpoints += dpoints
+                           ware.emeralds += demeralds
+                           @warehouse = ware
+                           @warehouse.save
+                           @dragonhoard = hoard
+                           @dragonhoard.save
+                           flash[:success] = "#{dpoints} points have been transfered to the warehouse!"
+                        else
+                           flash[:error] = "Point or Emerald donations can't exceed the hoard's treasury!"
+                        end
+                        redirect_to dragonhoards_path
+                     end                  
                   else
-                     flash[:error] = "There are no contestpoints to transfer!"
-                  end
-                  @dragonhoard = hoard
-                  @dragonhoard.save
-                  redirect_to dragonhoards_path
-               else
-                  redirect_to root_path
-               end
-            elsif(type == "itemmarket")
-               logged_in = current_user
-               if(logged_in && logged_in.pouch.privilege == "Glitchy")
-                  allItems = Item.order("reviewed_on desc, created_on desc")
-                  itemsReviewed = allItems.select{|item| item.reviewed}
-                  allShelves = Witemshelf.all
-                  @slots = allShelves
-                  @items = Kaminari.paginate_array(itemsReviewed).page(getHoardParams("Page")).per(30)
-               else
-                  redirect_to root_path
-               end
-            elsif(type == "petmarket")
-               logged_in = current_user
-               if(logged_in && logged_in.pouch.privilege == "Glitchy")
-                  allCreatures = Creature.order("reviewed_on desc, created_on desc")
-                  creaturesReviewed = allCreatures.select{|creature| creature.reviewed}
-                  allDens = Wpetden.all
-                  @slots = allDens
-                  @creatures = Kaminari.paginate_array(creaturesReviewed).page(getHoardParams("Page")).per(16)
-               else
-                  redirect_to root_path
-               end
-            elsif(type == "buyitem")
-               logged_in = current_user
-               hoard = Dragonhoard.find_by_id(1)
-               shelfFound = Witemshelf.find_by_id(getHoardParams("ShelfId"))
-               itemFound = Item.find_by_id(getHoardParams("ItemId"))
-               validPurchase = (shelfFound && itemFound)
-               if(logged_in && validPurchase && logged_in.pouch.privilege == "Glitchy")
-                  buyable = ((hoard.treasury - itemFound.cost >= 0) && (hoard.emeralds - itemFound.emeraldcost >= 0))
-                  room = storeitem(itemFound, shelfFound)
-                  if(room && buyable)
-                     #Buys item
-                     hoard.treasury -= itemFound.cost
-                     hoard.emeralds -= itemFound.emeraldcost
-                     @dragonhoard = hoard
-                     @dragonhoard.save
-                     @witemshelf = shelfFound
-                     @witemshelf.save
-                     
-                     #Pays the owner of the item
-                     owner = Pouch.find_by_user_id(itemFound.user_id)
-                     points = (itemFound.cost * 0.40).round
-                     owner.amount += points
-                     @owner = owner
-                     @owner.save
-                     flash[:success] = "Item #{itemFound.name} was added to the warehouse!"
-                     redirect_to warehouse_path(@witemshelf.warehouse.name)
-                  else
-                     if(!room)
-                        flash[:error] = "No room to store the item #{itemFound.name}!"
+                     if(hoard.contestpoints > 0)
+                        points = hoard.contestpoints
+                        logged_in.pouch.amount += points
+                        hoard.contestpoints = 0
+                        flash[:success] = "#{points} contestpoints were transfered to Glitchy!"
+                        @pouch = logged_in.pouch
+                        @pouch.save
+                        @dragonhoard = hoard
+                        @dragonhoard.save
                      else
-                        flash[:error] = "Insufficient funds to purchase the item #{itemFound.name}!"
+                        flash[:error] = "There are no contestpoints to transfer!"
                      end
                      redirect_to dragonhoards_path
                   end
                else
                   redirect_to root_path
                end
-            elsif(type == "buypet")
+            elsif(type == "petmarket" || type == "itemmarket")
+               logged_in = current_user
+               if(logged_in && logged_in.pouch.privilege == "Glitchy")
+                  allIpets = Item.order("reviewed_on desc, created_on desc")
+                  allSDens = Witemshelf.all
+                  if(type == "petmarket")
+                     allIpets = Creature.order("reviewed_on desc, created_on desc")
+                     allSDens = Wpetden.all
+                  end
+                  objectsReviewed = allIpets.select{|ipet| ipet.reviewed}
+                  @slots = allSDens
+                  if(type == "itemmarket")
+                     @items = Kaminari.paginate_array(objectsReviewed).page(getHoardParams("Page")).per(30)
+                  else
+                     @creatures = Kaminari.paginate_array(objectsReviewed).page(getHoardParams("Page")).per(16)
+                  end
+               else
+                  redirect_to root_path
+               end
+            elsif(type == "buyitem" || type == "buypet")
+               #Finds the item or creature the hoard will buy
                logged_in = current_user
                hoard = Dragonhoard.find_by_id(1)
-               denFound = Wpetden.find_by_id(getHoardParams("DenId"))
-               creatureFound = Creature.find_by_id(getHoardParams("CreatureId"))
-               validPurchase = (denFound && creatureFound)
+               ipetFound = nil
+               sdenFound = nil
+               if(type == "buypet")
+                  sdenFound = Wpetden.find_by_id(getHoardParams("DenId"))
+                  ipetFound = Creature.find_by_id(getHoardParams("CreatureId"))
+               else
+                  sdenFound = Witemshelf.find_by_id(getHoardParams("ShelfId"))
+                  ipetFound = Item.find_by_id(getHoardParams("ItemId"))
+               end
+               validPurchase = (sdenFound && ipetFound)
                if(logged_in && validPurchase && logged_in.pouch.privilege == "Glitchy")
-                  buyable = ((hoard.treasury - creatureFound.cost >= 0) && (hoard.emeralds - creatureFound.emeraldcost >= 0))
-                  room = storepet(creatureFound, denFound)
+                  buyable = ((hoard.treasury - ipetFound.cost >= 0) && (hoard.emeralds - ipetFound.emeraldcost >= 0))
+                  room = false
+                  if(type == "buypet")
+                     room = storepet(ipetFound, sdenFound)
+                  else
+                     room = storeitem(ipetFound, sdenFound)
+                  end
                   if(room && buyable)
-                     #Buys creature
-                     hoard.treasury -= creatureFound.cost
-                     hoard.emeralds -= creatureFound.emeraldcost
+                     hoard.treasury -= ipetFound.cost
+                     hoard.emeralds -= ipetFound.emeraldcost
                      @dragonhoard = hoard
                      @dragonhoard.save
-                     @wpetden = denFound
-                     @wpetden.save
-                     
-                     #Pays the owner of the creature
-                     owner = Pouch.find_by_user_id(creatureFound.user_id)
-                     points = (creatureFound.cost * 0.40).round
+                     @sden = sdenFound
+                     @sden.save
+                     owner = Pouch.find_by_user_id(ipetFound.user_id)
+                     points = (ipetFound.cost * 0.40).round
                      owner.amount += points
                      @owner = owner
                      @owner.save
-                     flash[:success] = "Creature #{creatureFound.name} was added to the warehouse!"
-                     redirect_to warehouse_path(@wpetden.warehouse.name)
-                  else
-                     if(!room)
-                        flash[:error] = "No room to store the creature #{creatureFound.name}!"
-                     else
-                        flash[:error] = "Insufficient funds to purchase the creature #{creatureFound.name}!"
+                     msg = "Item #{ipetFound.name} was added to the warehouse!"
+                     if(type == "buypet")
+                        msg = "Creature #{ipetFound.name} was added to the warehouse!"
                      end
+                     flash[:success] = msg
+                     redirect_to warehouse_path(@sden.warehouse.name)
+                  else
+                     msg = ""
+                     if(!room)
+                        msg = "No room to store the item #{ipetFound.name}!"
+                        if(type == "buypet")
+                           msg = "No room to store the creature #{ipetFound.name}!"
+                        end
+                     else
+                        msg = "Insufficient funds to purchase the item #{ipetFound.name}!"
+                        if(type == "buypet")
+                           msg = "Insufficient funds to purchase the creature #{ipetFound.name}!"
+                        end
+                     end
+                     flash[:error] = msg
                      redirect_to dragonhoards_path
                   end
                else

@@ -1,26 +1,26 @@
 <div class="container">
-   <div class="container"><p class="formlinks"><%= link_to getPetStats(getPet(petindex, slot), "Name"), user_creature_path(getPetStats(getPet(petindex, slot), "Creator"), getPetStats(getPet(petindex, slot), "Name")) %></p></div> <div class="container"><%= form.radio_button :petindex_id, petindex %></div>
-   <% if getPetStats(getPet(petindex, slot), "Imagecheck") %>
-      <p><%= image_tag(getPetStats(getPet(petindex, slot), "Image")) %></p>
+   <div class="container"><p class="formlinks"><%= link_to getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Name"), user_creature_path(getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Creator"), getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Name")) %></p></div> <div class="container"><%= form.radio_button :petindex_id, petindex %></div>
+   <% if getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Imagecheck") %>
+      <p><%= image_tag(getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Image")) %></p>
    <% end %>
-   <p>Type: <%= getPetStats(getPet(petindex, slot), "Creaturetype") %></p>
-   <p>Lives: <%= getPetStats(getPet(petindex, slot), "Lives") %></p>
-   <p>Rarity: <%= getPetStats(getPet(petindex, slot), "Rarity") %></p>
-   <p class="formlinks">Artist: <%= getUserPrivilege(getPetStats(getPet(petindex, slot), "User")) %><%= link_to getPetStats(getPet(petindex, slot), "Creator"), user_path(getPetStats(getPet(petindex, slot), "Creator")) %></p>
-   <p>Quantity: <%= getPetcost(getPet(petindex, slot), petindex, slot, "Quantity") %></p>
-   <p>Emeralds: <%= getPetcost(getPet(petindex, slot), petindex, slot, "Emerald") %></p>
-   <p>Points: <%= getPetcost(getPet(petindex, slot), petindex, slot, "Point") %></p>
+   <p>Type: <%= getWareStats(getWareItems(petindex, slot, "Den"), "Den", "PItype") %></p>
+   <p>Lives: <%= getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Lives") %></p>
+   <p>Rarity: <%= getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Rarity") %></p>
+   <p class="formlinks">Artist: <%= getUserPrivilege(getWareStats(getWareItems(petindex, slot, "Den"), "Den", "User")) %><%= link_to getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Creator"), user_path(getWareStats(getWareItems(petindex, slot, "Den"), "Den", "Creator")) %></p>
+   <p>Quantity: <%= getWarecost(getWareItems(petindex, slot, "Den"), petindex, slot, "Den", "Quantity") %></p>
+   <p>Emeralds: <%= getWarecost(getWareItems(petindex, slot, "Den"), petindex, slot, "Den", "Emerald") %></p>
+   <p>Points: <%= getWarecost(getWareItems(petindex, slot, "Den"), petindex, slot, "Den", "Point") %></p>
    <br>
    <p>Stats</p>
    <div class="container">
-      <%= getPettypeStats(getPet(petindex, slot), "Physical") %>
+      <%= getWaretype(getWareItems(petindex, slot, "Den"), "Den", "Physical") %>
    </div>
    <br>
    <br>
    <div class="container">
-      <%= getPettypeStats(getPet(petindex, slot), "Magical") %>
+      <%= getWaretype(getWareItems(petindex, slot, "Den"), "Den", "Magical") %>
    </div>
    <div class="container">
-      <%= getPettypeStats(getPet(petindex, slot), "Stamina") %>
+      <%= getWaretype(getWareItems(petindex, slot, "Den"), "Den", "Stamina") %>
    </div>
 </div>
