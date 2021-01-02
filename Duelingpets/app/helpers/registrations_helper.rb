@@ -289,8 +289,8 @@ module RegistrationsHelper
                      end
                   elsif(type == "emailpost")
                      email = params[:session][:parentemail]
-                     #Send email here!
-                     flash[:success] = "The consent form was sent to the parent's email!"
+                     UserMailer.coppaform(email).deliver_now
+                     flash[:success] = "A consent form was sent to your parent's email!"
                      redirect_to root_path
                   elsif(type == "register2" || type == "create")
                      newRegistration = Registration.new

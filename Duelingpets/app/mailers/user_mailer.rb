@@ -44,6 +44,12 @@ class UserMailer < ApplicationMailer
       mail(to: @user.email, from: websiteMail, subject: "Login info:[Duelingpets]")
    end
 
+   def coppaform(email)
+      websiteMail = "notification@duelingpets.net"
+      @email = email
+      mail(to: @email, from: websiteMail, subject: "Coppaform:[Duelingpets]")
+   end
+
    def registration(content, type, url)
       websiteMail = "notification@duelingpets.net"
       email = ""
