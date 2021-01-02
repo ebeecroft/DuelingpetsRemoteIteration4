@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_19_225552) do
+ActiveRecord::Schema.define(version: 2020_12_31_055421) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -1184,6 +1184,13 @@ ActiveRecord::Schema.define(version: 2020_12_19_225552) do
     t.string "login_id"
     t.string "vname"
     t.datetime "registered_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "regtokens", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "token"
+    t.datetime "expiretime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

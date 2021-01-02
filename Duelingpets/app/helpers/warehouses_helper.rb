@@ -32,6 +32,28 @@ module WarehousesHelper
          end
          return value
       end
+
+      def editCommons(type)
+         warehouseFound = Warehouse.find_by_name(getWarehouseParams("Id"))
+         if(warehouseFound)
+            logged_in = current_user
+            if(logged_in && logged_in.pouch.privilege == "Glitchy")
+               @warehouse = warehouseFound
+               if(type == "update")
+                  if(@warehouse.update_attributes(getWarehousefParams("Warehouse")))
+                     flash[:success] = "Warehouse #{@warehouse.name} was successfully updated."
+                     redirect_to warehouse_path(@warehouse.name)
+                  else
+                     render "edit"
+                  end
+               end
+            else
+               redirect_to root_path
+            end
+         else
+            redirect_to root_path
+         end
+      end
             
       def showCommons(type)
          warehouseFound = Warehouse.find_by_name(getWarehouseParams("Id"))

@@ -13,4 +13,9 @@ class Warehouse < ApplicationRecord
    #Validation section
    validates :name, presence: true, format: {with: VALID_NAME_REGEX}, uniqueness: { case_sensitive: false}
    validates :message, presence: true
+
+   #Overides the default parameters to use name in place of the id code
+   def to_param
+      self.name.parameterize
+   end
 end

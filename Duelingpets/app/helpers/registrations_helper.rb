@@ -1,12 +1,48 @@
 module RegistrationsHelper
 
    private
+      def getRegistrationParams(type)
+         value = ""
+         if(type == "Id")
+            value = params[:id]
+         elsif(type == "Registration")
+            value = params.require(:registration).permit(:firstname, :lastname, :email, :country, 
+            :country_timezone, :birthday, :login_id, :vname, :shared, :accounttype_id,
+            :message)
+         elsif(type == "Page")
+            value = params[:page]
+         else
+            raise "Invalid type detected!"
+         end
+         return value
+      end
+            
       def gateStatus(webcontrol)
          value  = "Closed"
          if(webcontrol.gate_open)
             value = "Open"
          end
          return value
+      end
+      
+      def gateValue
+         webcontrol = Webcontrol.find_by_id(1)
+         value = ""
+         if(webcontrol.gate_open)
+            value = "Close-gate"
+         else
+            value = "Open-gate"
+         end
+         return value
+      end
+
+      def getAge(month, year)
+         age = (currentTime.year - year.to_i)
+         month = (currentTime.month - month.to_i) / 12
+         if(month < 0)
+            age -= 1
+         end
+         return age
       end
 
       def validateRegistration(registration)
@@ -67,23 +103,6 @@ module RegistrationsHelper
             valid = false
          end
          return valid
-      end
-
-      def gateValue
-         webcontrol = Webcontrol.find_by_id(1)
-         value = ""
-         if(webcontrol.gate_open)
-            value = "Close-gate"
-         else
-            value = "Open-gate"
-         end
-         return value
-      end
-
-      def registration_params
-         params.require(:registration).permit(:firstname, :lastname, :email, :country, 
-         :country_timezone, :birthday, :login_id, :vname, :shared, :accounttype_id,
-         :message)
       end
 
       def welcomeUser
@@ -228,32 +247,94 @@ module RegistrationsHelper
                logged_in = current_user
                if(logged_in && ((logged_in.pouch.privilege == "Admin") || (logged_in.pouch.privilege == "Keymaster")))
                   removeTransactions
-                  allRegistrations = Registration.order("registered_on desc").page(params[:page]).per(10)
+                  allRegistrations = Registration.order("registered_on desc").page(getRegistrationParams("Page")).per(10)
                   @registrations = allRegistrations
                else
                   redirect_to root_path
                end
-            elsif(type == "register" || type == "verify")
+            elsif(type == "register" || type == "verify" || type == "register2" || type == "create" || type == "emailpost")
+               displayGreeter("Register")
                webcontrol = Webcontrol.find_by_id(1)
                if(webcontrol.gate_open)
-                  displayGreeter("Register")
                   if(type == "verify")
+                     #Sets up the user variables
                      color_value = params[:session][:color].downcase
-                     if(color_value)
+                     month = params[:session][:month]
+                     year = params[:session][:year]
+                     validDate = (month && year && month.to_i > 0 && month.to_i < 13)
+                     if(color_value && validDate)
                         results = `public/Resources/Code/verification/verify #{color_value}`
                         validMatch = results
-
+                        
                         #Determines if we are looking at a bot or a human
                         if(!validMatch.empty? && results != "Invalid")
-                           @accounttypes = Accounttype.all
-                           @registration = Registration.new
-                           render "register2"
+                           age = getAge(month, year)
+                           if(age > 12)
+                              @accounttypes = Accounttype.all
+                              @registration = Registration.new
+                              render "register2"
+                           elsif(age > 6)
+                              render "register3"
+                           else
+                              flash[:error] = "This child is too young to use the site!"
+                              redirect_to root_path
+                           end
                         else
                            flash[:error] = "User verification failed. Please try again."
                            redirect_to root_path
                         end
                      else
-                        flash[:error] = "Invalid color value"
+                        flash[:error] = "Invalid color value or date values!"
+                        redirect_to root_path
+                     end
+                  elsif(type == "emailpost")
+                     email = params[:session][:parentemail]
+                     #Send email here!
+                     flash[:success] = "The consent form was sent to the parent's email!"
+                     redirect_to root_path
+                  elsif(type == "register2" || type == "create")
+                     newRegistration = Registration.new
+                     if(type == "create")
+                        newRegistration = Registration.new(getRegistrationParams("Registration"))
+                        newRegistration.registered_on = currentTime
+                     end
+                     allAccounts = Accounttype.order("created_on desc")
+                     @accounttypes = allAccounts
+                     @registration = newRegistration
+                     if(type == "create")
+                        if(validateRegistration(newRegistration))
+                           if(@registration.save)
+                              flash[:success] = "Thank you for registration we will review your account over 
+                              the next three days to see if it is legitimate."
+                              url = "http://www.duelingpets.net/registrations/review"
+                              UserMailer.registration(@registration, "Review", url).deliver_later(wait: 2.minutes)
+                              redirect_to root_path
+                           else
+                              render "register2"
+                           end
+                        else
+                           @registration = newRegistration
+                           render "register2"
+                        end
+                     end
+                  end
+               else
+                  flash[:error] = "Registration is currently closed!"
+                  redirect_to root_path
+               end
+            elsif(type == "tokenfinder" || type == "tokenpost")
+               webcontrol = Webcontrol.find_by_id(1)
+               if(webcontrol.gate_open)
+                  if(type == "tokenpost")
+                     displayGreeter("Register")
+                     token = params[:session][:regtoken]
+                     tokenFound = Regtoken.find_by_token(token)
+                     if(tokenFound)
+                        @accounttypes = Accounttype.all
+                        @registration = Registration.new
+                        render "register2"
+                     else
+                        flash[:error] = "This token is invalid or expired!"
                         redirect_to root_path
                      end
                   end
@@ -261,40 +342,10 @@ module RegistrationsHelper
                   flash[:error] = "Registration is currently closed!"
                   redirect_to root_path
                end
-            elsif(type == "register2" || type == "create")
-               webcontrol = Webcontrol.find_by_id(1)
-               if(webcontrol.gate_open)
-                  displayGreeter("Register")
-                  newRegistration = Registration.new
-                  if(type == "create")
-                     newRegistration = Registration.new(registration_params)
-                     newRegistration.registered_on = currentTime
-                  end
-		  allAccounts = Accounttype.order("created_on desc")
-                  @accounttypes = allAccounts
-                  @registration = newRegistration
-                  if(type == "create")
-                     if(validateRegistration(newRegistration))
-                        if(@registration.save)
-                           flash[:success] = "Thank you for registration we will review your account over 
-                           the next three days to see if it is legitimate."
-                           #url = "http://localhost:3000/registrations/review"
-                           url = "http://www.duelingpets.net/registrations/review"
-                           UserMailer.registration(@registration, "Review", url).deliver_later(wait: 2.minutes)
-                           redirect_to root_path
-                        else
-                           render "register2"
-                        end
-                     else
-                        @registration = newRegistration
-                        render "register2"
-                     end
-                  end
-               end
             elsif(type == "approve" || type == "deny")
                logged_in = current_user
                if(logged_in)
-                  registrationFound = Registration.find_by_id(params[:id])
+                  registrationFound = Registration.find_by_id(getRegistrationParams("Id"))
                   if(registrationFound)
                      if(logged_in.pouch.privilege == "Admin" || logged_in.pouch.privilege == "Keymaster")
                         @registration = registrationFound

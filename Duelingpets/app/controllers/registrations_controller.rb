@@ -13,8 +13,20 @@ class RegistrationsController < ApplicationController
       mode "register"
    end
 
+   def tokenfinder
+      mode "tokenfinder"
+   end
+
+   def tokenpost
+      mode "tokenpost"
+   end
+
    def verify
       mode "verify"
+   end
+
+   def emailpost
+      mode "emailpost"
    end
 
    def approve
