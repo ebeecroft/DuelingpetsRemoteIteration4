@@ -1172,14 +1172,12 @@ ActiveRecord::Schema.define(version: 2020_12_31_055421) do
   end
 
   create_table "registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
+    t.string "imaginaryfriend"
     t.string "email"
     t.string "country"
     t.string "country_timezone"
     t.date "birthday"
     t.text "message"
-    t.integer "accounttype_id"
     t.boolean "shared", default: false
     t.string "login_id"
     t.string "vname"

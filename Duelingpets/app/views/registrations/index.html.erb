@@ -6,7 +6,7 @@
 <% @registrations.each do |registration| %>
    <div class="pageformat">
       <div class="container"><%= button_to 'Approve', registrations_review1_path(:id=>registration.id), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to 'Deny', registrations_review2_path(:id=>registration.id), method: :post, class: "button destroybutton" %></div>
-      <p>Name: <%= registration.firstname %> <%= registration.lastname %></p>
+      <p>Imaginary friend: <%= registration.imaginaryfriend %></p>
       <p>Birthday: <%= registration.birthday.strftime("%B-%d-%Y") %></p>
       <p>Country: <%= registration.country %></p>
       <p>Timezone: <%= registration.country_timezone %></p>
@@ -14,7 +14,6 @@
       <p>Login name: <%= registration.login_id %></p>
       <p>Vname: <%= registration.vname %></p>
       <p>Registered: <%= distance_of_time_in_words_to_now registration.registered_on %> ago on (<%= registration.registered_on.strftime("%B-%d-%Y") %>)</p>
-      <p>Account type: <%= registration.accounttype.name %></p>
       <p>Shared: <%= registration.shared %></p>
       <br>
       <p class="textindent"><%= textFormater("Multi", registration.message, "All").html_safe %></p>

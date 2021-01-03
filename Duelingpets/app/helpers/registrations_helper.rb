@@ -6,9 +6,8 @@ module RegistrationsHelper
          if(type == "Id")
             value = params[:id]
          elsif(type == "Registration")
-            value = params.require(:registration).permit(:firstname, :lastname, :email, :country, 
-            :country_timezone, :birthday, :login_id, :vname, :shared, :accounttype_id,
-            :message)
+            value = params.require(:registration).permit(:imaginaryfriend, :email, :country, 
+            :country_timezone, :birthday, :login_id, :vname, :shared, :message)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -221,15 +220,13 @@ module RegistrationsHelper
          newUser = User.new(params[:user])
          newUser.joined_on = currentTime
          newUser.registered_on = registrationFound.registered_on
-         newUser.firstname = registrationFound.firstname
-         newUser.lastname = registrationFound.lastname
+         newUser.firstname = registrationFound.imaginaryfriend
          newUser.email = registrationFound.email
          newUser.vname = registrationFound.vname
          newUser.login_id = registrationFound.login_id
          newUser.country = registrationFound.country
          newUser.country_timezone = registrationFound.country_timezone
          newUser.birthday = registrationFound.birthday
-         newUser.accounttype_id = registrationFound.accounttype_id
          newUser.shared = registrationFound.shared
          initialPassword = "Peaches"
          newUser.password = initialPassword
@@ -270,7 +267,6 @@ module RegistrationsHelper
                         if(!validMatch.empty? && results != "Invalid")
                            age = getAge(month, year)
                            if(age > 12)
-                              @accounttypes = Accounttype.all
                               @registration = Registration.new
                               render "register2"
                            elsif(age > 6)
@@ -298,8 +294,6 @@ module RegistrationsHelper
                         newRegistration = Registration.new(getRegistrationParams("Registration"))
                         newRegistration.registered_on = currentTime
                      end
-                     allAccounts = Accounttype.order("created_on desc")
-                     @accounttypes = allAccounts
                      @registration = newRegistration
                      if(type == "create")
                         if(validateRegistration(newRegistration))
@@ -330,7 +324,6 @@ module RegistrationsHelper
                      token = params[:session][:regtoken]
                      tokenFound = Regtoken.find_by_token(token)
                      if(tokenFound)
-                        @accounttypes = Accounttype.all
                         @registration = Registration.new
                         render "register2"
                      else
