@@ -6,9 +6,9 @@ module UsersHelper
          if(type == "Id")
             value = params[:id]
          elsif(type == "User")
-            value = params.require(:user).permit(:firstname, :lastname, :email,
+            value = params.require(:user).permit(:imaginaryfriend, :email,
             :country, :country_timezone, :military_time, :birthday, :login_id,
-            :vname, :password, :password_confirmation, :accounttype_id, :shared)
+            :vname, :password, :password_confirmation, :shared)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -145,8 +145,6 @@ module UsersHelper
             logged_in = current_user
             if(logged_in && ((logged_in.id == userFound.id) || logged_in.pouch.privilege == "Admin"))
                @user = userFound
-               allAccounts = Accounttype.order("created_on desc")
-               @groups = allAccounts
                if(type == "update")
                   if(@user.update(getUserParams("User")))
                      flash[:success] = "#{@user.vname} was successfully updated."

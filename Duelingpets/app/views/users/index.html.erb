@@ -20,7 +20,7 @@
             <p><%= image_tag(user.userinfo.miniavatar_url(:thumb)) %></p>
             <br>
          <% end %>
-         <p>Name: <%= user.firstname %> <%= user.lastname %></p>
+         <p>Imaginary friend: <%= user.imaginaryfriend %></p>
          <p>Joined</p>
          <p><%= distance_of_time_in_words_to_now user.joined_on %> ago on</p>
          <p>(<%= user.joined_on.strftime("%B-%d-%Y") %>)</p>
@@ -31,7 +31,6 @@
          <p>Email: <%= user.email %></p>
          <p>Country: <%= user.country %></p>
          <p>Timezone: <%= user.country_timezone %></p>
-         <p>Account type: <%= user.accounttype.name %></p>
          <p>Writing Group: <%= getWritingGroup(user, "Name") %></p>
          <p>Reading Group: <%= getReadingGroup(user, "Name") %></p>
          <p>Pouch: <%= user.pouch.amount %> points</p>

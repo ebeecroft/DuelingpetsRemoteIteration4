@@ -9,6 +9,10 @@ class StartController < ApplicationController
       mode "aboutus"
    end
 
+   def privacy
+      mode "privacy"
+   end
+
    def contact
       mode "contact"
    end

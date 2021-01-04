@@ -220,7 +220,7 @@ module RegistrationsHelper
          newUser = User.new(params[:user])
          newUser.joined_on = currentTime
          newUser.registered_on = registrationFound.registered_on
-         newUser.firstname = registrationFound.imaginaryfriend
+         newUser.imaginaryfriend = registrationFound.imaginaryfriend
          newUser.email = registrationFound.email
          newUser.vname = registrationFound.vname
          newUser.login_id = registrationFound.login_id

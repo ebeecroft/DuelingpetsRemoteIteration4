@@ -8,19 +8,11 @@ module CusersHelper
 
       def profileInfo(type, user)
          info = ""
-         if(type == "Name" || type == "Birthday")
+         if(type == "Birthday")
             if(current_user && (current_user.pouch.privilege == "Admin" || current_user.id == user.id))
-               if(type == "Name")
-                  info = (user.firstname + " " + user.lastname)
-               else
-                  info = user.birthday.strftime("%B-%d-%Y")
-               end
+               info = user.birthday.strftime("%B-%d-%Y")
             else
-               if(type == "Name")
-                  info = user.firstname
-               else
-                  info = user.birthday.strftime("%B-%d")
-               end
+               info = user.birthday.strftime("%B-%d")
             end
          elsif(type == "Vname")
             if(current_user)

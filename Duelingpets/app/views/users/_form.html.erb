@@ -12,13 +12,8 @@
      </div>
   <% end %>
   <div class="pageformat">
-    <%= form.label :firstname %>
-    <%= form.text_field :firstname %>
-  </div>
-  <br>
-  <div class="pageformat">
-    <%= form.label :lastname %>
-    <%= form.text_field :lastname %>
+    <%= form.label :imaginaryfriend %>
+    <%= form.text_field :imaginaryfriend %>
   </div>
   <br>
   <div class="pageformat">
@@ -49,11 +44,6 @@
   <div class="pageformat">
     <%= form.label :vname %>
     <%= form.text_field :vname %>
-  </div>
-  <br>
-  <div class="pageformat">
-    <%= form.label :accounttype_id, "Select Account" %>
-    <%= form.collection_select(:accounttype_id, @groups, :id, :name) %>
   </div>
   <br>
   <div class="pageformat">

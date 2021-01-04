@@ -30,15 +30,14 @@
    <% if @user.userinfo.avatar.to_s != "" %>
       <p><%= image_tag(@user.userinfo.avatar_url(:thumb)) %></p>
    <% end %>
+   <p>Imaginary friend: <%= @user.imaginaryfriend %></p>
    <% if current_user %>
-      <div class="container">Name: <%= profileInfo("Name", @user) %></div>
       <% if current_user.id == @user.id || current_user.pouch.privilege == "Admin" %>
          <div class="container"><%= button_to 'Edit', edit_user_path(@user), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', @user, method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div>
       <% end %>
       <p>Birthday: <%= profileInfo("Birthday", @user) %></p>
       <% if current_user.pouch.privilege == "Admin" || current_user.id == @user.id %>
          <p>Email: <%= @user.email %></p>
-         <p>Account type: <%= @user.accounttype.name %></p>
          <p>Shared: <%= @user.shared %></p>
          <p>Pouch: <%= @user.pouch.amount %>/<%= getUpgrades("Pouch", "Limit", @user.pouch, 1) %> points</p>
          <p>
