@@ -2,6 +2,7 @@ class Monster < ApplicationRecord
    #Monsters related
    belongs_to :user, optional: true
    belongs_to :monstertype, optional: true
+   #belongs_to :element, optional: true
    has_many :monsterbattles, :foreign_key => "monster_id", :dependent => :destroy
 
    #Uploader section

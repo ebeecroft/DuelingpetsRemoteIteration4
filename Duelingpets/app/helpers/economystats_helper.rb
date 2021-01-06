@@ -83,13 +83,17 @@ module EconomystatsHelper
          elsif(type == "Tags")
             allTags = user.tags.order("created_on desc")
             value = allTags.count
+         elsif(type == "Elements")
+            allElements = user.elements.order("created_on desc")
+            reviewedElements = allElements.select{|element| element.reviewed || (current_user && current_user.id == element.user_id)}
+            value = reviewedElements.count
          elsif(type == "Monsters")
             allMonsters = user.monsters.order("created_on desc")
             reviewedMonsters = allMonsters.select{|monster| monster.reviewed || (current_user && current_user.id == monster.user_id)}
             value = reviewedMonsters.count
          elsif(type == "Creatures")
             allCreatures = user.creatures.order("created_on desc")
-            reviewedCreatures = allCreatures.select{|creature| creature.reviewed || (current_user && current_user.id == oc.user_id)}
+            reviewedCreatures = allCreatures.select{|creature| creature.reviewed || (current_user && current_user.id == creature.user_id)}
             value = reviewedCreatures.count
          elsif(type == "Items")
             allItems = user.items.order("created_on desc")
@@ -110,9 +114,9 @@ module EconomystatsHelper
          elsif(type == "Jukeboxes")
             allJukeboxes = user.jukeboxes.order("created_on desc")
             value = allJukeboxes.count
-         elsif(type == "Books")
-            allBooks = user.books.order("created_on desc")
-            value = allBooks.count
+         elsif(type == "Bookworlds")
+            allBookworlds = user.bookworlds.order("created_on desc")
+            value = allBookworlds.count
          elsif(type == "PMs")
             allPMs = Pm.order("created_on desc")
             pms = allPMs.select{|pm| pm.pmbox.user_id == user.id}

@@ -9,7 +9,7 @@
          <!--Container space-->
          <div class="container">
       <% end %>
-         <div class="container"><p class="formlinks">Name: <%= link_to oc.name, user_oc_path(oc.user, oc) %></p></div> <div class="container"><%= button_to 'Approve', ocs_review1_path(:oc_id=>oc.id), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to 'Deny', ocs_review2_path(:oc_id=>oc.id), method: :post, class: "button destroybutton" %></div>
+         <div class="container"><p class="formlinks"><%= link_to oc.name, user_oc_path(oc.user, oc) %></p></div> <div class="container"><%= button_to 'Approve', ocs_review1_path(:oc_id=>oc.id), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to 'Deny', ocs_review2_path(:oc_id=>oc.id), method: :post, class: "button destroybutton" %></div>
          <p>Created</p>
          <p><%= distance_of_time_in_words_to_now oc.created_on %> ago on</p>
          <p>(<%= oc.created_on.strftime("%B-%d-%Y") %>)</p>

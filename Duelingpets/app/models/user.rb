@@ -3,6 +3,7 @@ class User < ApplicationRecord
    has_many :blogs, :foreign_key => "user_id", :dependent => :destroy
    has_many :ocs, :foreign_key => "user_id", :dependent => :destroy
    has_many :tags, :foreign_key => "user_id", :dependent => :destroy
+   has_many :elements, :foreign_key => "user_id", :dependent => :destroy
 
    #Relationships for user information
    has_one :pouch, :foreign_key => "user_id", :dependent => :destroy

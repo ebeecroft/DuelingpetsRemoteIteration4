@@ -30,24 +30,23 @@
    <% if @user.userinfo.avatar.to_s != "" %>
       <p><%= image_tag(@user.userinfo.avatar_url(:thumb)) %></p>
    <% end %>
-   <p>Imaginary friend: <%= @user.imaginaryfriend %></p>
+   <div class="container">Imaginary friend: <%= @user.imaginaryfriend %></div>
    <% if current_user %>
       <% if current_user.id == @user.id || current_user.pouch.privilege == "Admin" %>
          <div class="container"><%= button_to 'Edit', edit_user_path(@user), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', @user, method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div>
       <% end %>
       <p>Birthday: <%= profileInfo("Birthday", @user) %></p>
+      <p>Writing Group: <%= getWritingGroup(@user, "Name") %></p>
       <% if current_user.pouch.privilege == "Admin" || current_user.id == @user.id %>
+         <p>Reading Group: <%= getReadingGroup(@user, "Name") %></p>
          <p>Email: <%= @user.email %></p>
          <p>Shared: <%= @user.shared %></p>
-         <p>Pouch: <%= @user.pouch.amount %>/<%= getUpgrades("Pouch", "Limit", @user.pouch, 1) %> points</p>
-         <p>
-         <div class="container">Dreyterrium: <%= @user.pouch.dreyterriumamount %>/<%= getUpgrades("Dreyore", "Limit", @user.pouch, 5) %></div> <div class="container"><%= button_to 'Extract', users_extractore_path(:id=>@user.id), method: :post, class: "button submitbutton" %></div>
-         </p>
-         <% if getUpgrades("Emerald", "Limit", @user.pouch, 2) > 0 %>
-            <p>Emeralds: <%= @user.pouch.emeraldamount %>/<%= getUpgrades("Emerald", "Limit", @user.pouch, 2) %></p>
-         <% end %>
       <% end %>
+      <p>Timezone: <%= @user.country_timezone %></p>
+      <br>
    <% end %>
+   <p>Joined: <%= distance_of_time_in_words_to_now @user.joined_on %> ago on (<%= @user.joined_on.strftime("%B-%d-%Y") %>)</p>
+   <p>Registered: <%= distance_of_time_in_words_to_now @user.registered_on %> ago on (<%= @user.registered_on.strftime("%B-%d-%Y") %>)</p>
    <!--Ban section-->
    <% if @user.pouch.banned %>
       <br>
@@ -64,30 +63,7 @@
       <br>
       <p><%= button_to 'Add Avatar and Edit Browser', edit_userinfo_path(@user.userinfo), method: :get, class: "button submitbutton" %></p>
    <% end %>
-   <p>Audio Browser: <%= @user.userinfo.audiobrowser %></p>
-   <p>Video Browser: <%= @user.userinfo.videobrowser %></p>
-   <p>Country: <%= @user.country %></p>
-   <p>Timezone: <%= @user.country_timezone %></p>
-   <p>Writing Group: <%= getWritingGroup(@user, "Name") %></p>
-   <% if current_user %>
-      <p>Reading Group: <%= getReadingGroup(@user, "Name") %></p>
-   <% end %>
    <br>
-   <p>Vname: <%= profileInfo("Vname", @user) %></p>
-   <% if(@user.vname != "none") %>
-      <% if !@user.referral.nil? %>
-         <p class="formlinks">Referred by: <%= getUserPrivilege(@user.referral.referred_by) %><%= link_to @user.referral.referred_by.vname, user_path(@user.referral.referred_by) %></p>
-      <% end %>
-      <% if current_user && current_user.id == @user.id && @user.referral.nil? %>
-         <div class="container"><p class="formlinks">Referred by:</p></div>
-         <div class="container"><%= button_to "By Player", new_user_referral_path(@user), method: :get, class: "button submitbutton" %></div> <div class= "container"><%= button_to "Discoveredit", referrals_discoveredit_path, method: :post, class: "button submitbutton", data: { confirm: 'This means you found the site on your own. Are you sure you want to select it?' } %></div>
-      <% end %>
-   <% end %>
-   <p>Amount of referrals: <%= getReferrals(@user) %></p>
-   <% if current_user %>
-      <p>Joined: <%= distance_of_time_in_words_to_now @user.joined_on %> ago</p>
-      <p>Registered on: <%= distance_of_time_in_words_to_now @user.registered_on %> ago on (<%= @user.registered_on.strftime("%B-%d-%Y") %>)</p>
-   <% end %>
    <p class="textindent"><%= textFormater("Multi", @user.userinfo.info, "All").html_safe %></p>
    <% if current_user && current_user.id == @user.id && current_user.pouch.privilege == "Admin" %>
       <br>
@@ -118,48 +94,33 @@
    <%= render 'showform' %>
    <% if current_user %>
       <br>
-      <h2 class="subheader1">Shoutbox section</h2>
-      <!--What is the difference between page shouts and shout? -->
-      <p><%= button_to 'Review', shouts_review_path, method: :get, class: "button submitbutton" %></p>
-      <p>Capacity: <%= getUserContent(@user, "Shout") %>/<%= @user.shoutbox.capacity %></p>
-      <p>Box open: <%= @user.shoutbox.box_open %></p>
-      <% if(@user.shoutbox.box_open) %>
-         <% if current_user.id == @user.id %>
-            <br>
-            <p><%= button_to 'Disable Shoutbox', users_disableshoutbox_path(:id=>@user.id), method: :post, class: "button submitbutton" %></p>
+      <p>Shouts</p>
+      <div class="formlinks"><%= paginate getUserContent(@user, "Pageshouts") %></div>
+      <br>
+      <% getUserContent(@user, "Pageshouts").each do |shout| %>
+         <div class="container"><%= button_to 'Edit', edit_shoutbox_shout_path(shout.shoutbox, shout), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', [shout.shoutbox, shout], method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div>
+         <p>Created: <%= distance_of_time_in_words_to_now shout.created_on %> ago on (<%= shout.created_on.strftime("%B-%d-%Y") %>)</p>
+         <% if !shout.reviewed_on.nil? %>
+            <p>Reviewed on: <%= distance_of_time_in_words_to_now shout.reviewed_on %> ago on(<%= shout.reviewed_on.strftime("%B-%d-%Y") %>)</p>
          <% end %>
+         <% if shout.user.userinfo.miniavatar.to_s != "" %>
+            <p><%= image_tag(shout.user.userinfo.miniavatar_url(:thumb)) %></p>
+         <% end %>
+         <p class="formlinks">Owner: <%= getUserPrivilege(shout.user) %><%= link_to shout.user.vname, user_path(shout.user) %></p>
+         <p>Status: <%= getActivity(shout.user) %>
+            <% if getActivity(shout.user) != "Online" && getActivity(shout.user) != "Inoperable" %>
+               for <%= distance_of_time_in_words_to_now getTime(shout.user) %>
+            <% end %>
+         </p>
          <br>
-         <% getUserContent(@user, "Pageshouts").each do |shout| %>
-            <div class="container"><%= button_to 'Edit', edit_shoutbox_shout_path(shout.shoutbox, shout), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', [shout.shoutbox, shout], method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div>
-            <p>Created: <%= distance_of_time_in_words_to_now shout.created_on %> ago on (<%= shout.created_on.strftime("%B-%d-%Y") %>)</p>
-            <% if !shout.reviewed_on.nil? %>
-               <p>Reviewed on: <%= distance_of_time_in_words_to_now shout.reviewed_on %> ago on(<%= shout.reviewed_on.strftime("%B-%d-%Y") %>)</p>
-            <% end %>
-            <% if shout.user.userinfo.miniavatar.to_s != "" %>
-               <p><%= image_tag(shout.user.userinfo.miniavatar_url(:thumb)) %></p>
-            <% end %>
-            <p class="formlinks">Owner: <%= getUserPrivilege(shout.user) %><%= link_to shout.user.vname, user_path(shout.user) %></p>
-            <p>Status: <%= getActivity(shout.user) %>
-               <% if getActivity(shout.user) != "Online" && getActivity(shout.user) != "Inoperable" %>
-                  for <%= distance_of_time_in_words_to_now getTime(shout.user) %>
-               <% end %>
-            </p>
-            <br>
-            <p>Message</p>
-            <p class="textindent"><%= textFormater("Multi", shout.message, "All").html_safe %></p>
-         <% end %>
-         <% if current_user.id != @user.id && @user.pouch.amount > 0 %>
-            <%= form_for [@user.shoutbox, Shout.new] do |form| %>
-               <p><%= form.label :message %></p>
-               <p><%= form.text_area :message, :placeholder => "Enter message" %></p>
-               <p><%= form.submit %></p>
-            <% end %>
-         <% end %>
-      <% else %>
-         <p><%= @user.vname %>'s shoutbox is currently not open to receive shouts!</p>
-         <% if current_user.id == @user.id %>
-            <br>
-            <p><%= button_to 'Enable Shoutbox', users_disableshoutbox_path(:id=>@user.id), method: :post, class: "button submitbutton" %></p>
+         <p>Message</p>
+         <p class="textindent"><%= textFormater("Multi", shout.message, "All").html_safe %></p>
+      <% end %>
+      <% if current_user.id != @user.id && @user.pouch.amount > 0 %>
+         <%= form_for [@user.shoutbox, Shout.new] do |form| %>
+            <p><%= form.label :message %></p>
+            <p><%= form.text_area :message, :placeholder => "Enter message" %></p>
+            <p><%= form.submit %></p>
          <% end %>
       <% end %>
    <% end %>

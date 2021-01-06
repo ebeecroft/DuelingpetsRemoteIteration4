@@ -2,6 +2,7 @@ class Creature < ApplicationRecord
    #Creatures related
    belongs_to :user, optional: true
    belongs_to :creaturetype, optional: true
+   #belongs_to :element, optional: true
    has_many :partners, :foreign_key => "creature_id", :dependent => :destroy
 
    #Uploader section
