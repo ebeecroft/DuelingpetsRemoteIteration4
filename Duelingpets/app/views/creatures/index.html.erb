@@ -36,6 +36,7 @@
             <% end %>
             <p class="formlinks">Artist: <%= getUserPrivilege(creature.user) %><%= link_to creature.user.vname, user_path(creature.user) %></p>
             <p>Type: <%= creature.creaturetype.name %></p>
+            <p>Element: <%= creature.element.name %></p>
             <p>Status: <%= getActivity(creature.user) %>
                <% if getActivity(creature.user) != "Online" && getActivity(creature.user) != "Inoperable" %>
                   for <%= distance_of_time_in_words_to_now getTime(creature.user) %>
@@ -45,6 +46,7 @@
          <% else %>
             <br>
             <p>Type: <%= creature.creaturetype.name %></p>
+            <p>Element: <%= creature.element.name %></p>
             <br>
          <% end %>
          <p class="textindent"><%= textFormater("Multi", creature.description, "All").html_safe %></p>

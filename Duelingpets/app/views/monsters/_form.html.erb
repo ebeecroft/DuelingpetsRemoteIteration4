@@ -84,10 +84,14 @@
     <%= form.number_field :exp %>
   </div>
   <br>
-  <p class="pageformat">Player Cost</p>
   <div class="pageformat">
     <%= form.label :monstertype_id, "Select Monstertype" %>
     <%= form.collection_select(:monstertype_id, @monstertypes, :id, :name) %>
+  </div>
+  <br>
+  <div class="pageformat">
+    <%= form.label :monstertype_id, "Select Element" %>
+    <%= form.collection_select(:element_id, @elements, :id, :name) %>
   </div>
   <br>
   <div class="pageformat">

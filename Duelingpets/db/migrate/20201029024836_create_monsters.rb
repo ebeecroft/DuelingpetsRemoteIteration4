@@ -26,6 +26,7 @@ class CreateMonsters < ActiveRecord::Migration[5.2]
       t.datetime :reviewed_on
       t.integer :user_id
       t.integer :monstertype_id
+      t.integer :element_id
       t.boolean :reviewed, default: false
 
       t.timestamps

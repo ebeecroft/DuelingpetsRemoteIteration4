@@ -104,10 +104,14 @@
     <%= form.number_field :lives %>
   </div>
   <br>
-  <p class="pageformat">Player Cost</p>
   <div class="pageformat">
     <%= form.label :creaturetype_id, "Select Creaturetype" %>
     <%= form.collection_select(:creaturetype_id, @creaturetypes, :id, :name) %>
+  </div>
+  <br>
+  <div class="pageformat">
+    <%= form.label :element_id, "Select Element" %>
+    <%= form.collection_select(:element_id, @elements, :id, :name) %>
   </div>
   <br>
   <div class="pageformat">

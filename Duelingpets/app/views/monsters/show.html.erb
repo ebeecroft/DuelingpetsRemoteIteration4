@@ -39,6 +39,7 @@
    <p>Retired pet: <%= @monster.retiredmonster %></p>
    <p>Cost: <%= @monster.cost %></p>
    <p>Type: <%= @monster.monstertype.name %></p>
+   <p>Element: <%= @monster.element.name %></p>
    <br>
    <p class="textindent"><%= textFormater("Multi", @monster.description, "All").html_safe %></p>
    <br>

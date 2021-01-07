@@ -10,7 +10,7 @@ module CreaturesHelper
          elsif(type == "User")
             value = params[:user_id]
          elsif(type == "Creature")
-            value = params.require(:creature).permit(:name, :description, :hp, :atk, :def, :agility, :strength, :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :lives, :rarity, :starter, :emeraldcost, :unlimitedlives, :image, :remote_image_url, :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :voiceogg, :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id, :activepet, :remote_activepet_url, :activepet_cache)
+            value = params.require(:creature).permit(:name, :description, :hp, :atk, :def, :agility, :strength, :mp, :matk, :mdef, :magi, :mstr, :hunger, :thirst, :fun, :lives, :rarity, :starter, :emeraldcost, :unlimitedlives, :image, :remote_image_url, :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3, :remote_mp3_url, :mp3_cache, :voiceogg, :remote_voiceogg_url, :voiceogg_cache, :voicemp3, :remote_voicemp3_url, :voicemp3_cache, :creaturetype_id, :element_id, :activepet, :remote_activepet_url, :activepet_cache)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -109,6 +109,8 @@ module CreaturesHelper
                #Determines the creaturetype
                allCreaturetypes = Creaturetype.order("created_on desc")
                @creaturetypes = allCreaturetypes
+               allElements = Element.order("created_on desc")
+               @elements = allElements
                creatureFound.reviewed = false
                @creature = creatureFound
                @user = User.find_by_vname(creatureFound.user.vname)
@@ -206,6 +208,8 @@ module CreaturesHelper
                         #Determines the type of bookgroup the user belongs to
                         allCreaturetypes = Creaturetype.order("created_on desc")
                         @creaturetypes = allCreaturetypes
+                        allElements = Element.order("created_on desc")
+                        @elements = allElements
 
                         @creature = newCreature
                         @user = userFound
@@ -342,25 +346,6 @@ module CreaturesHelper
                   end
                else
                   redirect_to root_path
-               end
-            elsif(type == "shop")
-               allMode = Maintenancemode.find_by_id(1)
-               creatureMode = Maintenancemode.find_by_id(10)
-               if(allMode.maintenance_on || creatureMode.maintenance_on)
-                  if(allMode.maintenance_on)
-                     render "/start/maintenance"
-                  else
-                     render "/creatures/maintenance"
-                  end
-               else
-                  logged_in = current_user
-                  if(logged_in)
-                     allCreatures = Creature.order("reviewed_on desc, created_on desc")
-                     creaturesReviewed = allCreatures.select{|creature| (creature.reviewed && (logged_in.partners.count > 0 || (logged_in.partners.count == 0 && creature.starter)))}
-                     @creatures = Kaminari.paginate_array(creaturesReviewed).page(getCreatureParams("Page")).per(9)
-                  else
-                     redirect_to root_path
-                  end
                end
             end
          end

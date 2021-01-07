@@ -49,6 +49,7 @@
             <p>Mischief: <%= monster.mischief %></p>
             <p>Rarity: <%= monster.rarity %></p>
             <p>Type: <%= monster.monstertype.name %></p>
+            <p>Element: <%= monster.element.name %></p>
             <% if monster.user.userinfo.miniavatar.to_s != "" %>
                <br>
                <p><%= image_tag(monster.user.userinfo.miniavatar_url(:thumb)) %></p>

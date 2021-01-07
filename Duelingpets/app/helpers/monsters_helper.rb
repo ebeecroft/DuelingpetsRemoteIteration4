@@ -14,7 +14,7 @@ module MonstersHelper
             value = params.require(:monster).permit(:name, :description, :hp, :atk, :def, :agility, 
             :mp, :matk, :mdef, :magi, :exp, :mischief, :rarity, :image,
             :remote_image_url, :image_cache, :ogg, :remote_ogg_url, :ogg_cache, :mp3,
-            :remote_mp3_url, :mp3_cache, :monstertype_id)
+            :remote_mp3_url, :mp3_cache, :monstertype_id, :element_id)
          elsif(type == "Page")
             value = params[:page]
          else
@@ -103,6 +103,8 @@ module MonstersHelper
                #Determines the monstertype
                allMonstertypes = Monstertype.order("created_on desc")
                @monstertypes = allMonstertypes
+               allElements = Element.order("created_on desc")
+               @elements = allElements
                monsterFound.reviewed = false
                @monster = monsterFound
                @user = User.find_by_vname(monsterFound.user.vname)
@@ -199,6 +201,8 @@ module MonstersHelper
                         end
                         allMonstertypes = Monstertype.order("created_on desc")
                         @monstertypes = allMonstertypes
+                        allElements = Element.order("created_on desc")
+                        @elements = allElements
 
                         @monster = newMonster
                         @user = userFound

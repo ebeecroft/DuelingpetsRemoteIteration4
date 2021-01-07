@@ -36,6 +36,7 @@
             <% end %>
             <p class="formlinks">Artist: <%= getUserPrivilege(monster.user) %><%= link_to monster.user.vname, user_path(monster.user) %></p>
             <p>Type: <%= monster.monstertype.name %></p>
+            <p>Element: <%= monster.element.name %></p>
             <p>Status: <%= getActivity(monster.user) %>
                <% if getActivity(monster.user) != "Online" && getActivity(monster.user) != "Inoperable" %>
                   for <%= distance_of_time_in_words_to_now getTime(monster.user) %>
@@ -45,6 +46,7 @@
          <% else %>
             <br>
             <p>Type: <%= monster.monstertype.name %></p>
+            <p>Element: <%= monster.element.name %></p>
             <br>
          <% end %>
          <p class="textindent"><%= textFormater("Multi", monster.description, "All").html_safe %></p>

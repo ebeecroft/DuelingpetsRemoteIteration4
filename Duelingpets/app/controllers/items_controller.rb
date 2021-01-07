@@ -46,10 +46,6 @@ class ItemsController < ApplicationController
       mode "list"
    end
 
-   def shop
-      mode "shop"
-   end
-
    def junkdealer
       mode "junkdealer"
    end

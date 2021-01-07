@@ -344,28 +344,6 @@ module ItemsHelper
                else
                   redirect_to root_path
                end
-            elsif(type == "shop")
-               allMode = Maintenancemode.find_by_id(1)
-               itemMode = Maintenancemode.find_by_id(9)
-               if(allMode.maintenance_on || itemMode.maintenance_on)
-                  if(allMode.maintenance_on)
-                     render "/start/maintenance"
-                  else
-                     render "/items/maintenance"
-                  end
-               else
-                  logged_in = current_user
-                  if(logged_in)
-                     allItems = Item.order("reviewed_on desc, created_on desc")
-                     allSlots = Inventoryslot.all
-                     myslots = allSlots.select{|slot| slot.inventory_id == logged_in.inventory.id}
-                     @slots = myslots
-                     itemsReviewed = allItems.select{|item| item.reviewed}
-                     @items = Kaminari.paginate_array(itemsReviewed).page(getItemParams("Page")).per(9)
-                  else
-                     redirect_to root_path
-                  end
-               end
             elsif(type == "junkdealer")
                logged_in = current_user
                passedInValues = params[:format]

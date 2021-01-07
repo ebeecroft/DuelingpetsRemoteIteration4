@@ -23,7 +23,7 @@
       <h2 class="subheader1">Newest Monsters</h2>
       <% newestContent("Monster").each_with_index do |content, index| %>
          <div class="container">
-            <p class="formlinks"><%= link_to content.name, user_creature_path(content.user, content) %></p>
+            <p class="formlinks"><%= link_to content.name, user_monster_path(content.user, content) %></p>
             <% if content.image.to_s != "" %>
                <p><%= image_tag(content.image_url(:thumb)) %></p>
             <% end %>

@@ -330,6 +330,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_043245) do
     t.datetime "reviewed_on"
     t.integer "user_id"
     t.integer "creaturetype_id"
+    t.integer "element_id"
     t.boolean "reviewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -804,6 +805,7 @@ ActiveRecord::Schema.define(version: 2021_01_04_043245) do
     t.datetime "reviewed_on"
     t.integer "user_id"
     t.integer "monstertype_id"
+    t.integer "element_id"
     t.boolean "reviewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

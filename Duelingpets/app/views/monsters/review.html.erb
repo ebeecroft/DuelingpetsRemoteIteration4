@@ -51,6 +51,7 @@
          <p>Retired monster: <%= monster.retiredmonster %></p>
          <p>Cost: <%= monster.cost %></p>
          <p>Type: <%= monster.monstertype.name %></p>
+         <p>Element: <%= monster.element.name %></p>
          <% if monster.user.userinfo.miniavatar.to_s != "" %>
             <p><%= image_tag(monster.user.userinfo.miniavatar_url(:thumb)) %></p>
          <% end %>
