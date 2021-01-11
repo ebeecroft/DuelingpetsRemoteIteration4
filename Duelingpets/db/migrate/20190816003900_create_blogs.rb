@@ -22,6 +22,7 @@ class CreateBlogs < ActiveRecord::Migration[5.2]
       t.integer :bookgroup_id
       t.integer :gviewer_id
       t.integer :user_id
+      t.boolean :box_open, default: false
       t.boolean :largeimage1purchased, default: false
       t.boolean :largeimage2purchased, default: false
       t.boolean :largeimage3purchased, default: false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_04_043245) do
+ActiveRecord::Schema.define(version: 2021_01_07_032319) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -99,6 +99,18 @@ ActiveRecord::Schema.define(version: 2021_01_04_043245) do
   create_table "blacklistednames", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blogreplies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "message"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.datetime "reviewed_on"
+    t.integer "user_id"
+    t.integer "blog_id"
+    t.boolean "reviewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

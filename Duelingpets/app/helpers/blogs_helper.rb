@@ -218,8 +218,9 @@ module BlogsHelper
                #visitTimer(type, blogFound)
                #cleanupOldVisits
                @blog = blogFound
-               #blogReplies = @blog.replies.order("created_on desc")
-               #@replies = Kaminari.paginate_array(blogReplies).page(getBlogParams("Page")).per(6)
+               blogReplies = @blog.blogreplies.order("created_on desc")
+               #Add review later
+               @replies = Kaminari.paginate_array(blogReplies).page(getBlogParams("Page")).per(6)
                #stars = @blog.blogstars.count
                #@stars = stars
                if(type == "destroy")

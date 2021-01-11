@@ -1,9 +1,7 @@
 class User < ApplicationRecord
    has_many :colorschemes, :foreign_key => "user_id", :dependent => :destroy
-   has_many :blogs, :foreign_key => "user_id", :dependent => :destroy
    has_many :ocs, :foreign_key => "user_id", :dependent => :destroy
    has_many :tags, :foreign_key => "user_id", :dependent => :destroy
-   has_many :elements, :foreign_key => "user_id", :dependent => :destroy
 
    #Relationships for user information
    has_one :pouch, :foreign_key => "user_id", :dependent => :destroy
@@ -22,6 +20,8 @@ class User < ApplicationRecord
    has_one :pmbox, :foreign_key => "user_id", :dependent => :destroy
    has_many :pms, :foreign_key => "user_id", :dependent => :destroy
    has_many :pmreplies, :foreign_key => "user_id", :dependent => :destroy
+   has_many :blogs, :foreign_key => "user_id", :dependent => :destroy
+   has_many :blogreplies, :foreign_key => "user_id", :dependent => :destroy
 
    #Relationships for music content
    has_many :jukeboxes, :foreign_key => "user_id", :dependent => :destroy
@@ -47,6 +47,7 @@ class User < ApplicationRecord
    has_many :arts, :foreign_key => "user_id", :dependent => :destroy
 
    #Relationships for creature content
+   has_many :elements, :foreign_key => "user_id", :dependent => :destroy
    has_many :creatures, :foreign_key => "user_id", :dependent => :destroy
    has_many :partners, :foreign_key => "user_id", :dependent => :destroy
    has_one :inventory, :foreign_key => "user_id", :dependent => :destroy

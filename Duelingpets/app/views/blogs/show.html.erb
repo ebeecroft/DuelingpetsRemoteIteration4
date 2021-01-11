@@ -82,6 +82,39 @@
    <% end %>
    <br>
    <p class="textindent"><%= textFormater("Multi", @blog.description, "All").html_safe %></p>
+   <% if current_user %>
+      <br>
+      <% if current_user.pouch.privilege == "Manager" || current_user.pouch.privilege == "Admin" || current_user.id == @blog.user_id %>
+         <p><%= button_to 'Review', blogreplies_review_path, method: :get, class: "button submitbutton" %></p>
+         <br>
+      <% end %>
+      <div class="formlinks"><%= paginate @replies %></div>
+      <br>
+      <% @replies.each do |reply| %>
+         <% if current_user.pouch.privilege == "Admin" || current_user.id == @blog.user_id || current_user.id == reply.user_id %>
+            <div class="container"><%= button_to 'Edit', edit_blog_blogreply_path(reply.blog, reply), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', [reply.blog, reply], method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div>
+         <% end %>
+         <p>Created: <%= distance_of_time_in_words_to_now reply.created_on %> ago on (<%= reply.created_on.strftime("%B-%d-%Y") %>)</p>
+         <% if !reply.reviewed_on.nil? %>
+            <p>Reviewed: <%= distance_of_time_in_words_to_now reply.reviewed_on %> ago on(<%= reply.reviewed_on.strftime("%B-%d-%Y") %>)</p>
+         <% end %>
+         <p>Updated: <%= distance_of_time_in_words_to_now reply.updated_on %> ago on (<%= reply.updated_on.strftime("%B-%d-%Y") %>)</p>
+         <% if reply.user.userinfo.miniavatar.to_s != "" %>
+            <br>
+            <p><%= image_tag(reply.user.userinfo.miniavatar_url(:thumb)) %></p>
+         <% end %>
+         <p class="formlinks">Owner: <%= getUserPrivilege(reply.user) %><%= link_to reply.user.vname, user_path(reply.user) %></p>
+         <p>Status: <%= getActivity(reply.user) %>
+            <% if getActivity(reply.user) != "Online" && getActivity(reply.user) != "Inoperable" %>
+               for <%= distance_of_time_in_words_to_now getTime(reply.user) %>
+            <% end %>
+         </p>
+         <br>
+         <p class="textindent"><%= textFormater("Multi", reply.message, "All").html_safe %></p>
+         <br>
+      <% end %>
+      <p class="navlinks"><%= link_to 'New Reply', new_blog_blogreply_path(@blog) %></p>
+   <% end %>
 </div>
 <br>
 <p class="formlinks"><%= link_to "User Blogs", user_blogs_path(@blog.user) %> |
