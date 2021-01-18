@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_07_032319) do
+ActiveRecord::Schema.define(version: 2021_01_12_235646) do
 
   create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 2021_01_07_032319) do
     t.integer "bookgroup_id"
     t.integer "gviewer_id"
     t.integer "user_id"
+    t.boolean "box_open", default: false
     t.boolean "largeimage1purchased", default: false
     t.boolean "largeimage2purchased", default: false
     t.boolean "largeimage3purchased", default: false
@@ -489,6 +490,21 @@ ActiveRecord::Schema.define(version: 2021_01_07_032319) do
     t.integer "curdur8", default: 0
     t.integer "startdur8", default: 0
     t.boolean "activeslot", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "faqs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "goal"
+    t.text "prereqs"
+    t.text "steps"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.datetime "replied_on"
+    t.datetime "reviewed_on"
+    t.integer "user_id"
+    t.integer "staff_id"
+    t.boolean "reviewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

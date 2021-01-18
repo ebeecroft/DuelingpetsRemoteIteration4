@@ -1,0 +1,22 @@
+<% provide(:h1, "Faq Review") %>
+<div class="formlinks"><%= paginate @faqs %></div>
+<br>
+<% @faqs.each do |faq| %>
+   <div class="pageformat">
+      <div class="container"><%= faq.goal %></div> <div class="container"><%= button_to 'Approve', faqs_review1_path(:faq_id=>faq.id), method: :post, class: "button editbutton" %></div> <div class="container"><%= button_to 'Deny', faqs_review2_path(:faq_id=>faq.id), method: :post, class: "button destroybutton" %></div>
+      <p>Created: <%= distance_of_time_in_words_to_now faq.created_on %> ago on (<%= faq.created_on.strftime("%B-%d-%Y") %>)</p>
+      <p>Updated: <%= distance_of_time_in_words_to_now faq.updated_on %> ago on (<%= faq.updated_on.strftime("%B-%d-%Y") %>)</p>
+      <br>
+      <% if faq.user.userinfo.miniavatar.to_s != "" %>
+         <p><%= image_tag(faq.user.userinfo.miniavatar_url(:thumb)) %></p>
+      <% end %>
+      <p class="formlinks">Writer: <%= getUserPrivilege(faq.user) %><%= link_to faq.user.vname, user_path(faq.user) %></p>
+      <p>Status: <%= getActivity(faq.user) %>
+         <% if getActivity(faq.user) != "Online" && getActivity(faq.user) != "Inoperable" %>
+            for <%= distance_of_time_in_words_to_now getTime(faq.user) %>
+         <% end %>
+      </p>
+   </div>
+   <br>
+<% end %>
+<p class="formlinks"><%= link_to 'Back', root_path %></p>

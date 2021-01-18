@@ -95,6 +95,9 @@ module EconomystatsHelper
             allCreatures = user.creatures.order("created_on desc")
             reviewedCreatures = allCreatures.select{|creature| creature.reviewed || (current_user && current_user.id == creature.user_id)}
             value = reviewedCreatures.count
+         elsif(type == "Partners")
+            allPartners = user.partners.order("created_on desc")
+            value = allPartners.count
          elsif(type == "Items")
             allItems = user.items.order("created_on desc")
             reviewedItems = allItems.select{|item| item.reviewed || (current_user && current_user.id == item.user_id)}

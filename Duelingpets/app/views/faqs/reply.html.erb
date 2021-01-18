@@ -1,0 +1,10 @@
+<% provide(:h1, "Staff post") %>
+<%= form_for(:faq, url: faqs_replypost_path(:faq_id=>@faq.id), method: :post) do |form| %>
+   <div class="pageformat">
+      <p><%= form.label :prereqs %><%= form.text_area :prereqs %></p>
+      <br>
+      <p><%= form.label :steps %><%= form.text_area :steps %></p>
+      <br>
+      <p><%= form.submit "Add Reply", class: "button submitbutton" %></p>
+   </div>
+<% end %>

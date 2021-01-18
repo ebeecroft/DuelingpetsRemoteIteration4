@@ -1,0 +1,59 @@
+<% if optional %>
+   <% provide(:h1, @user.vname +  "'s faqs") %>
+<% else %>
+   <% provide(:h1, "What do you need help with?") %>
+<% end %>
+<div class="formlinks"><%= paginate @faqs %></div>
+<br>
+<% @faqs.each do |faq| %>
+   <div class="pageformat">
+      <div class="container"><%= faq.goal %></div>
+      <% if current_user && ((current_user.pouch.privilege == "Glitchy" || current_user.pouch.privilege == "Manager" || current_user.pouch.privilege == "Admin") || current_user.id == faq.user_id) %>
+         <div class="container"><%= button_to 'Edit', edit_user_faq_path(faq.user, faq), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', [faq.user, faq], method: :delete, data: { confirm: 'Are you sure?' }, class: "button destroybutton" %></div>
+      <% end %>
+      <p>Created: <%= distance_of_time_in_words_to_now faq.created_on %> ago on (<%= faq.created_on.strftime("%B-%d-%Y") %>)</p>
+      <p>Updated: <%= distance_of_time_in_words_to_now faq.updated_on %> ago on (<%= faq.updated_on.strftime("%B-%d-%Y") %>)</p>
+      <% if !faq.reviewed_on.nil? %>
+         <p>Reviewed: <%= distance_of_time_in_words_to_now faq.reviewed_on %> ago on(<%= faq.reviewed_on.strftime("%B-%d-%Y") %>)</p>
+      <% end %>
+      <% if !faq.replied_on.nil? %>
+         <p>Replied: <%= distance_of_time_in_words_to_now faq.replied_on %> ago on(<%= faq.replied_on.strftime("%B-%d-%Y") %>)</p>
+      <% end %>
+      <% if !optional %>
+         <br>
+         <% if faq.user.userinfo.miniavatar.to_s != "" %>
+            <p><%= image_tag(faq.user.userinfo.miniavatar_url(:thumb)) %></p>
+         <% end %>
+         <p class="formlinks">Writer: <%= getUserPrivilege(faq.user) %><%= link_to faq.user.vname, user_path(faq.user) %></p>
+         <p>Status: <%= getActivity(faq.user) %>
+            <% if getActivity(faq.user) != "Online" && getActivity(faq.user) != "Inoperable" %>
+               for <%= distance_of_time_in_words_to_now getTime(faq.user) %>
+            <% end %>
+         </p>
+      <% end %>
+      <% if !faq.staff.nil? %>
+         <br>
+         <p>Prereqs</p>
+         <p><%= textFormater("Multi", faq.prereqs, "All").html_safe %></p>
+         <br>
+         <p>Steps</p>
+         <p><%= textFormater("Multi", faq.steps, "All").html_safe %></p>
+         <br>
+         <% if faq.staff.userinfo.miniavatar.to_s != "" %>
+            <p><%= image_tag(faq.staff.userinfo.miniavatar_url(:thumb)) %></p>
+         <% end %>
+         <p class="formlinks">Staff: <%= getUserPrivilege(faq.staff) %><%= link_to faq.staff.vname, user_path(faq.staff) %></p>
+         <p>Status: <%= getActivity(faq.staff) %>
+            <% if getActivity(faq.staff) != "Online" && getActivity(faq.staff) != "Inoperable" %>
+               for <%= distance_of_time_in_words_to_now getTime(faq.staff) %>
+            <% end %>
+         </p>
+      <% end %>
+   </div>
+   <br>
+<% end %>
+<% if optional %>
+   <p class="formlinks"><%= link_to 'Back', user_path(@user) %></p>
+<% else %>
+   <p class="formlinks"><%= link_to 'Back', root_path %></p>
+<% end %>
