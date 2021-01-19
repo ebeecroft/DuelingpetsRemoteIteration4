@@ -104,14 +104,14 @@ module PartnersHelper
          creatureFound = Creature.find_by_id(newPartner.creature_id)
          newPartner.adopted_on = currentTime
          newPartner.updated_on = currentTime
-         newPartner.plevel = creatureFound.level
+         newPartner.plevel = (creatureFound.level - 1)
          newPartner.chp = creatureFound.hp
          newPartner.hp = creatureFound.hp
          newPartner.atk = creatureFound.atk
          newPartner.def = creatureFound.def
          newPartner.agility = creatureFound.agility
          newPartner.strength = creatureFound.strength
-         newPartner.mlevel = creatureFound.level
+         newPartner.mlevel = (creatureFound.level - 1)
          newPartner.cmp = creatureFound.mp
          newPartner.mp = creatureFound.mp
          newPartner.matk = creatureFound.matk

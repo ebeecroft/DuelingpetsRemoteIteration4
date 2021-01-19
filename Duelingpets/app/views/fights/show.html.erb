@@ -10,7 +10,7 @@
    <div class="formlinks"><%= paginate @monsterbattles %></div>
    <br>
    <% @monsterbattles.each do |monsterbattle| %>
-      <div class="container">Round: <%= monsterbattle.round %></div>
+      <div class="container"><p class="formlinks">Round: <%= link_to monsterbattle.round, fight_monsterbattle_path(monsterbattle.fight, monsterbattle) %></p></div>
       <% if current_user && (current_user.id == monsterbattle.fight.partner.user_id || current_user.pouch.privilege == "Admin") %>
          <div class="container"><%= button_to 'Destroy', [monsterbattle.fight, monsterbattle], method: :delete, class: "button destroybutton", data: { confirm: 'Are you sure?' } %></div>
          <br>

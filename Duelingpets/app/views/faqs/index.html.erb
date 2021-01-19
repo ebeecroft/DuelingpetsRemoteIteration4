@@ -11,14 +11,7 @@
       <% if current_user && ((current_user.pouch.privilege == "Glitchy" || current_user.pouch.privilege == "Manager" || current_user.pouch.privilege == "Admin") || current_user.id == faq.user_id) %>
          <div class="container"><%= button_to 'Edit', edit_user_faq_path(faq.user, faq), method: :get, class: "button editbutton" %></div> <div class="container"><%= button_to 'Destroy', [faq.user, faq], method: :delete, data: { confirm: 'Are you sure?' }, class: "button destroybutton" %></div>
       <% end %>
-      <p>Created: <%= distance_of_time_in_words_to_now faq.created_on %> ago on (<%= faq.created_on.strftime("%B-%d-%Y") %>)</p>
-      <p>Updated: <%= distance_of_time_in_words_to_now faq.updated_on %> ago on (<%= faq.updated_on.strftime("%B-%d-%Y") %>)</p>
-      <% if !faq.reviewed_on.nil? %>
-         <p>Reviewed: <%= distance_of_time_in_words_to_now faq.reviewed_on %> ago on(<%= faq.reviewed_on.strftime("%B-%d-%Y") %>)</p>
-      <% end %>
-      <% if !faq.replied_on.nil? %>
-         <p>Replied: <%= distance_of_time_in_words_to_now faq.replied_on %> ago on(<%= faq.replied_on.strftime("%B-%d-%Y") %>)</p>
-      <% end %>
+      <br>
       <% if !optional %>
          <br>
          <% if faq.user.userinfo.miniavatar.to_s != "" %>
@@ -30,9 +23,19 @@
                for <%= distance_of_time_in_words_to_now getTime(faq.user) %>
             <% end %>
          </p>
+      <% else %>
+         <p>Created: <%= distance_of_time_in_words_to_now faq.created_on %> ago on (<%= faq.created_on.strftime("%B-%d-%Y") %>)</p>
+         <p>Updated: <%= distance_of_time_in_words_to_now faq.updated_on %> ago on (<%= faq.updated_on.strftime("%B-%d-%Y") %>)</p>
+         <% if !faq.reviewed_on.nil? %>
+            <p>Reviewed: <%= distance_of_time_in_words_to_now faq.reviewed_on %> ago on(<%= faq.reviewed_on.strftime("%B-%d-%Y") %>)</p>
+         <% end %>
+         <% if !faq.replied_on.nil? %>
+            <p>Replied: <%= distance_of_time_in_words_to_now faq.replied_on %> ago on(<%= faq.replied_on.strftime("%B-%d-%Y") %>)</p>
+         <% end %>
       <% end %>
       <% if !faq.staff.nil? %>
          <br>
+         <p>Staff response:</p>
          <p>Prereqs</p>
          <p><%= textFormater("Multi", faq.prereqs, "All").html_safe %></p>
          <br>

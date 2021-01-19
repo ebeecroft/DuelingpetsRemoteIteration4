@@ -27,7 +27,7 @@
       <% end %>
       <p>Battle: <%= @monsterbattle.battleresult %></p>
       <% if @monsterbattle.battleover %>
-         <p><%= @monsterbattle.message %></p>
+         <p><%#= @monsterbattle.message %></p>
       <% end %>
       <br>
       <div class="container">
@@ -67,7 +67,7 @@
          <% if @monsterbattle.battleresult != "Not-Started" %>
             <p>Damage: <%= @monsterbattle.partner_damage %></p>
          <% end %>
-         <p>Rarity: <%= @monsterbattle.partner_rarity %></p>
+         <p>Rarity: <%= @monsterbattle.fight.partner.creature.rarity %></p>
       </div>
       <div class="container">
          <p>Monster</p>
@@ -101,13 +101,15 @@
          <% if @monsterbattle.battleresult != "Not-Started" %>
             <p>Damage: <%= @monsterbattle.monster_damage %></p>
          <% end %>
-         <p>Rarity: <%= @monsterbattle.partner_rarity %></p>
+         <p>Rarity: <%= @monsterbattle.monster.rarity %></p>
       </div>
    </div>
    <br>
    <% if current_user && current_user.id == @monsterbattle.fight.partner.user_id %>
-      <div class="pageformat"><%= form.submit "Battle", class: "button submitbutton" %></div>
-      <br>
+      <% if @monsterbattle.battleresult == "Started" || @monsterbattle.battleresult == "Not-Started" %>
+         <div class="pageformat"><%= form.submit "Battle", class: "button submitbutton" %></div>
+         <br>
+      <% end %>
    <% end %>
 <% end %>
 <p class="formlinks"><%= link_to 'Back', partner_fight_path(@monsterbattle.fight.partner, @monsterbattle.fight) %></p>

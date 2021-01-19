@@ -799,6 +799,7 @@ ActiveRecord::Schema.define(version: 2021_01_12_235646) do
     t.integer "dreyore_earned", default: 0
     t.integer "items_earned", default: 0
     t.boolean "battleover", default: false
+    t.string "battleresult", default: "Not-Started"
     t.datetime "started_on"
     t.datetime "ended_on"
     t.integer "fight_id"

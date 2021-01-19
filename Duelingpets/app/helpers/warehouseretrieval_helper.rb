@@ -630,14 +630,14 @@ module WarehouseretrievalHelper
          newPartner = logged_in.partners.new(getWarehouseParams("Partner"))
          newPartner.adopted_on = currentTime
          newPartner.updated_on = currentTime
-         newPartner.plevel = creature.level
+         newPartner.plevel = (creature.level - 1)
          newPartner.chp = creature.hp
          newPartner.hp = creature.hp
          newPartner.atk = creature.atk
          newPartner.def = creature.def
          newPartner.agility = creature.agility
          newPartner.strength = creature.strength
-         newPartner.mlevel = creature.level
+         newPartner.mlevel = (creature.level - 1)
          newPartner.cmp = creature.mp
          newPartner.mp = creature.mp
          newPartner.matk = creature.matk
