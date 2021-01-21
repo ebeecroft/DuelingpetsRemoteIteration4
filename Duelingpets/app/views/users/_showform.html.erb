@@ -8,6 +8,13 @@
          <p>Emeralds: <%= @user.pouch.emeraldamount %>/<%= getUpgrades("Emerald", "Limit", @user.pouch, 2) %></p>
       <% end %>
       <br>
+      <p>Feature Requests</p>
+      <div class="container"><%= button_to "My Suggestions", suggestions_path, method: :get, class: "button submitbutton" %></div>
+      <% if current_user.id == @user.id %>
+         <div class="container"><%= button_to "New Suggestion", new_user_suggestion_path(@user), method: :get, class: "button submitbutton" %></div>
+         <br>
+      <% end %>
+      <br>
    <% end %>
    <h2 class="subheader1">Userboxes</h2>
    <% if(@user.donationbox.box_open) %>
@@ -313,7 +320,7 @@
       <div class="container"><%= button_to "New OC", new_user_oc_path(@user), method: :get, class: "button submitbutton" %></div>
       <div class="container"><%= button_to "New Blog", new_user_blog_path(@user), method: :get, class: "button submitbutton" %></div>
       <div class="container"><%= button_to "New Colorscheme", new_user_colorscheme_path(@user), method: :get, class: "button submitbutton" %></div>
-      <div class="container"><%= button_to "New Faq", new_user_faq_path(@user), method: :get, class: "button submitbutton" %></div>
+      <div class="container"><%#= button_to "New Faq", new_user_faq_path(@user), method: :get, class: "button submitbutton" %></div>
       <br>
    <% end %>
 <% end %>

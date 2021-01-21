@@ -1,7 +1,6 @@
 class CreateMonsterbattles < ActiveRecord::Migration[5.2]
   def change
     create_table :monsterbattles do |t|
-      t.string :partner_name
       t.integer :partner_plevel
       t.integer :partner_pexp
       t.integer :partner_chp
@@ -22,8 +21,6 @@ class CreateMonsterbattles < ActiveRecord::Migration[5.2]
       t.integer :partner_damage, default: 0
       t.boolean :partner_activepet, default: false
       t.integer :creaturetype_id
-      t.integer :partner_rarity
-      t.string :monster_name
       t.string :monster_mischief
       t.integer :monster_plevel
       t.integer :monster_chp
@@ -38,9 +35,8 @@ class CreateMonsterbattles < ActiveRecord::Migration[5.2]
       t.integer :monster_mdef
       t.integer :monster_magi
       t.integer :monster_loot
-      t.integer :monster_damage
+      t.integer :monster_damage, default: 0
       t.integer :monstertype_id
-      t.integer :monster_rarity
       t.integer :round, default: 1
       t.integer :tokens_earned, default: 0
       t.integer :exp_earned, default: 0

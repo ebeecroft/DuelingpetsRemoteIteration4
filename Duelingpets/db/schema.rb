@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_235646) do
-
-  create_table "accounttypes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_on"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2021_01_20_030850) do
 
   create_table "artpages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -753,7 +746,6 @@ ActiveRecord::Schema.define(version: 2021_01_12_235646) do
   end
 
   create_table "monsterbattles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "partner_name"
     t.integer "partner_plevel"
     t.integer "partner_pexp"
     t.integer "partner_chp"
@@ -774,8 +766,6 @@ ActiveRecord::Schema.define(version: 2021_01_12_235646) do
     t.integer "partner_damage", default: 0
     t.boolean "partner_activepet", default: false
     t.integer "creaturetype_id"
-    t.integer "partner_rarity"
-    t.string "monster_name"
     t.string "monster_mischief"
     t.integer "monster_plevel"
     t.integer "monster_chp"
@@ -790,9 +780,8 @@ ActiveRecord::Schema.define(version: 2021_01_12_235646) do
     t.integer "monster_mdef"
     t.integer "monster_magi"
     t.integer "monster_loot"
-    t.integer "monster_damage"
+    t.integer "monster_damage", default: 0
     t.integer "monstertype_id"
-    t.integer "monster_rarity"
     t.integer "round", default: 1
     t.integer "tokens_earned", default: 0
     t.integer "exp_earned", default: 0
@@ -1339,6 +1328,16 @@ ActiveRecord::Schema.define(version: 2021_01_12_235646) do
     t.boolean "collab_mode", default: false
     t.boolean "fave_folder", default: false
     t.boolean "privatesubsheet", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suggestions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "created_on"
+    t.datetime "updated_on"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
