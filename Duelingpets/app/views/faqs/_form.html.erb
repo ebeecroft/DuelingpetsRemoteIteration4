@@ -1,4 +1,4 @@
-<%= form_with(model: [@user, @faq], local: true) do |form| %>
+<%= form_with(model: @faq, local: true) do |form| %>
   <% if @faq.errors.any? %>
      <div class="alignboxes">
         <div id="errorexplan">
@@ -17,8 +17,18 @@
   </div>
   <br>
   <div class="pageformat">
+    <%= form.label :prereqs %>
+    <%= form.text_area :prereqs %>
+  </div>
+  <br>
+  <div class="pageformat">
+    <%= form.label :steps %>
+    <%= form.text_area :steps %>
+  </div>
+  <br>
+  <div class="pageformat">
     <%= form.submit class: "button submitbutton" %>
   </div>
   <br>
-  <p class="formlinks"><%= link_to 'Back', user_path(@faq.user) %></p>
+  <p class="formlinks"><%= link_to 'Back', faqs_path %></p>
 <% end %>

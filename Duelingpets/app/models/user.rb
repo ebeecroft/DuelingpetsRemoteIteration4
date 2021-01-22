@@ -2,7 +2,6 @@ class User < ApplicationRecord
    has_many :colorschemes, :foreign_key => "user_id", :dependent => :destroy
    has_many :ocs, :foreign_key => "user_id", :dependent => :destroy
    has_many :tags, :foreign_key => "user_id", :dependent => :destroy
-   has_many :faqs, :foreign_key => "user_id", :dependent => :destroy
    has_many :suggestions, :foreign_key => "user_id", :dependent => :destroy
 
    #Relationships for user information

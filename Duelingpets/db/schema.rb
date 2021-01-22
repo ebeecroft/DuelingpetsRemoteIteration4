@@ -493,11 +493,6 @@ ActiveRecord::Schema.define(version: 2021_01_20_030850) do
     t.text "steps"
     t.datetime "created_on"
     t.datetime "updated_on"
-    t.datetime "replied_on"
-    t.datetime "reviewed_on"
-    t.integer "user_id"
-    t.integer "staff_id"
-    t.boolean "reviewed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

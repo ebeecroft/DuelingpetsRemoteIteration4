@@ -24,32 +24,4 @@ class FaqsController < ApplicationController
    def destroy
       mode "destroy"
    end
-
-   def review
-      mode "review"
-   end
-
-   def approve
-      mode "approve"
-   end
-
-   def deny
-      mode "deny"
-   end
-
-   def list
-      mode "list"
-   end
-
-   def staffanswer
-      mode "staffanswer"
-   end
-
-   def reply
-      mode "reply"
-   end
-
-   def replypost
-      mode "replypost"
-   end
 end
