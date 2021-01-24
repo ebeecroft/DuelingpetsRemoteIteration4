@@ -115,8 +115,8 @@ module BlogrepliesHelper
                               #@arttag = arttag
                               #@arttag.save
                               updateBlog(@blogreply.blog)
-                              #url = "http://www.duelingpets.net/blogreplies/review"
-                              CommunityMailer.content_comments(@blogreply, "Blogreply", "Review", 0).deliver_now
+                              url = "http://www.duelingpets.net/blogreplies/review"
+                              CommunityMailer.content_comments(@blogreply, "Blogreply", "Review", 0, url).deliver_now
                               flash[:success] = "#Reply was successfully created."
                               redirect_to user_blog_path(@blog.user, @blog)
                            else
@@ -193,7 +193,7 @@ module BlogrepliesHelper
                            #@economytransaction = newTransaction
                            #@economytransaction.save
 
-                           CommunityMailer.content_comments(@blogreply, "Blogreply", "Approved", 10).deliver_now
+                           CommunityMailer.content_comments(@blogreply, "Blogreply", "Approved", 10, "None").deliver_now
                            #allWatches = Watch.all
                            #watchers = allWatches.select{|watch| (((watch.watchtype.name == "Arts" || watch.watchtype.name == "Blogarts") || (watch.watchtype.name == "Artsounds" || watch.watchtype.name == "Artmovies")) || (watch.watchtype.name == "Maincontent" || watch.watchtype.name == "All")) && watch.from_user.id != @art.user_id}
                            #if(watchers.count > 0)
@@ -204,7 +204,7 @@ module BlogrepliesHelper
                            value = "Reply was approved."
                         else
                            @blogreply = replyFound
-                           CommunityMailer.content_denied(@blogreply, "Blogreply", "Denied", 0).deliver_now
+                           CommunityMailer.content_denied(@blogreply, "Blogreply", "Denied", 0, "None").deliver_now
                            value = "Reply was denied."
                         end
                         flash[:success] = value

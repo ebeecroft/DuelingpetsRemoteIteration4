@@ -64,7 +64,7 @@ class CommunityMailer < ApplicationMailer
       mail(to: email, from: websiteMail, subject: message)
    end
 
-   def content_comments(content, type, status, points)
+   def content_comments(content, type, status, points, url)
       websiteMail = "notification@duelingpets.net"
       email = ""
       message = ""
