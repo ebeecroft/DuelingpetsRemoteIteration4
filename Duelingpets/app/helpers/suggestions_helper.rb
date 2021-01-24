@@ -105,6 +105,7 @@ module SuggestionsHelper
 
                         if(type == "create")
                            if(@suggestion.save)
+                              ContentMailer.content_created(@suggestion, "Suggestion", 5).deliver_now
                               flash[:success] = "Suggestion #{@suggestion.title} was successfully created."
                               redirect_to suggestions_path
                            else

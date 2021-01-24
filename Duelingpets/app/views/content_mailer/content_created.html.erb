@@ -6,6 +6,8 @@
    <body>
       <% if @type == "Colorsheme" %>
          <h1>You created a new Colorscheme: <%= @content.name %> for the site!</h1>
+      <% elsif @type == "Suggestion" %>
+         <h1>You created a new Suggestion: <%= @content.title %> for the site!</h1>
       <% elsif @type == "Watch" %>
          <h1><%= @content.from_user.vname %> has decided to watch you!</h1>
       <% elsif @type == "Referral" %>
@@ -21,6 +23,12 @@
             as filling in all the different colors and having them fit well is
             a bit of a chore. In recognition of your effort we like to offer you
             these <%= @points %> points for you to spend at your leisure.
+         <% elsif @type == "Suggestion" %>
+            The Duelingpets team is always open to hearing new suggestions for
+            the site. This could be new features that you think might be cool
+            for us to implement or simple bug fixes. Since you have take the
+            time to send us your suggestions to us we have decided to give you
+            <%= @points %> points that you can spend on what you want.
          <% elsif @type == "Watch" %>
             It seems like you have generated quite the following and well
             designed content like this proves it. Its important that you continue

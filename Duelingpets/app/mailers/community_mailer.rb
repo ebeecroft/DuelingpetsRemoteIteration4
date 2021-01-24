@@ -64,6 +64,27 @@ class CommunityMailer < ApplicationMailer
       mail(to: email, from: websiteMail, subject: message)
    end
 
+   def content_comments(content, type, status, points)
+      websiteMail = "notification@duelingpets.net"
+      email = ""
+      message = ""
+      if(status == "Review")
+         email = content.blog.user.email
+         message = "#{content.user.vname}'s blogreply is awaiting your review:[Duelingpets]"
+      elsif(status == "Approved")
+         email = content.user.email
+         message = "Your blogreply to #{content.blog.user.vname}'s blog was approved:[Duelingpets]"
+      elsif(status == "Denied")
+         email = content.user.email
+         message = "Your blogreply to #{content.blog.user.vname}'s blog was denied:[Duelingpets]"
+      end
+      @type = type
+      @status = status
+      @content = content
+      @points = points
+      mail(to: email, from: websiteMail, subject: message)
+   end
+
    def content_critiqued(content, type, points)
       websiteMail = "notification@duelingpets.net"
       email = ""

@@ -139,7 +139,7 @@ module BlogsHelper
             @economytransaction = newTransaction
             @economytransaction.save
          end
-         #ContentMailer.content_approved(@blog, "Blog", pointsForBlog).deliver_later(wait: 5.minutes)
+         ContentMailer.content_approved(@blog, "Blog", pointsForBlog).deliver_later(wait: 5.minutes)
 
          #allWatches = Watch.all
          #watchers = allWatches.select{|watch| ((((watch.watchtype.name == "Blogs" || watch.watchtype.name == "Blogarts") || (watch.watchtype.name == "Blogsounds" || watch.watchtype.name == "Blogmovies")) || (watch.watchtype.name == "Forumblogs" || watch.watchtype.name == "All"))) && watch.from_user.id != @blog.user_id}

@@ -2,18 +2,22 @@
    Your new blog <%= @content.title %> was denied!
 <% elsif @type == "OC" %>
    Your new oc <%= @content.name %> was denied!
-<% elsif @type == "Item" %>
-   Your new item <%= @content.name %> was denied!
-<% elsif @type == "Creature" %>
-   Your new creature <%= @content.name %> was denied!
-<% elsif @type == "Sound" %>
-   Your new sound <%= @content.title %> was denied!
-<% elsif @type == "Chapter" %>
-   Your new chapter <%= @content.title %> was denied!
 <% elsif @type == "Movie" %>
    Your new movie <%= @content.title %> was denied!
 <% elsif @type == "Art" %>
    Your new art <%= @content.title %> was denied!
+<% elsif @type == "Sound" %>
+   Your new sound <%= @content.title %> was denied!
+<% elsif @type == "Chapter" %>
+   Your new chapter <%= @content.title %> was denied!
+<% elsif @type == "Element" %>
+   Your new element <%= @content.name %> was denied!
+<% elsif @type == "Creature" %>
+   Your new creature <%= @content.name %> was denied!
+<% elsif @type == "Monster" %>
+   Your new monster <%= @content.name %> was denied!
+<% elsif @type == "Item" %>
+   Your new item <%= @content.name %> was denied!
 <% end %>
 ===============================================
  
@@ -30,21 +34,19 @@ that it doesn't fit into the correct book group.
    the song or the voice itself might not be right
    for the age group it is targeted for. The content
    may need to be changed just a tad before it can
-   be approved.
-<% elsif @type == "Item" %>
-   The image of this item may not be suitable for our
-   community. Though there is still the possibility
-   that the stats for the item may be too
-   overpowered, or the item costs too much. The
-   content may need to be changed just a tad before
-   it can be approved.
-<% elsif @type == "Creature" %>
-   The image of this creature may not be suitable for our
-   community. Though there is still the possibility
-   that the stats for the creature may be too
-   overpowered, or the creature costs too much. It is
-   also possible the music, or the voice might be not
-   appropriate for the community. The
+   be approved.   
+<% elsif @type == "Movie" %>
+   The video of this movie may not be suitable for our
+   community. It is also possible that the bookgroup
+   was set to the wrong type for this type of video.
+   The content may need to be changed just a tad
+   before it can be approved.
+<% elsif @type == "Art" %>
+   The image of this artwork may not be suitable for
+   our community. It is also possible that the
+   bookgroup was set to the wrong type for this type
+   of art. The sound that is included may not be
+   appropriate for the audience it is targeting. The
    content may need to be changed just a tad before
    it can be approved.
 <% elsif @type == "Sound" %>
@@ -58,18 +60,32 @@ that it doesn't fit into the correct book group.
    bookgroup, or the music and images might not be
    suitable for our community. The content may need to
    be changed just a tad before it can be approved.
-<% elsif @type == "Movie" %>
-   The video of this movie may not be suitable for our
-   community. It is also possible that the bookgroup
-   was set to the wrong type for this type of video.
-   The content may need to be changed just a tad
-   before it can be approved.
-<% elsif @type == "Art" %>
-   The image of this artwork may not be suitable for
-   our community. It is also possible that the
-   bookgroup was set to the wrong type for this type
-   of art. The sound that is included may not be
-   appropriate for the audience it is targeting. The
+<% elsif @type == "Element" %>
+   The image of the element may have not been suitable
+   for our community. It might be possible that the
+   description may have not been appropriate. The
+   content may need to be changed just a tad before
+   it can be approved.
+<% elsif @type == "Creature" %>
+   The image of this creature may not be suitable for our
+   community. Though there is still the possibility
+   that the stats for the creature may be too
+   overpowered, or the creature costs too much. It is
+   also possible the music, or the voice might be not
+   appropriate for the community. The
+   content may need to be changed just a tad before
+   it can be approved.
+<% elsif @type == "Monster" %>
+   The image of this monster may not be suitable for our
+   community. Though there is still the possibility that
+   the stats for the monster may be too overpowered, or
+   the monster costs too much. The content may need to
+   be changed just a tad before it can be approved.
+<% elsif @type == "Item" %>
+   The image of this item may not be suitable for our
+   community. Though there is still the possibility
+   that the stats for the item may be too
+   overpowered, or the item costs too much. The
    content may need to be changed just a tad before
    it can be approved.
 <% end %>

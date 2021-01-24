@@ -146,7 +146,7 @@ module ElementsHelper
                         if(type == "create")
                            if(@element.save)
                               #url = "http://www.duelingpets.net/elements/review"
-                              #ContentMailer.content_review(@creature, "Creature", url).deliver_now
+                              ContentMailer.content_review(@element, "Element", url).deliver_now
                               flash[:success] = "#{@element.name} was successfully created."
                               redirect_to user_element_path(@user, @element)
                            else
@@ -248,7 +248,7 @@ module ElementsHelper
                               #newTransaction.created_on = currentTime
                               #@economytransaction = newTransaction
                               #@economytransaction.save
-                              #ContentMailer.content_approved(@element, "Element", price).deliver_now
+                              ContentMailer.content_approved(@element, "Element", price).deliver_now
                               value = "#{@element.user.vname}'s element #{@element.name} was approved."
                            #else
                            #   flash[:error] = "Insufficient funds to create a creature!"
@@ -256,7 +256,7 @@ module ElementsHelper
                            #end
                         else
                            @element = elementFound
-                           #ContentMailer.content_denied(@element, "Element").deliver_now
+                           ContentMailer.content_denied(@element, "Element").deliver_now
                            value = "#{@element.user.vname}'s element #{@element.name} was denied."
                         end
                         flash[:success] = value
