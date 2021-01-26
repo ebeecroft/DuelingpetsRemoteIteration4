@@ -1,4 +1,42 @@
+== Removals
+== Iteration 4
+== User Content
+* Accounttype: The difficulty in keeping accounttype is it places strain on available points and emeralds stored in storage accounts. When points and emeralds are placed in storage that means they are not out there buying things and reduce the amount of capital flowing through the economy. This also has a negative affect on the Dragonhoard which is a fundamental part of balancing the economy. The Central Bank uses the points it gets from taxes to create emeralds for the user to buy. So what this means is the Central Bank would be unable to purchase pets and items from the player or to perform upgrades to its Warehouse. The Central Bank is highly reliant on users making purchases as it doesn't create points on its own. Since email has been changed to be one email per account for recovery features, it made no sense to keep this feature floating around.
+
+== Changes
+== Iteration 4
+== User Content
+* Gviewer: Renamed blogviewers to gviewers to provide a generic viewer object that can be used with any table.
+
 == Additions
+== Iteration 4
+== Battles
+* Fight: Keeps tracks of loss, wins and draws of pet battles for the specific pet.
+
+* Monster: Allows the user to create various monsters that other users may battle. Monsters may be either a Mon or a Boss based on their monster type, and like creatures they have a variety of different stats that can be set. Monsters in general are the only source of dreyore materials, a necessary ingredient in the construction of items and creatures. Monsters have a property called mischief which applies a condition of some kind to the player or pet. Monsters require a combination of points and emeralds to create them.
+
+* Monsterbattle: Allows the player's partner to fight a monster and depending on if they win, they might get a variety of different loot.
+
+* Element: Allows pets and monsters to have specific strengths and weakness to certain elements. For example fire is weak to water, and water is weak to grass, and grass is weak to fire. These elements are user generated and as such, adds a new dynamic to the way pet battles are now handled compared to the original version of the website.
+
+== User Content
+* Tag: Allows the user to create a variety of tags that they can then apply to their ocs, arts, sounds, movies and chapters. In a future update this might make it easier to search for a specific oc, or other content based on the tag alone.
+
+== Central Bank
+
+* Warehouse: A place for users to purchase items and pets that the Dragonhoard owns. In order to refill its inventory the warehouse will purchase the items and pets from the artist for a modest fee. Any points and emeralds gained from here can then be transfered back to the central bank. Witemshelves is an item storage system for the warehouse, and can hold up to a max of 30 items per shelf. Wpetdens is a pet storage system for the warehouse, and can hold up to a max of 16 pets per den. Each of these features can raise or lower the tax on each individual item or pet to adjust the price of the object.
+
+== Communications
+* Blogreply: Allows users to write comments on another user's blog. Unlike shouts and pms which take points away from the user, this is the only one that awards points to the blog owner. Like shouts, blogreplies must be reviewed before other logged in users can view the message that the reply was sent from. Blogreplies are not displayed to guests for users privacy.
+
+== Webcontrols
+* Faq: Provides an important help file for users to consult for a variety of different features on the website. An example of this would be creating a working gallery. It uses a combination of prereqs and steps fields to provide information on how to build one from the ground up.
+
+* Suggestion: Allows users to suggest important new features to the website or be used to report out new bugs that the users have discovered while navigating the website.
+
+== User Information
+* Regtoken: Allows a user to register for an account if they are underage and parental consent has been received.
+
 == Iteration 3
 == Galleries
 * Gallery: Allows users to be able to store their various artwork on the website. To set one up the user needs to buy the gallery upgrade first. After that they will need to pay in points to create a gallery. In addition to this the user can setup some music to give the gallery a bit of flavor. Gallery content can be restricted to various bookgroups depending on the content that it contains.
