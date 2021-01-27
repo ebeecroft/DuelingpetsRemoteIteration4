@@ -1,6 +1,6 @@
 == Removals
 == Iteration 4
-== User Content
+== User Information
 * Accounttype: The difficulty in keeping accounttype is it places strain on available points and emeralds stored in storage accounts. When points and emeralds are placed in storage that means they are not out there buying things and reduce the amount of capital flowing through the economy. This also has a negative affect on the Dragonhoard which is a fundamental part of balancing the economy. The Central Bank uses the points it gets from taxes to create emeralds for the user to buy. So what this means is the Central Bank would be unable to purchase pets and items from the player or to perform upgrades to its Warehouse. The Central Bank is highly reliant on users making purchases as it doesn't create points on its own. Since email has been changed to be one email per account for recovery features, it made no sense to keep this feature floating around.
 
 == Changes
