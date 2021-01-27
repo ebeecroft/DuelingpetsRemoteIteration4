@@ -6,7 +6,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
 
 == Current Features:
 
-= Main Features:
+== Main Features:
    == Battles
    * Monster: Allows the user to create various monsters that other users may battle. Monsters may be either a Mon or a Boss based on their monster type, and like creatures they have a variety of different stats that can be set. Monsters in general are the only source of dreyore materials, a necessary ingredient in the construction of items and creatures. Monsters have a property called mischief which applies a condition of some kind to the player or pet. Monsters require a combination of points and emeralds to create them.
    
@@ -70,7 +70,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
    * Gviewer: Provides a way to adjust the type of users who can view galleries, jukeboxes, books, and channels. Valid parameters are any, both, watchers, friends, or self. Depending on the value chosen, only those specific users are allowed access to the content.
 
 
-= Secondary Features
+== Secondary Features
    == Communications
    * Blog: Allows the user to provide a bit of news or thoughts of what they are thinking at the moment. These could also be used to let users know about pending point commissions that might begin to take place. Mascots are available to the user for free if the user chooses to use them, these are kind of like free advertisements. Banners, largeimages, smallimages, and music can be purchased but transform a blog into an advertisement section. Blogs need to be reviewed first by the Duelingpets staff before they show up to others on the site. Depending on what the user chooses this is one of the few features that can be either a point source or a sink. Blogtypes set the type of blog that the user chooses at the moment. The blog upgrade needs to be bought first before one can create a blog.
    
