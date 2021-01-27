@@ -7,7 +7,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
 == Current Features:
 
 == Main Features:
-   == Battles
+== Battles
    * Monster: Allows the user to create various monsters that other users may battle. Monsters may be either a Mon or a Boss based on their monster type, and like creatures they have a variety of different stats that can be set. Monsters in general are the only source of dreyore materials, a necessary ingredient in the construction of items and creatures. Monsters have a property called mischief which applies a condition of some kind to the player or pet. Monsters require a combination of points and emeralds to create them.
    
    * Monsterbattle: Allows the player's partner to fight a monster and depending on if they win, they might get a variety of different loot.
@@ -24,7 +24,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
    
    * Element: Allows pets and monsters to have specific strengths and weakness to certain elements. For example fire is weak to water, and water is weak to grass, and grass is weak to fire. These elements are user generated and as such, adds a new dynamic to the way pet battles are now handled compared to the original version of the website.
    
-   == Channels
+== Channels
    * Channel: Allows users to be able to store their various videos on the website. To set one up the user needs to buy the channel upgrade first. After that they will need to pay in points to create a channel. In addition to this the user can setup some music to give the channel a bit of flavor. Channel content can be restricted to various bookgroups depending on the content that it contains.
    
    * Mainplaylist: Is a folder that the user uses to showcase a single video from their channel. In order for them to display the video, the movie itself must be reviewed first.
@@ -33,7 +33,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
    
    * Movie: Are movies that the user decided to upload to the website. Unlike the channel, mainplaylist, and subsheet, movies must be first approved by the Duelingpets staff in order for it to show up to others on the site. Movie allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
    
-   == Jukeboxes
+== Jukeboxes
    * Jukebox: Allows users to be able to store their various music on the website. To set one up the user needs to buy the jukebox upgrade first. After that they will need to pay in points to create a jukebox. In additon to this the user can setup some music to give the jukebox a bit of flavor. Jukebox content can be restricted to various bookgroups depending on the content that it contains.
    
    * Mainsheet: Is a folder that the user uses to showcase a single song from their jukebox. In order for them to display the music, the sound itself must be reviewed first.
@@ -42,7 +42,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
    
    * Sound: Are sounds that the user decided to upload to the website, these could be voices or background music. Unlike the jukebox, mainsheet, and subsheet, sounds must be first approved by the Duelingpets staff in order for it to show up to others on the site. Sound allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
 
-   == Galleries
+== Galleries
    * Gallery: Allows users to be able to store their various artwork on the website. To set one up the user needs to buy the gallery upgrade first. After that they will need to pay in points to create a gallery. In addition to this the user can setup some music to give the gallery a bit of flavor. Gallery content can be restricted to various bookgroups depending on the content that it contains.
    
    * Mainfolder: Is a folder that the user uses to showcase a single image from their gallery. In order for them to display the image, the artwork itself must be reviewed first.
@@ -51,7 +51,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
    
    * Art: Are artworks that the user decided to upload to the website, these may at times contain music to help play out a scene. Unlike the gallery, mainfolder, and subfolder, artwork must be first approved by the Duelingpets staff in order for it to show up to others on the site. Artwork allows the user to generate points and is dependent on the price of the day that is set by the dragonhoard.
    
-   == Bookworlds
+== Bookworlds
    * Bookworld: Allows users to be able to store their various stories on the website. Bookworlds sets up the story universe that the author has created. In addition to this the user can open up the bookworld to others and allow other users to create books of their own in this universe. The user may also choose to setup a price for books that the others might create here.
    
    * Book: Is a story that may contain multiple chapters that the player created for a certain universe. The user may choose to open up this book for collaboration with many other people to submit chapters. Book content can be restricted to various bookgroups depending on the content that it contains. Some example of books could be like superman, flash gordon, or pokemon. In order to create one the user needs to buy the book upgrade first. After that they will need to pay points to the bookworld owner to create a book there.
@@ -60,7 +60,7 @@ Duelingpets has a central bank called the Dragonhoard that manages the virtual p
    
    * Chapter: Are chapters that the user decided to upload to the website, these may at times contain a bookcover, character voices, background music, or artwork of a character for a particular scene. Unlike the bookworld, book, and gchapters, chapter must be first approved by the Duelingpets staff in order for it to show up to others on the site. Chapters allows the user to generate points and is dependent on the price of the day.
    
-   == Misc
+== Misc
    * Tag: Allows the user to create a variety of tags that they can then apply to their ocs, arts, sounds, movies and chapters. In a future update this might make it easier to search for a specific oc, or other content based on the tag alone.
    
    * Original Character(OC): Allows the user to create their very own characters that they can use in stories, videos, audio adventures, rps, and many more. An oc may contain an image, music, or even a voice to make their characters come alive. OCs need to be reviewed first by the Duelingpets team before they show up to the public. OCs provide the user with points dependent on the price set by the dragonhoard. This is one of the few features that is available at start that doesn't need to be bought, though its quantity is kind of limited.
